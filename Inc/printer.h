@@ -1,0 +1,1 @@
+extern unsigned int PrintResults_Comm(unsigned char results_to_print);

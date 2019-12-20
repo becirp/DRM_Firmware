@@ -1,0 +1,10 @@
+stm32f407zet6\printer.o: ..\Src\printer.c
+stm32f407zet6\printer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f407zet6\printer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32f407zet6\printer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f407zet6\printer.o: ../Inc/bios.h
+stm32f407zet6\printer.o: ../Inc/control.h
+stm32f407zet6\printer.o: ../Inc/comm.h
+stm32f407zet6\printer.o: ../Inc/lang.h
+stm32f407zet6\printer.o: ../Inc/adc.h
+stm32f407zet6\printer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

@@ -1,0 +1,20 @@
+1. RADI KOMUNIKACIJA PORTA
+2. RADI KOMUNIKACIJA PORTB
+3. RADI MEMORIJA (SRAM) - ukljuci enable write 
+4. RADI SD KARTICA
+6. RADI I2C
+
+1. ZA SD CARD U SDIO MODU TREBA POVECATI HEAP I STACK SIZE NA 0x2000 odnosno 0x4000 (STM CUBE)
+(Project Manager -> Advanved settings)
+2. CLOCK DIVIDER ZA SD CARD TREBA  DA BUDE BAR 3
+3. NECE DA RADI AKO DOAM NAKNADNO UART U STM CUBE. TREBA ODMAH SVE DEFINISATI PA ZATIM KRERATI PROJECT!
+
+
+
+PRORADIO UART. Vezem se sa vanjske strane preko USB na RS232 na 10 pinskom konekotru!
+
+
+1. RADI KOMPLETNO SNIMANJE NA SD KARTICU (proboa sam samo analogne kanale i digitalni transducer).
+2. RADI printer (samo sam isprintao header).
+
+
