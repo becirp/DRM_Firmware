@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F407ZET6\STM32F407ZET6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F407ZET6\STM32F407ZET6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Dec 26 13:41:43 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Dec 26 14:56:27 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2183,7 +2183,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
 
-<P><STRONG><a name="[171]"></a>Read_DRM_ADC_Results</STRONG> (Thumb, 246 bytes, Stack size 56 bytes, control.o(i.Read_DRM_ADC_Results))
+<P><STRONG><a name="[171]"></a>Read_DRM_ADC_Results</STRONG> (Thumb, 310 bytes, Stack size 56 bytes, control.o(i.Read_DRM_ADC_Results))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Read_DRM_ADC_Results &rArr; SendOutputBuffer &rArr; putcharB &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
@@ -2191,6 +2191,7 @@ Global Symbols
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Write_16b
 <LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM1_ADC1_Read
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getcharB
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
@@ -3391,6 +3392,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetInputBuffer
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wait_char_from_pc
+<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_DRM_ADC_Results
 </UL>
 
 <P><STRONG><a name="[1df]"></a>init_coil_control</STRONG> (Thumb, 178 bytes, Stack size 16 bytes, init.o(i.init_coil_control))
