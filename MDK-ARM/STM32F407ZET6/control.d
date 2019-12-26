@@ -47,3 +47,4 @@ stm32f407zet6\control.o: ../Inc/adc.h
 stm32f407zet6\control.o: ../Inc/calib.h
 stm32f407zet6\control.o: ../Inc/init.h
 stm32f407zet6\control.o: ../Inc/sd_card.h
+stm32f407zet6\control.o: ../Inc/dwt_delay.h

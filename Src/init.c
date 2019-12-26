@@ -139,7 +139,7 @@ void MX_TIM2_Init(void)
   //onda je prescaler = 84 Mhz * 0.01 ms -1 = 840 -1 
   //dok onda period uzimas koliko brojis ovakvih impulsa... Npr 10*100kHz = 10 kHz...  	
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 10-1; //ovo broji 10 puta (period 10)
+  htim2.Init.Period = 5-1; //ovo broji 10 puta (period 10)
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
@@ -443,6 +443,7 @@ void MX_FSMC_Init(void)
   Timing.CLKDivision = 16;
   Timing.DataLatency = 17;
   Timing.AccessMode = FSMC_ACCESS_MODE_A;
+	
   /* ExtTiming */
 
   if (HAL_SRAM_Init(&hsram1, &Timing, NULL) != HAL_OK)
