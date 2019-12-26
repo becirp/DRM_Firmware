@@ -5472,10 +5472,39 @@ unsigned int Read_DRM_ADC_Results(void)
 		}		
 		
 		//RAM read and send to GUI
+//		data_current = 0;
+//		data_voltage = 0;
+//		sram_address = 0x60000000;
+//		for(i=0; i<sample_size/2; i++)
+//		{
+//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current, 1);
+//			sram_address+=2;
+//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage, 1);
+//			sram_address+=2;
+//			sprintf(OutputBuffer, "%u,%u;", data_current, data_voltage);
+//			SendOutputBuffer(COMM.port);
+//		}	
+//		
+//		while(1)
+//		{
+//			if(getcharB() == 'A') break;
+//		}
+//		
+//		for(; i<sample_size; i++)
+//		{
+//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current, 1);
+//			sram_address+=2;
+//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage, 1);
+//			sram_address+=2;
+//			sprintf(OutputBuffer, "%u,%u;", data_current, data_voltage);
+//			SendOutputBuffer(COMM.port);
+//		}	
+		
+		//RAM read and send to GUI
 		data_current = 0;
 		data_voltage = 0;
 		sram_address = 0x60000000;
-		for(i=0; i<sample_size/2; i++)
+		for(i=0; i<sample_size; i++)
 		{
 			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current, 1);
 			sram_address+=2;
@@ -5483,22 +5512,12 @@ unsigned int Read_DRM_ADC_Results(void)
 			sram_address+=2;
 			sprintf(OutputBuffer, "%u,%u;", data_current, data_voltage);
 			SendOutputBuffer(COMM.port);
-		}	
-		
-		while(1)
-		{
-			if(getcharB() == 'A') break;
+			if(i==2000 | i==4000 | i==6000 | i==8000)
+			{
+				while(getcharB() != 'A') HAL_Delay(10);	
+			}
 		}
 		
-		for(; i<sample_size; i++)
-		{
-			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current, 1);
-			sram_address+=2;
-			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage, 1);
-			sram_address+=2;
-			sprintf(OutputBuffer, "%u,%u;", data_current, data_voltage);
-			SendOutputBuffer(COMM.port);
-		}	
 		
 		//End of transfer
 		sprintf(OutputBuffer,"OK");

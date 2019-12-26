@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F407ZET6\STM32F407ZET6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F407ZET6\STM32F407ZET6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Dec 26 14:56:27 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Dec 26 15:47:02 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1147,6 +1147,7 @@ Global Symbols
 <LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_flash_drive_MCU
 <LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_CH1
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Test_Mode_COMM
+<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_DRM_ADC_Results
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_ADC_Res_COMM
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slave_select_usb_flash_drive
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slave_deselect_usb_flash_drive
@@ -2187,6 +2188,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Read_DRM_ADC_Results &rArr; SendOutputBuffer &rArr; putcharB &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Write_16b
 <LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
