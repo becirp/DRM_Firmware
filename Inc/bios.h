@@ -988,9 +988,14 @@ extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
 
+#define DRM_SAMPLE_SIZE     (uint16_t)10000
+
 #define CHANNEL1 (unsigned int)1
 #define CHANNEL2 (unsigned int)2
 #define CHANNEL3 (unsigned int)3
+
+//SRAM
+#define SRAM_BASE_ADDRESS   0x60000000
 
 //DRM Control
 

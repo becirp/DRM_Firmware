@@ -233,9 +233,52 @@ int main(void)
 	}
 	#endif
 	
+	/* Remote ENABLE PORTB */
+		COMM.remote_enable=REMOTE_ENABLE;
+		COMM.port = COMM_PORT_B;
+		#if ST_LINK_DEBUG
+			MeasurementStart_Comm();
+		#endif
+	
 	/* WHILE LOOP BEGINS HERE*/
   while (1)
   {		
+		
+		//Slanje komandi sa PC na PORTB
+		#if 1
+//			COMM.remote_enable=REMOTE_ENABLE;
+//			COMM.port = COMM_PORT_B;
+//			#if ST_LINK_DEBUG
+//				MeasurementStart_Comm();
+//			#endif
+			status=GetInputBuffer(COMM.port);
+			if (status==MAIN_OK)
+      {             
+      status=RemoteCommandSwitch();
+                if (status==MAIN_NOK)
+                {                                         
+                     sprintf(OutputBuffer,"ErRCS"); //Error: Remote Comand Switch               
+                }      
+                else if (status==ERROR_SRAM)
+                {
+                    sprintf(OutputBuffer, "ErMEM"); //Error: SRAM Memory!               
+                }
+                else if(status==ERROR_SDC)
+                {
+                    //vec upisana greska, samo je posalji nazad!
+                }       
+                else if (status!=MAIN_OK){                
+                //sprintf(OutputBuffer, "ErS%02u", ErrorSLAVE_nbr); //Error: Slave Device XX
+                }                  
+      } 
+      else 
+      {
+                sprintf(OutputBuffer,"ErGIB"); //Error: Get Input Buffer
+      }       
+			SendOutputBuffer(COMM.port);
+			GetDataFromMemory=NO;
+		#endif
+		
 		
 		//HAL_UART_Receive(&huart1, &myVar2, 1, HAL_MAX_DELAY);
 		//sprintf(OutputBuffer, "PRIMIO PODATAK\r\n");
@@ -272,6 +315,9 @@ int main(void)
 		}
 		#endif
 		
+		
+		
+		
 		#if 0
 		while(1)
 		{
@@ -290,40 +336,7 @@ int main(void)
 		}
 		#endif
 		
-		//Slanje komandi sa PC na PORTB
-		#if 1
-			COMM.remote_enable=REMOTE_ENABLE;
-			COMM.port = COMM_PORT_B;
-			#if ST_LINK_DEBUG
-				MeasurementStart_Comm();
-			#endif
-			status=GetInputBuffer(COMM.port);
-			if (status==MAIN_OK)
-      {             
-      status=RemoteCommandSwitch();
-                if (status==MAIN_NOK)
-                {                                         
-                     sprintf(OutputBuffer,"ErRCS"); //Error: Remote Comand Switch               
-                }      
-                else if (status==ERROR_SRAM)
-                {
-                    sprintf(OutputBuffer, "ErMEM"); //Error: SRAM Memory!               
-                }
-                else if(status==ERROR_SDC)
-                {
-                    //vec upisana greska, samo je posalji nazad!
-                }       
-                else if (status!=MAIN_OK){                
-                //sprintf(OutputBuffer, "ErS%02u", ErrorSLAVE_nbr); //Error: Slave Device XX
-                }                  
-      } 
-      else 
-      {
-                sprintf(OutputBuffer,"ErGIB"); //Error: Get Input Buffer
-      }       
-			SendOutputBuffer(COMM.port);
-			GetDataFromMemory=NO;
-		#endif
+
 		
 		
 		#if 0

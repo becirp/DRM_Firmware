@@ -18,7 +18,6 @@ unsigned int retVal=MAIN_NOK;
              
 if (InputBuffer[0]=='m')
 {
-					//Ubaciti Get_Predif_Number_of_Samples_Comm funkciju za skupljanje samplova.
 					//Battery charger control
 					if((InputBuffer[1]=='B')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='T'))
 					{
@@ -27,17 +26,17 @@ if (InputBuffer[0]=='m')
 					//DRM Read function
 					if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]=='C'))
 					{
-									return (Read_DRM_ADC_Results());
+									return (Read_DRM_ADC());			
 					}
 					//DRM Read all function
-										if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]=='D'))
+										if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]!='C'))
 					{
-									return (Read_All_DRM_ADC_Results());
+									return (Read_DRM_ADC());
 					}
 					//DRM DIN function
 					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='A'))
 					{
-									return (Write_DRM_CH1());
+									return (Write_DRM_Channel());
 					}
 					//Test pin toggle
 					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='O')&&(InputBuffer[3]=='G'))
