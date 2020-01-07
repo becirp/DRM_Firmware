@@ -29,6 +29,11 @@ if (InputBuffer[0]=='m')
 					{
 									return (Read_DRM_ADC_Results());
 					}
+					//DRM Read all function
+										if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]=='D'))
+					{
+									return (Read_All_DRM_ADC_Results());
+					}
 					//DRM DIN function
 					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='A'))
 					{

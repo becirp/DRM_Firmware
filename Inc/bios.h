@@ -1025,6 +1025,10 @@ extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int
 
 #define DRM1_ADC_CURR1			HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6)
 #define DRM1_ADC_VOUT1			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6)
+#define DRM1_ADC_CURR2			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_7)
+#define DRM1_ADC_VOUT2			HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7)
+#define DRM1_ADC_CURR3			HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_14)
+#define DRM1_ADC_VOUT3			HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15)
 
 //I2C Battery Control
 

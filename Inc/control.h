@@ -40,4 +40,5 @@ extern unsigned char PuniPrintBufferMotion  (unsigned char parameter1, unsigned 
 extern unsigned int Toggle_Pins(void);
 extern unsigned int Write_DRM_CH1(void);
 extern unsigned int Read_DRM_ADC_Results(void);
+extern unsigned int Read_All_DRM_ADC_Results(void);
 extern unsigned int Battery_Charger_Control(void);

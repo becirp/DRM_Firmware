@@ -5446,7 +5446,7 @@ unsigned int Read_DRM_ADC_Results(void)
 		unsigned int retVal = MAIN_OK;
 		uint32_t sample_size = 10000;
 		unsigned char BuffLen;
-		uint16_t data_voltage, data_current, data;
+		uint16_t data_voltage, data_current;
 		uint16_t voltage_array[sample_size], current_array[sample_size];
 		uint16_t i, j;
 		uint32_t sram_address;	
@@ -5472,37 +5472,6 @@ unsigned int Read_DRM_ADC_Results(void)
 		}		
 		
 		//RAM read and send to GUI
-//		data_current = 0;
-//		data_voltage = 0;
-//		sram_address = 0x60000000;
-//		for(i=0; i<sample_size/2; i++)
-//		{
-//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current, 1);
-//			sram_address+=2;
-//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage, 1);
-//			sram_address+=2;
-//			sprintf(OutputBuffer, "%u,%u;", data_current, data_voltage);
-//			SendOutputBuffer(COMM.port);
-//		}	
-//		
-//		while(1)
-//		{
-//			if(getcharB() == 'A') break;
-//		}
-//		
-//		for(; i<sample_size; i++)
-//		{
-//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current, 1);
-//			sram_address+=2;
-//			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage, 1);
-//			sram_address+=2;
-//			sprintf(OutputBuffer, "%u,%u;", data_current, data_voltage);
-//			SendOutputBuffer(COMM.port);
-//		}	
-		
-		//RAM read and send to GUI
-		data_current = 0;
-		data_voltage = 0;
 		sram_address = 0x60000000;
 		for(i=0; i<sample_size; i++)
 		{
@@ -5517,8 +5486,80 @@ unsigned int Read_DRM_ADC_Results(void)
 				while(getcharB() != 'A') HAL_Delay(10);	
 			}
 		}
+				
+		//End of transfer
+		sprintf(OutputBuffer,"OK");
+		return retVal;
+}
+
+unsigned int Read_All_DRM_ADC_Results(void)
+{
+		unsigned int retVal = MAIN_OK;
+		uint32_t sample_size = 10000;
+		unsigned char BuffLen;
+		uint16_t data_voltage1, data_voltage2, data_voltage3;
+		uint16_t data_current1, data_current2, data_current3;
+		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
+	  uint16_t current_array1[sample_size], current_array2[sample_size], current_array3[sample_size];
+		uint16_t i, j;
+		uint32_t sram_address;	
+	
+		//Timer setup and start
+		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
+    timer1_interrupt=1;
 		
+		//Read ADC and write to RAM
+		sram_address = 0x60000000;
+		for(i=0; i<sample_size; i++)
+		{
+			while(timer1_interrupt==0);
+			timer1_interrupt=0;
+			DRM1_ADC1_Read();
+			data_current1 = ADC_Results.ANCH[0];
+			data_voltage1 = ADC_Results.ANCH[1];
+			data_current2 = ADC_Results.ANCH[2];
+			data_voltage2 = ADC_Results.ANCH[3];
+			data_current3 = ADC_Results.ANCH[4];
+			data_voltage3 = ADC_Results.ANCH[5];
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current1, 1);					
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage1, 1);
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current2, 1);					
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
+			sram_address+=2;	
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);					
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
+			sram_address+=2;
+		}		
 		
+		//RAM read and send to GUI
+		sram_address = 0x60000000;
+		for(i=0; i<sample_size; i++)
+		{
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current1, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage1, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current2, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
+			sram_address+=2;
+			sprintf(OutputBuffer, "%u,%u,%u,%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2, data_current3, data_voltage3);
+			SendOutputBuffer(COMM.port);
+			if(i==2000 | i==4000 | i==6000 | i==8000)
+			{
+				while(getcharB() != 'A') HAL_Delay(10);	
+			}
+		}
+				
 		//End of transfer
 		sprintf(OutputBuffer,"OK");
 		return retVal;

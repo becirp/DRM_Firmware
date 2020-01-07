@@ -1313,8 +1313,6 @@ ADC_Results.LT[2]+=(ADC_8bit_results.LT_L[2]);
 
 
 /* READ DRM Channels */
-
-
 void DRM1_ADC1_Read(void)
 {
 	unsigned int i;
@@ -1352,7 +1350,66 @@ void DRM1_ADC1_Read(void)
 		if(current_data[i] == 1) ADC_Results.ANCH[0] |= bit_operator;
 		if(voltage_data[i] == 1) ADC_Results.ANCH[1] |= bit_operator;
 		bit_operator = bit_operator >> 1;
-	}
-	
+	}	
 }
+
+/* READ All DRM Channels */
+
+void DRM1_ADC_Read(void)
+{
+	unsigned int i;
+	uint8_t current_data1[16] = 0;
+	uint8_t voltage_data1[16] = 0;
+	uint8_t current_data2[16] = 0;
+	uint8_t voltage_data2[16] = 0;
+	uint8_t current_data3[16] = 0;
+	uint8_t voltage_data3[16] = 0;
+	uint16_t bit_operator = 0x8000;
+	//DRM Channels buffers
+	ADC_Results.ANCH[0]=0; 
+	ADC_Results.ANCH[1]=0;
+	ADC_Results.ANCH[2]=0; 
+	ADC_Results.ANCH[3]=0;
+	ADC_Results.ANCH[4]=0; 
+	ADC_Results.ANCH[5]=0;
+	
+	DRM1_ADC_CLK_RESET;
+	DELAY_IN_us;
+	DRM1_ADC_CS_RESET;
+	for(i=0; i<6; i++)
+	{
+		DELAY_IN_us;
+		DRM1_ADC_CLK_SET;
+		DELAY_IN_us;
+		DRM1_ADC_CLK_RESET;
+	}
+		for(i=0; i<16; i++)
+	{
+		DELAY_IN_us;
+		DRM1_ADC_CLK_SET;
+		DELAY_IN_us;
+		current_data1[i] = DRM1_ADC_CURR1;
+		voltage_data1[i] = DRM1_ADC_VOUT1;
+		current_data2[i] = DRM1_ADC_CURR2;
+		voltage_data2[i] = DRM1_ADC_VOUT2;
+		current_data3[i] = DRM1_ADC_CURR3;
+		voltage_data3[i] = DRM1_ADC_VOUT3;
+		DRM1_ADC_CLK_RESET;
+	}
+	DELAY_IN_us;
+	DRM1_ADC_CS_SET;
+	
+	for(i=0; i<16; i++)
+	{
+		if(current_data1[i] == 1) ADC_Results.ANCH[0] |= bit_operator;
+		if(voltage_data1[i] == 1) ADC_Results.ANCH[1] |= bit_operator;
+		if(current_data2[i] == 1) ADC_Results.ANCH[2] |= bit_operator;
+		if(voltage_data2[i] == 1) ADC_Results.ANCH[3] |= bit_operator;
+		if(current_data3[i] == 1) ADC_Results.ANCH[4] |= bit_operator;
+		if(voltage_data3[i] == 1) ADC_Results.ANCH[5] |= bit_operator;
+		bit_operator = bit_operator >> 1;
+	}	
+}
+
+
 
