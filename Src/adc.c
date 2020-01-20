@@ -1322,6 +1322,8 @@ void DRM1_ADC1_Read(void)
 	//DRM Channels buffers
 	ADC_Results.ANCH[0]=0; 
 	ADC_Results.ANCH[1]=0;
+//	ADC_Results.ANCH[4]=0; 
+//	ADC_Results.ANCH[5]=0;
 	
 	DRM1_ADC_CLK_RESET;
 	DELAY_IN_us;
@@ -1333,7 +1335,7 @@ void DRM1_ADC1_Read(void)
 		DELAY_IN_us;
 		DRM1_ADC_CLK_RESET;
 	}
-		for(i=0; i<16; i++)
+	for(i=0; i<16; i++)
 	{
 		DELAY_IN_us;
 		DRM1_ADC_CLK_SET;
@@ -1349,12 +1351,13 @@ void DRM1_ADC1_Read(void)
 	{
 		if(current_data[i] == 1) ADC_Results.ANCH[0] |= bit_operator;
 		if(voltage_data[i] == 1) ADC_Results.ANCH[1] |= bit_operator;
+//		if(current_data[i] == 1) ADC_Results.ANCH[4] |= bit_operator;
+//		if(voltage_data[i] == 1) ADC_Results.ANCH[5] |= bit_operator;
 		bit_operator = bit_operator >> 1;
 	}	
 }
 
 /* READ All DRM Channels */
-
 void DRM1_ADC_Read_All(void)
 {
 	unsigned int i;

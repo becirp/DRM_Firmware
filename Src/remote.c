@@ -18,6 +18,11 @@ unsigned int retVal=MAIN_NOK;
              
 if (InputBuffer[0]=='m')
 {
+					//Test function
+					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='S')&&(InputBuffer[3]=='T'))
+					{
+									return (test_fun());
+					}
 					//Battery charger control
 					if((InputBuffer[1]=='B')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='T'))
 					{

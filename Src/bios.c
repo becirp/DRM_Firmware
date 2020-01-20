@@ -455,7 +455,7 @@ HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U610, (uint8_t*)(&PORT610), 1, 10
 
 #endif
 
-void SPI_24_Write_CH1(unsigned int data, unsigned int channel)
+void DRM_DAC_Write(unsigned int data, unsigned int channel)
 {
 	unsigned char i;
 	unsigned long full_data = 0;
@@ -469,7 +469,7 @@ void SPI_24_Write_CH1(unsigned int data, unsigned int channel)
 	DRM1_CLK_HIGH;
 	delay_us(spi_delay);
 	if(channel == CHANNEL1) DRM1_SYNC1_LOW;
-	//if(channel == CHANNEL2) DRM1_SYNC2_LOW; TODO: pin za SYNC2 visi
+	//if(channel == CHANNEL2) DRM1_SYNC2_LOW; TODO: pin za SYNC2 visi. Zicom je kratko spojen na SYNC2. Istovremeno se zadaje DAC1 i DAC2 i na istu vrijednost.
 	if(channel == CHANNEL3) DRM1_SYNC3_LOW;
 	delay_us(spi_delay);
 	

@@ -246,11 +246,11 @@ int main(void)
 		
 		//Slanje komandi sa PC na PORTB
 		#if 1
-//			COMM.remote_enable=REMOTE_ENABLE;
-//			COMM.port = COMM_PORT_B;
-//			#if ST_LINK_DEBUG
-//				MeasurementStart_Comm();
-//			#endif
+			COMM.remote_enable=REMOTE_ENABLE;
+			COMM.port = COMM_PORT_B;
+			#if ST_LINK_DEBUG
+				MeasurementStart_Comm();
+			#endif
 			status=GetInputBuffer(COMM.port);
 			if (status==MAIN_OK)
       {             

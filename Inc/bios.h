@@ -977,7 +977,7 @@ extern STICK_STRUCT           STICK;
 // 							DRM FUNCTIONS						  //
 ////////////////////////////////////////////
 
-extern void SPI_24_Write_CH1(unsigned int data, unsigned int channel);
+extern void DRM_DAC_Write(unsigned int data, unsigned int channel);
 extern void DRM_Channel_Enable(unsigned int channel_number);
 extern void DRM_Channel_Disable(unsigned int channel_number);
 extern void MCU_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
@@ -1017,7 +1017,7 @@ extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int
 #define DRM1_SYNC1_HIGH			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET)
 #define DRM1_SYNC1_LOW			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET)
 
-//definisati liniju za SYNC2, trenutno visi pin, nije povezan na procesor
+//definisati liniju za SYNC2, trenutno visi pin, nije povezan na procesor, iskoristiti SYNC1 ili SYNC3 pin konektora
 
 #define DRM1_SYNC3_HIGH			HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET)
 #define DRM1_SYNC3_LOW			HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_RESET)
@@ -1031,7 +1031,7 @@ extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int
 #define DRM1_ADC_CURR1			HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6)
 #define DRM1_ADC_VOUT1			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6)
 #define DRM1_ADC_CURR2			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_7)
-#define DRM1_ADC_VOUT2			HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7)
+#define DRM1_ADC_VOUT2			HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8)
 #define DRM1_ADC_CURR3			HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_14)
 #define DRM1_ADC_VOUT3			HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15)
 
