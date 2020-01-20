@@ -983,6 +983,7 @@ extern void DRM_Channel_Disable(unsigned int channel_number);
 extern void MCU_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
 extern void MCU_Coil_Control(unsigned char port_control, unsigned int on_off);
 extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
+extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
 
 ////////////////////////////////////////////
 // 							DRM MACROS							  //

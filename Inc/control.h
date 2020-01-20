@@ -41,3 +41,4 @@ extern unsigned int Toggle_Pins(void);
 extern unsigned int Write_DRM_Channel(void);
 extern unsigned int Read_DRM_ADC();
 extern unsigned int Battery_Charger_Control(void);
+extern unsigned int Battery_Charger_Control(void);

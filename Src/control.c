@@ -5621,14 +5621,22 @@ unsigned int Read_DRM_ADC3(void)
 }
 
 
-//Battery charger control (I2C)
+//Battery charger control (I2C) Turn on/off +5V from battery
 unsigned int Battery_Charger_Control(void)
 {
 		unsigned int retVal = MAIN_OK;
-		sprintf(OutputBuffer,"I2C Write to Port Expander U3");	
-		MCU_Coil_Control(COIL_IGBT1_ON_OFF, SET);
-	  HAL_Delay(10000);
-		MCU_Coil_Control(COIL_IGBT1_ON_OFF, RESET);
+		unsigned int setOnOff;
+		if(InputBuffer[4] == '1')
+		{
+			setOnOff = SET;
+			sprintf(OutputBuffer, "Enable DRM 1 Power Ch1");
+		}
+		else if(InputBuffer[4] == '0')
+		{
+			setOnOff = RESET;
+			sprintf(OutputBuffer, "Disable DRM 1 Power Enable Ch1");
+		}
+		DRM_Pwr_Cfg_Ch1(setOnOff);
 		return retVal;
 }
 
