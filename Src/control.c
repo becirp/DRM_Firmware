@@ -5629,12 +5629,14 @@ unsigned int Battery_Charger_Control(void)
 		if(InputBuffer[4] == '1')
 		{
 			setOnOff = SET;
-			sprintf(OutputBuffer, "Enable DRM 1 Power Ch1");
+//			sprintf(OutputBuffer, "Enable DRM 1 Power Ch1");
+			sprintf(OutputBuffer, "Enable PWR Relay DRM 2 Ch1 ");
 		}
 		else if(InputBuffer[4] == '0')
 		{
 			setOnOff = RESET;
-			sprintf(OutputBuffer, "Disable DRM 1 Power Enable Ch1");
+//			sprintf(OutputBuffer, "Disable DRM 1 Power Enable Ch1");
+			sprintf(OutputBuffer, "Disable PWR Relay DRM 2 Ch1 ");
 		}
 		DRM_Pwr_Cfg_Ch1(setOnOff);
 		return retVal;

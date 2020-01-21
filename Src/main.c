@@ -134,7 +134,7 @@ int main(void)
 	MX_I2C1_Init();
 	init_variables();
 	init_coil_control();
-	
+	init_bat_control();
 	MAIN_CONTACTS_INIT_SEQ;
 	
 	//PRIVREMENO SE UPISUJU JEDINICNI KOEFICIJENTI:

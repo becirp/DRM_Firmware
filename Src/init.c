@@ -619,3 +619,16 @@ CLR_CLOSING1_IGBT;
 CLR_CLOSING2_IGBT;
 CLR_CLOSING3_IGBT;
 }
+
+void init_bat_control(void)
+{
+	uint8_t DRM1_Bat_Chg_Info1 = 0x10;
+	uint8_t DRM1_Bat_Chg_Info2 = 0x42;
+	DRM1_Bat_Chg_Info1 |= (DRM1_ADPT_RLY_CH1 | DRM1_ADPT_RLY_CH2);
+	DRM1_Bat_Chg_Info2 |= DRM1_ADPT_RLY_CH3;
+	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);
+}
+
+
+

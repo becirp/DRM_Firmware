@@ -17,3 +17,8 @@ extern TIM_HandleTypeDef htim2;
 extern UART_HandleTypeDef huart1;
 extern SRAM_HandleTypeDef hsram1;
 extern I2C_HandleTypeDef hi2c1;
+
+//DRM functions
+extern void init_bat_control(void);
+
+
