@@ -1068,3 +1068,4 @@ extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
 #define DRM1_PWR_EN_CH3				0x10
 #define DRM1_CHG_DSB_CH3			0x20
 #define DRM1_CHG_INFO_CH3			0x40
+

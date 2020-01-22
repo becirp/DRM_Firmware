@@ -17,11 +17,9 @@
 volatile unsigned char timer1_interrupt;
 volatile unsigned char control_after_first_contact_touched;
 
-///ove funkcije ponovo definisati:
-//unsigned char PrintNewLine(unsigned int starting_position){}
-
-
-//unsigned char trigger_from_current_clamps;
+//DRM I2C control
+uint8_t DRM1_Bat_Chg_Info1 = 0x10;
+uint8_t DRM1_Bat_Chg_Info2 = 0x42;
 	
 unsigned int check_if_digit(unsigned char first, unsigned char last)
 {
@@ -5625,20 +5623,48 @@ unsigned int Read_DRM_ADC3(void)
 unsigned int Battery_Charger_Control(void)
 {
 		unsigned int retVal = MAIN_OK;
-		unsigned int setOnOff;
-		if(InputBuffer[4] == '1')
-		{
-			setOnOff = SET;
-//			sprintf(OutputBuffer, "Enable DRM 1 Power Ch1");
-			sprintf(OutputBuffer, "Enable PWR Relay DRM 2 Ch1 ");
+	//Command: BAT11 - ukljuci CHG1, BAT10 - iskljuci CHG1, itd.
+		if(InputBuffer[5] == '1'){
+			if(InputBuffer[4] == '1')
+			{
+				DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH1);
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+				sprintf(OutputBuffer, "Enable PWR Relay CHG1");
+			}
+			if(InputBuffer[4] == '2')
+			{
+				DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH2);	
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);				
+				sprintf(OutputBuffer, "Enable PWR Relay CHG2");
+			}
+			if(InputBuffer[4] == '3')
+			{			
+				DRM1_Bat_Chg_Info2 &= ~(DRM1_ADPT_RLY_CH3);	
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);	
+				sprintf(OutputBuffer, "Enable PWR Relay CHG3");
+			}
 		}
-		else if(InputBuffer[4] == '0')
+		else if(InputBuffer[5] == '0')
 		{
-			setOnOff = RESET;
-//			sprintf(OutputBuffer, "Disable DRM 1 Power Enable Ch1");
-			sprintf(OutputBuffer, "Disable PWR Relay DRM 2 Ch1 ");
+			if(InputBuffer[4] == '1')
+			{
+				DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH1;
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+				sprintf(OutputBuffer, "Disable PWR Relay CHG1");
+			}
+			if(InputBuffer[4] == '2')
+			{
+				DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH2;
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+				sprintf(OutputBuffer, "Disable PWR Relay CHG2");
+			}
+			if(InputBuffer[4] == '3')
+			{
+				DRM1_Bat_Chg_Info2 |= DRM1_ADPT_RLY_CH3;	
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);	
+				sprintf(OutputBuffer, "Disable PWR Relay CHG3");
+			}
 		}
-		DRM_Pwr_Cfg_Ch1(setOnOff);
 		return retVal;
 }
 

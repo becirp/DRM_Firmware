@@ -9,6 +9,8 @@
 #include "init.h"
 #include "dwt_delay.h"
 
+//MCU Battery Charger Control
+uint8_t MCU_bat_chg_ctrl = 0x02;
 
 unsigned char language=0; //English is default language
 
@@ -36,10 +38,7 @@ LINEAR_RESULTS_STRUCT  LTransd_Results;
 DIGITAL_RESULTS_STRUCT DTransd_Results;
 RMO_RESULTS_STRUCT     RMO_Results;
 
-//DRM I2C control
-uint8_t MCU_bat_chg_ctrl = 0x02;
-uint8_t DRM1_Bat_Chg_Info1 = 0x10;
-uint8_t DRM1_Bat_Chg_Info2 = 0x42;
+
 
 void BSGRelayControl(unsigned char BSG_RELAY, unsigned char On_Off)
 {
@@ -546,21 +545,7 @@ void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off
 
 void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff)
 {
-	//DRM1_Bat_Chg_Info1
-	if(setOnOff == SET)
-	{
-//		DRM1_Bat_Chg_Info1 |= MCU_CHG_PWR_ON_OFF;		
-//		DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH1);
-		DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH2);
-		HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);	
-	}
-	else if(setOnOff == RESET)
-	{
-//		DRM1_Bat_Chg_Info1 &= ~(MCU_CHG_PWR_ON_OFF);
-//		DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH1;
-		DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH2;
-		HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
-	}
+
 }
 
 
