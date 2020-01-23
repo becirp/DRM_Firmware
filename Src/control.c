@@ -5432,7 +5432,7 @@ unsigned int Write_DRM_Channel(void)
 			sprintf(OutputBuffer,"Write %.2fV to DAC1:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current1, 
 			drm1_current1*conversion_factor, drm1_voltage1, drm1_voltage1*10.0/65535);
 			DRM_Channel_Disable(CHANNEL1);
-//			DRM_DAC_Write(0, CHANNEL1);
+			DRM_DAC_Write(0, CHANNEL1);
 			retVal = MAIN_OK;
 		}	
 		if(InputBuffer[3]=='2')
@@ -5441,6 +5441,7 @@ unsigned int Write_DRM_Channel(void)
 			DRM_DAC_Write(dac_output, CHANNEL2);
 			HAL_Delay(10);
 			DRM_Channel_Enable(CHANNEL2);
+//			HAL_Delay(100);
 			HAL_Delay(100);
 			DRM1_ADC_Read_All();
 			drm1_current2 = ADC_Results.ANCH[2];
@@ -5457,14 +5458,15 @@ unsigned int Write_DRM_Channel(void)
 			DRM_DAC_Write(dac_output, CHANNEL3);
 			HAL_Delay(10);
 			DRM_Channel_Enable(CHANNEL3);
+//			HAL_Delay(100);
 			HAL_Delay(100);
 			DRM1_ADC_Read_All();
-			drm1_current2 = ADC_Results.ANCH[4];
-			drm1_voltage2 = ADC_Results.ANCH[5];
+			drm1_current3 = ADC_Results.ANCH[4];
+			drm1_voltage3 = ADC_Results.ANCH[5];
 			sprintf(OutputBuffer,"Write %.2fV to DAC3:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current3, 
 			drm1_current3*conversion_factor, drm1_voltage3, drm1_voltage3*10.0/65535);
 			DRM_Channel_Disable(CHANNEL3);
-//			DRM_DAC_Write(0, CHANNEL3);
+			DRM_DAC_Write(0, CHANNEL3);
 			retVal = MAIN_OK;
 		}
 		return retVal;

@@ -3357,194 +3357,194 @@ Image Symbol Table
     i.WriteSPIs_fast                         0x08009c12   Section        0  usb_flash_drive.o(i.WriteSPIs_fast)
     i.Write_Calib_Coef_Comm                  0x08009c48   Section        0  calib.o(i.Write_Calib_Coef_Comm)
     i.Write_DRM_Channel                      0x08009e24   Section        0  control.o(i.Write_DRM_Channel)
-    i.__0sprintf                             0x0800a06c   Section        0  printfa.o(i.__0sprintf)
-    i.__aeabi_errno_addr                     0x0800a094   Section        0  errno.o(i.__aeabi_errno_addr)
-    i.__scatterload_copy                     0x0800a09c   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x0800a0aa   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x0800a0ac   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i._fp_digits                             0x0800a0bc   Section        0  printfa.o(i._fp_digits)
-    _fp_digits                               0x0800a0bd   Thumb Code   366  printfa.o(i._fp_digits)
-    i._printf_core                           0x0800a240   Section        0  printfa.o(i._printf_core)
-    _printf_core                             0x0800a241   Thumb Code  1744  printfa.o(i._printf_core)
-    i._printf_post_padding                   0x0800a91c   Section        0  printfa.o(i._printf_post_padding)
-    _printf_post_padding                     0x0800a91d   Thumb Code    36  printfa.o(i._printf_post_padding)
-    i._printf_pre_padding                    0x0800a940   Section        0  printfa.o(i._printf_pre_padding)
-    _printf_pre_padding                      0x0800a941   Thumb Code    46  printfa.o(i._printf_pre_padding)
-    i._sputc                                 0x0800a96e   Section        0  printfa.o(i._sputc)
-    _sputc                                   0x0800a96f   Thumb Code    10  printfa.o(i._sputc)
-    i.abs_16_bit                             0x0800a978   Section        0  control.o(i.abs_16_bit)
-    i.add_new_res_to_list                    0x0800a984   Section        0  sd_card.o(i.add_new_res_to_list)
-    i.apply_offset_correction                0x0800a9cc   Section        0  calib.o(i.apply_offset_correction)
-    i.calc_max_time                          0x0800a9f2   Section        0  control.o(i.calc_max_time)
-    i.calc_min_time                          0x0800aa14   Section        0  control.o(i.calc_min_time)
-    i.calculate_gained_value                 0x0800aa38   Section        0  calib.o(i.calculate_gained_value)
-    i.calculate_offset_for_CC_channels       0x0800aa98   Section        0  calib.o(i.calculate_offset_for_CC_channels)
-    i.calculate_overtavel                    0x0800ab08   Section        0  control.o(i.calculate_overtavel)
-    i.calculate_rebound                      0x0800ac0c   Section        0  control.o(i.calculate_rebound)
-    i.calculate_total_travel                 0x0800acf8   Section        0  control.o(i.calculate_total_travel)
-    i.check_calibration_coeficients          0x0800adf8   Section        0  calib.o(i.check_calibration_coeficients)
-    i.check_for_stop_button                  0x0800ae98   Section        0  control.o(i.check_for_stop_button)
-    i.check_fs                               0x0800aeb4   Section        0  ff.o(i.check_fs)
-    check_fs                                 0x0800aeb5   Thumb Code   102  ff.o(i.check_fs)
-    i.check_if_digit                         0x0800af24   Section        0  control.o(i.check_if_digit)
-    i.check_mc_test_results                  0x0800af5c   Section        0  control.o(i.check_mc_test_results)
-    i.chk_lock                               0x0800b020   Section        0  ff.o(i.chk_lock)
-    chk_lock                                 0x0800b021   Thumb Code    86  ff.o(i.chk_lock)
-    i.clear_lock                             0x0800b07c   Section        0  ff.o(i.clear_lock)
-    clear_lock                               0x0800b07d   Thumb Code    28  ff.o(i.clear_lock)
-    i.clear_sector                           0x0800b09c   Section        0  usb_flash_drive.o(i.clear_sector)
-    i.clmt_clust                             0x0800b0b4   Section        0  ff.o(i.clmt_clust)
-    clmt_clust                               0x0800b0b5   Thumb Code    36  ff.o(i.clmt_clust)
-    i.close_file_and_unmount                 0x0800b0d8   Section        0  sd_card.o(i.close_file_and_unmount)
-    i.clrvn                                  0x0800b0fc   Section        0  usb_flash_drive.o(i.clrvn)
-    i.clust2sect                             0x0800b110   Section        0  ff.o(i.clust2sect)
-    clust2sect                               0x0800b111   Thumb Code    24  ff.o(i.clust2sect)
-    i.coil_control                           0x0800b128   Section        0  control.o(i.coil_control)
-    i.compare_analog_value                   0x0800b250   Section        0  control.o(i.compare_analog_value)
-    i.convert_to_slong_DT_res                0x0800b2d8   Section        0  adc.o(i.convert_to_slong_DT_res)
-    i.create_chain                           0x0800b2f0   Section        0  ff.o(i.create_chain)
-    create_chain                             0x0800b2f1   Thumb Code   164  ff.o(i.create_chain)
-    i.create_name                            0x0800b394   Section        0  ff.o(i.create_name)
-    create_name                              0x0800b395   Thumb Code   168  ff.o(i.create_name)
-    i.dec_lock                               0x0800b450   Section        0  ff.o(i.dec_lock)
-    dec_lock                                 0x0800b451   Thumb Code    48  ff.o(i.dec_lock)
-    i.define_path                            0x0800b484   Section        0  sd_card.o(i.define_path)
-    i.delay_us                               0x0800b4e0   Section        0  usb_flash_drive.o(i.delay_us)
-    i.delete_result_from_the_list            0x0800b4ec   Section        0  sd_card.o(i.delete_result_from_the_list)
-    i.dir_find                               0x0800b4f2   Section        0  ff.o(i.dir_find)
-    dir_find                                 0x0800b4f3   Thumb Code   100  ff.o(i.dir_find)
-    i.dir_next                               0x0800b558   Section        0  ff.o(i.dir_next)
-    dir_next                                 0x0800b559   Thumb Code   244  ff.o(i.dir_next)
-    i.dir_read                               0x0800b64c   Section        0  ff.o(i.dir_read)
-    dir_read                                 0x0800b64d   Thumb Code    96  ff.o(i.dir_read)
-    i.dir_register                           0x0800b6ac   Section        0  ff.o(i.dir_register)
-    dir_register                             0x0800b6ad   Thumb Code   102  ff.o(i.dir_register)
-    i.dir_remove                             0x0800b712   Section        0  ff.o(i.dir_remove)
-    dir_remove                               0x0800b713   Thumb Code    30  ff.o(i.dir_remove)
-    i.dir_sdi                                0x0800b730   Section        0  ff.o(i.dir_sdi)
-    dir_sdi                                  0x0800b731   Thumb Code   130  ff.o(i.dir_sdi)
-    i.disable_printer_communication          0x0800b7b4   Section        0  bios.o(i.disable_printer_communication)
-    i.disk_initialize                        0x0800b7e0   Section        0  diskio.o(i.disk_initialize)
-    i.disk_ioctl                             0x0800b808   Section        0  diskio.o(i.disk_ioctl)
-    i.disk_read                              0x0800b824   Section        0  diskio.o(i.disk_read)
-    i.disk_status                            0x0800b840   Section        0  diskio.o(i.disk_status)
-    i.disk_write                             0x0800b858   Section        0  diskio.o(i.disk_write)
-    i.drive_close_coil                       0x0800b874   Section        0  control.o(i.drive_close_coil)
-    i.drive_open_coil                        0x0800b8fc   Section        0  control.o(i.drive_open_coil)
-    i.enable_printer_communication           0x0800b988   Section        0  bios.o(i.enable_printer_communication)
-    i.erase_all_mem_locations                0x0800b9b4   Section        0  sd_card.o(i.erase_all_mem_locations)
-    i.f_close                                0x0800b9e8   Section        0  ff.o(i.f_close)
-    i.f_mount                                0x0800ba10   Section        0  ff.o(i.f_mount)
-    i.f_open                                 0x0800ba68   Section        0  ff.o(i.f_open)
-    i.f_read                                 0x0800bc74   Section        0  ff.o(i.f_read)
-    i.f_sync                                 0x0800bdc6   Section        0  ff.o(i.f_sync)
-    i.f_unlink                               0x0800be54   Section        0  ff.o(i.f_unlink)
-    i.f_write                                0x0800bef2   Section        0  ff.o(i.f_write)
-    i.find_volume                            0x0800c080   Section        0  ff.o(i.find_volume)
-    find_volume                              0x0800c081   Thumb Code   582  ff.o(i.find_volume)
-    i.follow_path                            0x0800c2d4   Section        0  ff.o(i.follow_path)
-    follow_path                              0x0800c2d5   Thumb Code   116  ff.o(i.follow_path)
-    i.free                                   0x0800c348   Section        0  malloc.o(i.free)
-    i.get_fat                                0x0800c398   Section        0  ff.o(i.get_fat)
-    get_fat                                  0x0800c399   Thumb Code   190  ff.o(i.get_fat)
-    i.get_fattime                            0x0800c456   Section        0  fatfs.o(i.get_fattime)
-    i.get_ldnumber                           0x0800c45a   Section        0  ff.o(i.get_ldnumber)
-    get_ldnumber                             0x0800c45b   Thumb Code    60  ff.o(i.get_ldnumber)
-    i.get_range                              0x0800c496   Section        0  calib.o(i.get_range)
-    i.get_real_adc_values                    0x0800c4bc   Section        0  adc.o(i.get_real_adc_values)
-    i.getcharB                               0x0800c600   Section        0  comm.o(i.getcharB)
-    i.inc_lock                               0x0800c6c0   Section        0  ff.o(i.inc_lock)
-    inc_lock                                 0x0800c6c1   Thumb Code   124  ff.o(i.inc_lock)
-    i.init_bat_control                       0x0800c740   Section        0  init.o(i.init_bat_control)
-    i.init_coil_control                      0x0800c774   Section        0  init.o(i.init_coil_control)
-    i.init_results_vaules                    0x0800c840   Section        0  control.o(i.init_results_vaules)
-    i.init_sd_card                           0x0800c8e4   Section        0  sd_card.o(i.init_sd_card)
-    i.init_variables                         0x0800c904   Section        0  init.o(i.init_variables)
-    i.ld_clust                               0x0800c984   Section        0  ff.o(i.ld_clust)
-    ld_clust                                 0x0800c985   Thumb Code    38  ff.o(i.ld_clust)
-    i.ld_dword                               0x0800c9aa   Section        0  ff.o(i.ld_dword)
-    ld_dword                                 0x0800c9ab   Thumb Code    22  ff.o(i.ld_dword)
-    i.ld_word                                0x0800c9c0   Section        0  ff.o(i.ld_word)
-    ld_word                                  0x0800c9c1   Thumb Code    10  ff.o(i.ld_word)
-    i.list_all_mem_locations                 0x0800c9cc   Section        0  sd_card.o(i.list_all_mem_locations)
-    i.load_mem_loc_info                      0x0800ca30   Section        0  sd_card.o(i.load_mem_loc_info)
-    i.main                                   0x0800ca58   Section        0  main.o(i.main)
-    i.malloc                                 0x0800cb04   Section        0  malloc.o(i.malloc)
-    i.mem_cpy                                0x0800cb70   Section        0  ff.o(i.mem_cpy)
-    mem_cpy                                  0x0800cb71   Thumb Code    18  ff.o(i.mem_cpy)
-    i.mem_location_info                      0x0800cb84   Section        0  sd_card.o(i.mem_location_info)
-    i.mem_set                                0x0800cbcc   Section        0  ff.o(i.mem_set)
-    mem_set                                  0x0800cbcd   Thumb Code    14  ff.o(i.mem_set)
-    i.move_window                            0x0800cbda   Section        0  ff.o(i.move_window)
-    move_window                              0x0800cbdb   Thumb Code    50  ff.o(i.move_window)
-    i.my_getchar                             0x0800cc0c   Section        0  comm.o(i.my_getchar)
-    i.my_putchar                             0x0800cc28   Section        0  comm.o(i.my_putchar)
-    i.process_data_for_CO_test               0x0800cc40   Section        0  control.o(i.process_data_for_CO_test)
-    i.process_data_for_OCO_test              0x0800cd58   Section        0  control.o(i.process_data_for_OCO_test)
-    i.process_data_for_OC_test               0x0800d01c   Section        0  control.o(i.process_data_for_OC_test)
-    i.process_data_for_closing_test          0x0800d248   Section        0  control.o(i.process_data_for_closing_test)
-    i.process_data_for_opening_test          0x0800d660   Section        0  control.o(i.process_data_for_opening_test)
-    i.put_fat                                0x0800d988   Section        0  ff.o(i.put_fat)
-    put_fat                                  0x0800d989   Thumb Code   234  ff.o(i.put_fat)
-    i.putcharB                               0x0800da74   Section        0  comm.o(i.putcharB)
-    i.putchar_printer                        0x0800db2c   Section        0  comm.o(i.putchar_printer)
-    i.read_adc_raw_results                   0x0800db44   Section        0  adc.o(i.read_adc_raw_results)
-    i.read_adc_res_sram_test                 0x0800dce8   Section        0  adc.o(i.read_adc_res_sram_test)
-    i.read_all_adc_channels_test             0x0800df74   Section        0  adc.o(i.read_all_adc_channels_test)
-    i.read_all_adcs                          0x0800eba8   Section        0  control.o(i.read_all_adcs)
-    i.read_analog_adc_for_trigger            0x0800ecb8   Section        0  adc.o(i.read_analog_adc_for_trigger)
-    i.read_data_from_sd_card                 0x0800ecba   Section        0  sd_card.o(i.read_data_from_sd_card)
-    i.read_digital_trans_chs                 0x0800ecf4   Section        0  adc.o(i.read_digital_trans_chs)
-    i.read_dummy                             0x0800ee98   Section        0  printer.o(i.read_dummy)
-    i.read_from_file                         0x0800eeac   Section        0  sd_card.o(i.read_from_file)
-    i.read_multiple_ch_adcs                  0x0800f014   Section        0  adc.o(i.read_multiple_ch_adcs)
-    i.remove_chain                           0x0800f48a   Section        0  ff.o(i.remove_chain)
-    remove_chain                             0x0800f48b   Thumb Code   116  ff.o(i.remove_chain)
-    i.reset_flash_drive_MCU                  0x0800f500   Section        0  usb_flash_drive.o(i.reset_flash_drive_MCU)
-    i.search_max_current_per_ch              0x0800f540   Section        0  control.o(i.search_max_current_per_ch)
-    i.search_min_max_voltage_per_ch          0x0800f5bc   Section        0  control.o(i.search_min_max_voltage_per_ch)
-    i.send_data_transfer_over_status         0x0800f608   Section        0  comm.o(i.send_data_transfer_over_status)
-    i.send_measuring_samples_to_pc           0x0800f63c   Section        0  comm.o(i.send_measuring_samples_to_pc)
-    i.send_test_data_to_pc                   0x0800f70c   Section        0  comm.o(i.send_test_data_to_pc)
-    i.set_contact_wipe_results_to_zero       0x0800f9f8   Section        0  control.o(i.set_contact_wipe_results_to_zero)
-    i.set_osg_or_bsg                         0x0800fa54   Section        0  control.o(i.set_osg_or_bsg)
-    i.setdt                                  0x0800fa88   Section        0  usb_flash_drive.o(i.setdt)
-    i.slave_deselect_usb_flash_drive         0x0800fac8   Section        0  usb_flash_drive.o(i.slave_deselect_usb_flash_drive)
-    i.slave_select_usb_flash_drive           0x0800fae4   Section        0  usb_flash_drive.o(i.slave_select_usb_flash_drive)
-    i.spie_master_tx_fast                    0x0800fb00   Section        0  comm.o(i.spie_master_tx_fast)
-    i.spie_master_tx_rx                      0x0800fba8   Section        0  comm.o(i.spie_master_tx_rx)
-    i.st_clust                               0x0800fc58   Section        0  ff.o(i.st_clust)
-    st_clust                                 0x0800fc59   Thumb Code    40  ff.o(i.st_clust)
-    i.st_dword                               0x0800fc80   Section        0  ff.o(i.st_dword)
-    st_dword                                 0x0800fc81   Thumb Code    16  ff.o(i.st_dword)
-    i.st_word                                0x0800fc90   Section        0  ff.o(i.st_word)
-    st_word                                  0x0800fc91   Thumb Code     8  ff.o(i.st_word)
-    i.store_data_to_sd_card                  0x0800fc98   Section        0  sd_card.o(i.store_data_to_sd_card)
-    i.store_graphics_to_sd_card              0x0800fcdc   Section        0  sd_card.o(i.store_graphics_to_sd_card)
-    i.store_list_array_into_mem              0x0800fd14   Section        0  sd_card.o(i.store_list_array_into_mem)
-    i.store_numerics_to_sd_card              0x0800fd36   Section        0  sd_card.o(i.store_numerics_to_sd_card)
-    i.string_to_int                          0x0800fd60   Section        0  control.o(i.string_to_int)
-    i.string_to_long                         0x0800fd8c   Section        0  control.o(i.string_to_long)
-    i.sync_fs                                0x0800fdb8   Section        0  ff.o(i.sync_fs)
-    sync_fs                                  0x0800fdb9   Thumb Code   126  ff.o(i.sync_fs)
-    i.sync_window                            0x0800fe40   Section        0  ff.o(i.sync_window)
-    sync_window                              0x0800fe41   Thumb Code    82  ff.o(i.sync_window)
-    i.test_fun                               0x0800fe92   Section        0  control.o(i.test_fun)
-    i.validate                               0x0800fe96   Section        0  ff.o(i.validate)
-    validate                                 0x0800fe97   Thumb Code    50  ff.o(i.validate)
-    i.wait_char_from_pc                      0x0800fec8   Section        0  comm.o(i.wait_char_from_pc)
-    i.write_to_file                          0x0800ff2c   Section        0  sd_card.o(i.write_to_file)
-    .constdata                               0x08010130   Section       20  sd_diskio.o(.constdata)
-    .constdata                               0x08010144   Section       16  system_stm32f4xx.o(.constdata)
-    .constdata                               0x08010154   Section        8  system_stm32f4xx.o(.constdata)
-    .constdata                               0x0801015c   Section      156  ff.o(.constdata)
-    ExCvt                                    0x0801015c   Data         128  ff.o(.constdata)
-    cst                                      0x080101dc   Data          14  ff.o(.constdata)
-    cst32                                    0x080101ea   Data          14  ff.o(.constdata)
-    .constdata                               0x080101f8   Section      129  ctype_o.o(.constdata)
-    .constdata                               0x0801027c   Section        4  ctype_o.o(.constdata)
-    table                                    0x0801027c   Data           4  ctype_o.o(.constdata)
-    .conststring                             0x08010280   Section      225  control.o(.conststring)
+    i.__0sprintf                             0x0800a07c   Section        0  printfa.o(i.__0sprintf)
+    i.__aeabi_errno_addr                     0x0800a0a4   Section        0  errno.o(i.__aeabi_errno_addr)
+    i.__scatterload_copy                     0x0800a0ac   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800a0ba   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0800a0bc   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i._fp_digits                             0x0800a0cc   Section        0  printfa.o(i._fp_digits)
+    _fp_digits                               0x0800a0cd   Thumb Code   366  printfa.o(i._fp_digits)
+    i._printf_core                           0x0800a250   Section        0  printfa.o(i._printf_core)
+    _printf_core                             0x0800a251   Thumb Code  1744  printfa.o(i._printf_core)
+    i._printf_post_padding                   0x0800a92c   Section        0  printfa.o(i._printf_post_padding)
+    _printf_post_padding                     0x0800a92d   Thumb Code    36  printfa.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x0800a950   Section        0  printfa.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x0800a951   Thumb Code    46  printfa.o(i._printf_pre_padding)
+    i._sputc                                 0x0800a97e   Section        0  printfa.o(i._sputc)
+    _sputc                                   0x0800a97f   Thumb Code    10  printfa.o(i._sputc)
+    i.abs_16_bit                             0x0800a988   Section        0  control.o(i.abs_16_bit)
+    i.add_new_res_to_list                    0x0800a994   Section        0  sd_card.o(i.add_new_res_to_list)
+    i.apply_offset_correction                0x0800a9dc   Section        0  calib.o(i.apply_offset_correction)
+    i.calc_max_time                          0x0800aa02   Section        0  control.o(i.calc_max_time)
+    i.calc_min_time                          0x0800aa24   Section        0  control.o(i.calc_min_time)
+    i.calculate_gained_value                 0x0800aa48   Section        0  calib.o(i.calculate_gained_value)
+    i.calculate_offset_for_CC_channels       0x0800aaa8   Section        0  calib.o(i.calculate_offset_for_CC_channels)
+    i.calculate_overtavel                    0x0800ab18   Section        0  control.o(i.calculate_overtavel)
+    i.calculate_rebound                      0x0800ac1c   Section        0  control.o(i.calculate_rebound)
+    i.calculate_total_travel                 0x0800ad08   Section        0  control.o(i.calculate_total_travel)
+    i.check_calibration_coeficients          0x0800ae08   Section        0  calib.o(i.check_calibration_coeficients)
+    i.check_for_stop_button                  0x0800aea8   Section        0  control.o(i.check_for_stop_button)
+    i.check_fs                               0x0800aec4   Section        0  ff.o(i.check_fs)
+    check_fs                                 0x0800aec5   Thumb Code   102  ff.o(i.check_fs)
+    i.check_if_digit                         0x0800af34   Section        0  control.o(i.check_if_digit)
+    i.check_mc_test_results                  0x0800af6c   Section        0  control.o(i.check_mc_test_results)
+    i.chk_lock                               0x0800b030   Section        0  ff.o(i.chk_lock)
+    chk_lock                                 0x0800b031   Thumb Code    86  ff.o(i.chk_lock)
+    i.clear_lock                             0x0800b08c   Section        0  ff.o(i.clear_lock)
+    clear_lock                               0x0800b08d   Thumb Code    28  ff.o(i.clear_lock)
+    i.clear_sector                           0x0800b0ac   Section        0  usb_flash_drive.o(i.clear_sector)
+    i.clmt_clust                             0x0800b0c4   Section        0  ff.o(i.clmt_clust)
+    clmt_clust                               0x0800b0c5   Thumb Code    36  ff.o(i.clmt_clust)
+    i.close_file_and_unmount                 0x0800b0e8   Section        0  sd_card.o(i.close_file_and_unmount)
+    i.clrvn                                  0x0800b10c   Section        0  usb_flash_drive.o(i.clrvn)
+    i.clust2sect                             0x0800b120   Section        0  ff.o(i.clust2sect)
+    clust2sect                               0x0800b121   Thumb Code    24  ff.o(i.clust2sect)
+    i.coil_control                           0x0800b138   Section        0  control.o(i.coil_control)
+    i.compare_analog_value                   0x0800b260   Section        0  control.o(i.compare_analog_value)
+    i.convert_to_slong_DT_res                0x0800b2e8   Section        0  adc.o(i.convert_to_slong_DT_res)
+    i.create_chain                           0x0800b300   Section        0  ff.o(i.create_chain)
+    create_chain                             0x0800b301   Thumb Code   164  ff.o(i.create_chain)
+    i.create_name                            0x0800b3a4   Section        0  ff.o(i.create_name)
+    create_name                              0x0800b3a5   Thumb Code   168  ff.o(i.create_name)
+    i.dec_lock                               0x0800b460   Section        0  ff.o(i.dec_lock)
+    dec_lock                                 0x0800b461   Thumb Code    48  ff.o(i.dec_lock)
+    i.define_path                            0x0800b494   Section        0  sd_card.o(i.define_path)
+    i.delay_us                               0x0800b4f0   Section        0  usb_flash_drive.o(i.delay_us)
+    i.delete_result_from_the_list            0x0800b4fc   Section        0  sd_card.o(i.delete_result_from_the_list)
+    i.dir_find                               0x0800b502   Section        0  ff.o(i.dir_find)
+    dir_find                                 0x0800b503   Thumb Code   100  ff.o(i.dir_find)
+    i.dir_next                               0x0800b568   Section        0  ff.o(i.dir_next)
+    dir_next                                 0x0800b569   Thumb Code   244  ff.o(i.dir_next)
+    i.dir_read                               0x0800b65c   Section        0  ff.o(i.dir_read)
+    dir_read                                 0x0800b65d   Thumb Code    96  ff.o(i.dir_read)
+    i.dir_register                           0x0800b6bc   Section        0  ff.o(i.dir_register)
+    dir_register                             0x0800b6bd   Thumb Code   102  ff.o(i.dir_register)
+    i.dir_remove                             0x0800b722   Section        0  ff.o(i.dir_remove)
+    dir_remove                               0x0800b723   Thumb Code    30  ff.o(i.dir_remove)
+    i.dir_sdi                                0x0800b740   Section        0  ff.o(i.dir_sdi)
+    dir_sdi                                  0x0800b741   Thumb Code   130  ff.o(i.dir_sdi)
+    i.disable_printer_communication          0x0800b7c4   Section        0  bios.o(i.disable_printer_communication)
+    i.disk_initialize                        0x0800b7f0   Section        0  diskio.o(i.disk_initialize)
+    i.disk_ioctl                             0x0800b818   Section        0  diskio.o(i.disk_ioctl)
+    i.disk_read                              0x0800b834   Section        0  diskio.o(i.disk_read)
+    i.disk_status                            0x0800b850   Section        0  diskio.o(i.disk_status)
+    i.disk_write                             0x0800b868   Section        0  diskio.o(i.disk_write)
+    i.drive_close_coil                       0x0800b884   Section        0  control.o(i.drive_close_coil)
+    i.drive_open_coil                        0x0800b90c   Section        0  control.o(i.drive_open_coil)
+    i.enable_printer_communication           0x0800b998   Section        0  bios.o(i.enable_printer_communication)
+    i.erase_all_mem_locations                0x0800b9c4   Section        0  sd_card.o(i.erase_all_mem_locations)
+    i.f_close                                0x0800b9f8   Section        0  ff.o(i.f_close)
+    i.f_mount                                0x0800ba20   Section        0  ff.o(i.f_mount)
+    i.f_open                                 0x0800ba78   Section        0  ff.o(i.f_open)
+    i.f_read                                 0x0800bc84   Section        0  ff.o(i.f_read)
+    i.f_sync                                 0x0800bdd6   Section        0  ff.o(i.f_sync)
+    i.f_unlink                               0x0800be64   Section        0  ff.o(i.f_unlink)
+    i.f_write                                0x0800bf02   Section        0  ff.o(i.f_write)
+    i.find_volume                            0x0800c090   Section        0  ff.o(i.find_volume)
+    find_volume                              0x0800c091   Thumb Code   582  ff.o(i.find_volume)
+    i.follow_path                            0x0800c2e4   Section        0  ff.o(i.follow_path)
+    follow_path                              0x0800c2e5   Thumb Code   116  ff.o(i.follow_path)
+    i.free                                   0x0800c358   Section        0  malloc.o(i.free)
+    i.get_fat                                0x0800c3a8   Section        0  ff.o(i.get_fat)
+    get_fat                                  0x0800c3a9   Thumb Code   190  ff.o(i.get_fat)
+    i.get_fattime                            0x0800c466   Section        0  fatfs.o(i.get_fattime)
+    i.get_ldnumber                           0x0800c46a   Section        0  ff.o(i.get_ldnumber)
+    get_ldnumber                             0x0800c46b   Thumb Code    60  ff.o(i.get_ldnumber)
+    i.get_range                              0x0800c4a6   Section        0  calib.o(i.get_range)
+    i.get_real_adc_values                    0x0800c4cc   Section        0  adc.o(i.get_real_adc_values)
+    i.getcharB                               0x0800c610   Section        0  comm.o(i.getcharB)
+    i.inc_lock                               0x0800c6d0   Section        0  ff.o(i.inc_lock)
+    inc_lock                                 0x0800c6d1   Thumb Code   124  ff.o(i.inc_lock)
+    i.init_bat_control                       0x0800c750   Section        0  init.o(i.init_bat_control)
+    i.init_coil_control                      0x0800c784   Section        0  init.o(i.init_coil_control)
+    i.init_results_vaules                    0x0800c850   Section        0  control.o(i.init_results_vaules)
+    i.init_sd_card                           0x0800c8f4   Section        0  sd_card.o(i.init_sd_card)
+    i.init_variables                         0x0800c914   Section        0  init.o(i.init_variables)
+    i.ld_clust                               0x0800c994   Section        0  ff.o(i.ld_clust)
+    ld_clust                                 0x0800c995   Thumb Code    38  ff.o(i.ld_clust)
+    i.ld_dword                               0x0800c9ba   Section        0  ff.o(i.ld_dword)
+    ld_dword                                 0x0800c9bb   Thumb Code    22  ff.o(i.ld_dword)
+    i.ld_word                                0x0800c9d0   Section        0  ff.o(i.ld_word)
+    ld_word                                  0x0800c9d1   Thumb Code    10  ff.o(i.ld_word)
+    i.list_all_mem_locations                 0x0800c9dc   Section        0  sd_card.o(i.list_all_mem_locations)
+    i.load_mem_loc_info                      0x0800ca40   Section        0  sd_card.o(i.load_mem_loc_info)
+    i.main                                   0x0800ca68   Section        0  main.o(i.main)
+    i.malloc                                 0x0800cb14   Section        0  malloc.o(i.malloc)
+    i.mem_cpy                                0x0800cb80   Section        0  ff.o(i.mem_cpy)
+    mem_cpy                                  0x0800cb81   Thumb Code    18  ff.o(i.mem_cpy)
+    i.mem_location_info                      0x0800cb94   Section        0  sd_card.o(i.mem_location_info)
+    i.mem_set                                0x0800cbdc   Section        0  ff.o(i.mem_set)
+    mem_set                                  0x0800cbdd   Thumb Code    14  ff.o(i.mem_set)
+    i.move_window                            0x0800cbea   Section        0  ff.o(i.move_window)
+    move_window                              0x0800cbeb   Thumb Code    50  ff.o(i.move_window)
+    i.my_getchar                             0x0800cc1c   Section        0  comm.o(i.my_getchar)
+    i.my_putchar                             0x0800cc38   Section        0  comm.o(i.my_putchar)
+    i.process_data_for_CO_test               0x0800cc50   Section        0  control.o(i.process_data_for_CO_test)
+    i.process_data_for_OCO_test              0x0800cd68   Section        0  control.o(i.process_data_for_OCO_test)
+    i.process_data_for_OC_test               0x0800d02c   Section        0  control.o(i.process_data_for_OC_test)
+    i.process_data_for_closing_test          0x0800d258   Section        0  control.o(i.process_data_for_closing_test)
+    i.process_data_for_opening_test          0x0800d670   Section        0  control.o(i.process_data_for_opening_test)
+    i.put_fat                                0x0800d998   Section        0  ff.o(i.put_fat)
+    put_fat                                  0x0800d999   Thumb Code   234  ff.o(i.put_fat)
+    i.putcharB                               0x0800da84   Section        0  comm.o(i.putcharB)
+    i.putchar_printer                        0x0800db3c   Section        0  comm.o(i.putchar_printer)
+    i.read_adc_raw_results                   0x0800db54   Section        0  adc.o(i.read_adc_raw_results)
+    i.read_adc_res_sram_test                 0x0800dcf8   Section        0  adc.o(i.read_adc_res_sram_test)
+    i.read_all_adc_channels_test             0x0800df84   Section        0  adc.o(i.read_all_adc_channels_test)
+    i.read_all_adcs                          0x0800ebb8   Section        0  control.o(i.read_all_adcs)
+    i.read_analog_adc_for_trigger            0x0800ecc8   Section        0  adc.o(i.read_analog_adc_for_trigger)
+    i.read_data_from_sd_card                 0x0800ecca   Section        0  sd_card.o(i.read_data_from_sd_card)
+    i.read_digital_trans_chs                 0x0800ed04   Section        0  adc.o(i.read_digital_trans_chs)
+    i.read_dummy                             0x0800eea8   Section        0  printer.o(i.read_dummy)
+    i.read_from_file                         0x0800eebc   Section        0  sd_card.o(i.read_from_file)
+    i.read_multiple_ch_adcs                  0x0800f024   Section        0  adc.o(i.read_multiple_ch_adcs)
+    i.remove_chain                           0x0800f49a   Section        0  ff.o(i.remove_chain)
+    remove_chain                             0x0800f49b   Thumb Code   116  ff.o(i.remove_chain)
+    i.reset_flash_drive_MCU                  0x0800f510   Section        0  usb_flash_drive.o(i.reset_flash_drive_MCU)
+    i.search_max_current_per_ch              0x0800f550   Section        0  control.o(i.search_max_current_per_ch)
+    i.search_min_max_voltage_per_ch          0x0800f5cc   Section        0  control.o(i.search_min_max_voltage_per_ch)
+    i.send_data_transfer_over_status         0x0800f618   Section        0  comm.o(i.send_data_transfer_over_status)
+    i.send_measuring_samples_to_pc           0x0800f64c   Section        0  comm.o(i.send_measuring_samples_to_pc)
+    i.send_test_data_to_pc                   0x0800f71c   Section        0  comm.o(i.send_test_data_to_pc)
+    i.set_contact_wipe_results_to_zero       0x0800fa08   Section        0  control.o(i.set_contact_wipe_results_to_zero)
+    i.set_osg_or_bsg                         0x0800fa64   Section        0  control.o(i.set_osg_or_bsg)
+    i.setdt                                  0x0800fa98   Section        0  usb_flash_drive.o(i.setdt)
+    i.slave_deselect_usb_flash_drive         0x0800fad8   Section        0  usb_flash_drive.o(i.slave_deselect_usb_flash_drive)
+    i.slave_select_usb_flash_drive           0x0800faf4   Section        0  usb_flash_drive.o(i.slave_select_usb_flash_drive)
+    i.spie_master_tx_fast                    0x0800fb10   Section        0  comm.o(i.spie_master_tx_fast)
+    i.spie_master_tx_rx                      0x0800fbb8   Section        0  comm.o(i.spie_master_tx_rx)
+    i.st_clust                               0x0800fc68   Section        0  ff.o(i.st_clust)
+    st_clust                                 0x0800fc69   Thumb Code    40  ff.o(i.st_clust)
+    i.st_dword                               0x0800fc90   Section        0  ff.o(i.st_dword)
+    st_dword                                 0x0800fc91   Thumb Code    16  ff.o(i.st_dword)
+    i.st_word                                0x0800fca0   Section        0  ff.o(i.st_word)
+    st_word                                  0x0800fca1   Thumb Code     8  ff.o(i.st_word)
+    i.store_data_to_sd_card                  0x0800fca8   Section        0  sd_card.o(i.store_data_to_sd_card)
+    i.store_graphics_to_sd_card              0x0800fcec   Section        0  sd_card.o(i.store_graphics_to_sd_card)
+    i.store_list_array_into_mem              0x0800fd24   Section        0  sd_card.o(i.store_list_array_into_mem)
+    i.store_numerics_to_sd_card              0x0800fd46   Section        0  sd_card.o(i.store_numerics_to_sd_card)
+    i.string_to_int                          0x0800fd70   Section        0  control.o(i.string_to_int)
+    i.string_to_long                         0x0800fd9c   Section        0  control.o(i.string_to_long)
+    i.sync_fs                                0x0800fdc8   Section        0  ff.o(i.sync_fs)
+    sync_fs                                  0x0800fdc9   Thumb Code   126  ff.o(i.sync_fs)
+    i.sync_window                            0x0800fe50   Section        0  ff.o(i.sync_window)
+    sync_window                              0x0800fe51   Thumb Code    82  ff.o(i.sync_window)
+    i.test_fun                               0x0800fea2   Section        0  control.o(i.test_fun)
+    i.validate                               0x0800fea6   Section        0  ff.o(i.validate)
+    validate                                 0x0800fea7   Thumb Code    50  ff.o(i.validate)
+    i.wait_char_from_pc                      0x0800fed8   Section        0  comm.o(i.wait_char_from_pc)
+    i.write_to_file                          0x0800ff3c   Section        0  sd_card.o(i.write_to_file)
+    .constdata                               0x08010140   Section       20  sd_diskio.o(.constdata)
+    .constdata                               0x08010154   Section       16  system_stm32f4xx.o(.constdata)
+    .constdata                               0x08010164   Section        8  system_stm32f4xx.o(.constdata)
+    .constdata                               0x0801016c   Section      156  ff.o(.constdata)
+    ExCvt                                    0x0801016c   Data         128  ff.o(.constdata)
+    cst                                      0x080101ec   Data          14  ff.o(.constdata)
+    cst32                                    0x080101fa   Data          14  ff.o(.constdata)
+    .constdata                               0x08010208   Section      129  ctype_o.o(.constdata)
+    .constdata                               0x0801028c   Section        4  ctype_o.o(.constdata)
+    table                                    0x0801028c   Data           4  ctype_o.o(.constdata)
+    .conststring                             0x08010290   Section      225  control.o(.conststring)
     .data                                    0x20000000   Section        1  main.o(.data)
     .data                                    0x20000001   Section        1  sd_diskio.o(.data)
     Stat                                     0x20000001   Data           1  sd_diskio.o(.data)
@@ -4011,119 +4011,119 @@ Image Symbol Table
     WriteSPIs                                0x08009bc9   Thumb Code    74  usb_flash_drive.o(i.WriteSPIs)
     WriteSPIs_fast                           0x08009c13   Thumb Code    54  usb_flash_drive.o(i.WriteSPIs_fast)
     Write_Calib_Coef_Comm                    0x08009c49   Thumb Code   468  calib.o(i.Write_Calib_Coef_Comm)
-    Write_DRM_Channel                        0x08009e25   Thumb Code   526  control.o(i.Write_DRM_Channel)
-    __0sprintf                               0x0800a06d   Thumb Code    34  printfa.o(i.__0sprintf)
-    __1sprintf                               0x0800a06d   Thumb Code     0  printfa.o(i.__0sprintf)
-    __2sprintf                               0x0800a06d   Thumb Code     0  printfa.o(i.__0sprintf)
-    __c89sprintf                             0x0800a06d   Thumb Code     0  printfa.o(i.__0sprintf)
-    sprintf                                  0x0800a06d   Thumb Code     0  printfa.o(i.__0sprintf)
-    __aeabi_errno_addr                       0x0800a095   Thumb Code     4  errno.o(i.__aeabi_errno_addr)
-    __rt_errno_addr                          0x0800a095   Thumb Code     0  errno.o(i.__aeabi_errno_addr)
-    __scatterload_copy                       0x0800a09d   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x0800a0ab   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x0800a0ad   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    abs_16_bit                               0x0800a979   Thumb Code    10  control.o(i.abs_16_bit)
-    add_new_res_to_list                      0x0800a985   Thumb Code    66  sd_card.o(i.add_new_res_to_list)
-    apply_offset_correction                  0x0800a9cd   Thumb Code    38  calib.o(i.apply_offset_correction)
-    calc_max_time                            0x0800a9f3   Thumb Code    34  control.o(i.calc_max_time)
-    calc_min_time                            0x0800aa15   Thumb Code    34  control.o(i.calc_min_time)
-    calculate_gained_value                   0x0800aa39   Thumb Code    66  calib.o(i.calculate_gained_value)
-    calculate_offset_for_CC_channels         0x0800aa99   Thumb Code   102  calib.o(i.calculate_offset_for_CC_channels)
-    calculate_overtavel                      0x0800ab09   Thumb Code   246  control.o(i.calculate_overtavel)
-    calculate_rebound                        0x0800ac0d   Thumb Code   224  control.o(i.calculate_rebound)
-    calculate_total_travel                   0x0800acf9   Thumb Code   240  control.o(i.calculate_total_travel)
-    check_calibration_coeficients            0x0800adf9   Thumb Code   154  calib.o(i.check_calibration_coeficients)
-    check_for_stop_button                    0x0800ae99   Thumb Code    22  control.o(i.check_for_stop_button)
-    check_if_digit                           0x0800af25   Thumb Code    52  control.o(i.check_if_digit)
-    check_mc_test_results                    0x0800af5d   Thumb Code   188  control.o(i.check_mc_test_results)
-    clear_sector                             0x0800b09d   Thumb Code    20  usb_flash_drive.o(i.clear_sector)
-    close_file_and_unmount                   0x0800b0d9   Thumb Code    28  sd_card.o(i.close_file_and_unmount)
-    clrvn                                    0x0800b0fd   Thumb Code    16  usb_flash_drive.o(i.clrvn)
-    coil_control                             0x0800b129   Thumb Code   282  control.o(i.coil_control)
-    compare_analog_value                     0x0800b251   Thumb Code   130  control.o(i.compare_analog_value)
-    convert_to_slong_DT_res                  0x0800b2d9   Thumb Code    18  adc.o(i.convert_to_slong_DT_res)
-    define_path                              0x0800b485   Thumb Code    38  sd_card.o(i.define_path)
-    delay_us                                 0x0800b4e1   Thumb Code    12  usb_flash_drive.o(i.delay_us)
-    delete_result_from_the_list              0x0800b4ed   Thumb Code     6  sd_card.o(i.delete_result_from_the_list)
-    disable_printer_communication            0x0800b7b5   Thumb Code    34  bios.o(i.disable_printer_communication)
-    disk_initialize                          0x0800b7e1   Thumb Code    36  diskio.o(i.disk_initialize)
-    disk_ioctl                               0x0800b809   Thumb Code    24  diskio.o(i.disk_ioctl)
-    disk_read                                0x0800b825   Thumb Code    24  diskio.o(i.disk_read)
-    disk_status                              0x0800b841   Thumb Code    18  diskio.o(i.disk_status)
-    disk_write                               0x0800b859   Thumb Code    24  diskio.o(i.disk_write)
-    drive_close_coil                         0x0800b875   Thumb Code   128  control.o(i.drive_close_coil)
-    drive_open_coil                          0x0800b8fd   Thumb Code   132  control.o(i.drive_open_coil)
-    enable_printer_communication             0x0800b989   Thumb Code    34  bios.o(i.enable_printer_communication)
-    erase_all_mem_locations                  0x0800b9b5   Thumb Code    48  sd_card.o(i.erase_all_mem_locations)
-    f_close                                  0x0800b9e9   Thumb Code    40  ff.o(i.f_close)
-    f_mount                                  0x0800ba11   Thumb Code    84  ff.o(i.f_mount)
-    f_open                                   0x0800ba69   Thumb Code   520  ff.o(i.f_open)
-    f_read                                   0x0800bc75   Thumb Code   338  ff.o(i.f_read)
-    f_sync                                   0x0800bdc7   Thumb Code   142  ff.o(i.f_sync)
-    f_unlink                                 0x0800be55   Thumb Code   158  ff.o(i.f_unlink)
-    f_write                                  0x0800bef3   Thumb Code   398  ff.o(i.f_write)
-    free                                     0x0800c349   Thumb Code    76  malloc.o(i.free)
-    get_fattime                              0x0800c457   Thumb Code     4  fatfs.o(i.get_fattime)
-    get_range                                0x0800c497   Thumb Code    36  calib.o(i.get_range)
-    get_real_adc_values                      0x0800c4bd   Thumb Code   318  adc.o(i.get_real_adc_values)
-    getcharB                                 0x0800c601   Thumb Code   182  comm.o(i.getcharB)
-    init_bat_control                         0x0800c741   Thumb Code    48  init.o(i.init_bat_control)
-    init_coil_control                        0x0800c775   Thumb Code   178  init.o(i.init_coil_control)
-    init_results_vaules                      0x0800c841   Thumb Code   140  control.o(i.init_results_vaules)
-    init_sd_card                             0x0800c8e5   Thumb Code    24  sd_card.o(i.init_sd_card)
-    init_variables                           0x0800c905   Thumb Code    84  init.o(i.init_variables)
-    list_all_mem_locations                   0x0800c9cd   Thumb Code    92  sd_card.o(i.list_all_mem_locations)
-    load_mem_loc_info                        0x0800ca31   Thumb Code    24  sd_card.o(i.load_mem_loc_info)
-    main                                     0x0800ca59   Thumb Code   134  main.o(i.main)
-    malloc                                   0x0800cb05   Thumb Code    92  malloc.o(i.malloc)
-    mem_location_info                        0x0800cb85   Thumb Code    66  sd_card.o(i.mem_location_info)
-    my_getchar                               0x0800cc0d   Thumb Code    22  comm.o(i.my_getchar)
-    my_putchar                               0x0800cc29   Thumb Code    18  comm.o(i.my_putchar)
-    process_data_for_CO_test                 0x0800cc41   Thumb Code   268  control.o(i.process_data_for_CO_test)
-    process_data_for_OCO_test                0x0800cd59   Thumb Code   696  control.o(i.process_data_for_OCO_test)
-    process_data_for_OC_test                 0x0800d01d   Thumb Code   544  control.o(i.process_data_for_OC_test)
-    process_data_for_closing_test            0x0800d249   Thumb Code  1024  control.o(i.process_data_for_closing_test)
-    process_data_for_opening_test            0x0800d661   Thumb Code   782  control.o(i.process_data_for_opening_test)
-    putcharB                                 0x0800da75   Thumb Code   174  comm.o(i.putcharB)
-    putchar_printer                          0x0800db2d   Thumb Code    18  comm.o(i.putchar_printer)
-    read_adc_raw_results                     0x0800db45   Thumb Code   412  adc.o(i.read_adc_raw_results)
-    read_adc_res_sram_test                   0x0800dce9   Thumb Code   640  adc.o(i.read_adc_res_sram_test)
-    read_all_adc_channels_test               0x0800df75   Thumb Code  3122  adc.o(i.read_all_adc_channels_test)
-    read_all_adcs                            0x0800eba9   Thumb Code   256  control.o(i.read_all_adcs)
-    read_analog_adc_for_trigger              0x0800ecb9   Thumb Code     2  adc.o(i.read_analog_adc_for_trigger)
-    read_data_from_sd_card                   0x0800ecbb   Thumb Code    58  sd_card.o(i.read_data_from_sd_card)
-    read_digital_trans_chs                   0x0800ecf5   Thumb Code   394  adc.o(i.read_digital_trans_chs)
-    read_dummy                               0x0800ee99   Thumb Code    18  printer.o(i.read_dummy)
-    read_from_file                           0x0800eead   Thumb Code   298  sd_card.o(i.read_from_file)
-    read_multiple_ch_adcs                    0x0800f015   Thumb Code  1142  adc.o(i.read_multiple_ch_adcs)
-    reset_flash_drive_MCU                    0x0800f501   Thumb Code    58  usb_flash_drive.o(i.reset_flash_drive_MCU)
-    search_max_current_per_ch                0x0800f541   Thumb Code   114  control.o(i.search_max_current_per_ch)
-    search_min_max_voltage_per_ch            0x0800f5bd   Thumb Code    70  control.o(i.search_min_max_voltage_per_ch)
-    send_data_transfer_over_status           0x0800f609   Thumb Code    46  comm.o(i.send_data_transfer_over_status)
-    send_measuring_samples_to_pc             0x0800f63d   Thumb Code   204  comm.o(i.send_measuring_samples_to_pc)
-    send_test_data_to_pc                     0x0800f70d   Thumb Code   576  comm.o(i.send_test_data_to_pc)
-    set_contact_wipe_results_to_zero         0x0800f9f9   Thumb Code    78  control.o(i.set_contact_wipe_results_to_zero)
-    set_osg_or_bsg                           0x0800fa55   Thumb Code    48  control.o(i.set_osg_or_bsg)
-    setdt                                    0x0800fa89   Thumb Code    56  usb_flash_drive.o(i.setdt)
-    slave_deselect_usb_flash_drive           0x0800fac9   Thumb Code    22  usb_flash_drive.o(i.slave_deselect_usb_flash_drive)
-    slave_select_usb_flash_drive             0x0800fae5   Thumb Code    22  usb_flash_drive.o(i.slave_select_usb_flash_drive)
-    spie_master_tx_fast                      0x0800fb01   Thumb Code   160  comm.o(i.spie_master_tx_fast)
-    spie_master_tx_rx                        0x0800fba9   Thumb Code   168  comm.o(i.spie_master_tx_rx)
-    store_data_to_sd_card                    0x0800fc99   Thumb Code    64  sd_card.o(i.store_data_to_sd_card)
-    store_graphics_to_sd_card                0x0800fcdd   Thumb Code    52  sd_card.o(i.store_graphics_to_sd_card)
-    store_list_array_into_mem                0x0800fd15   Thumb Code    34  sd_card.o(i.store_list_array_into_mem)
-    store_numerics_to_sd_card                0x0800fd37   Thumb Code    40  sd_card.o(i.store_numerics_to_sd_card)
-    string_to_int                            0x0800fd61   Thumb Code    40  control.o(i.string_to_int)
-    string_to_long                           0x0800fd8d   Thumb Code    40  control.o(i.string_to_long)
-    test_fun                                 0x0800fe93   Thumb Code     4  control.o(i.test_fun)
-    wait_char_from_pc                        0x0800fec9   Thumb Code    56  comm.o(i.wait_char_from_pc)
-    write_to_file                            0x0800ff2d   Thumb Code   454  sd_card.o(i.write_to_file)
-    SD_Driver                                0x08010130   Data          20  sd_diskio.o(.constdata)
-    AHBPrescTable                            0x08010144   Data          16  system_stm32f4xx.o(.constdata)
-    APBPrescTable                            0x08010154   Data           8  system_stm32f4xx.o(.constdata)
-    __ctype_table                            0x080101f8   Data         129  ctype_o.o(.constdata)
-    Region$$Table$$Base                      0x08010364   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08010384   Number         0  anon$$obj.o(Region$$Table)
+    Write_DRM_Channel                        0x08009e25   Thumb Code   542  control.o(i.Write_DRM_Channel)
+    __0sprintf                               0x0800a07d   Thumb Code    34  printfa.o(i.__0sprintf)
+    __1sprintf                               0x0800a07d   Thumb Code     0  printfa.o(i.__0sprintf)
+    __2sprintf                               0x0800a07d   Thumb Code     0  printfa.o(i.__0sprintf)
+    __c89sprintf                             0x0800a07d   Thumb Code     0  printfa.o(i.__0sprintf)
+    sprintf                                  0x0800a07d   Thumb Code     0  printfa.o(i.__0sprintf)
+    __aeabi_errno_addr                       0x0800a0a5   Thumb Code     4  errno.o(i.__aeabi_errno_addr)
+    __rt_errno_addr                          0x0800a0a5   Thumb Code     0  errno.o(i.__aeabi_errno_addr)
+    __scatterload_copy                       0x0800a0ad   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800a0bb   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0800a0bd   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    abs_16_bit                               0x0800a989   Thumb Code    10  control.o(i.abs_16_bit)
+    add_new_res_to_list                      0x0800a995   Thumb Code    66  sd_card.o(i.add_new_res_to_list)
+    apply_offset_correction                  0x0800a9dd   Thumb Code    38  calib.o(i.apply_offset_correction)
+    calc_max_time                            0x0800aa03   Thumb Code    34  control.o(i.calc_max_time)
+    calc_min_time                            0x0800aa25   Thumb Code    34  control.o(i.calc_min_time)
+    calculate_gained_value                   0x0800aa49   Thumb Code    66  calib.o(i.calculate_gained_value)
+    calculate_offset_for_CC_channels         0x0800aaa9   Thumb Code   102  calib.o(i.calculate_offset_for_CC_channels)
+    calculate_overtavel                      0x0800ab19   Thumb Code   246  control.o(i.calculate_overtavel)
+    calculate_rebound                        0x0800ac1d   Thumb Code   224  control.o(i.calculate_rebound)
+    calculate_total_travel                   0x0800ad09   Thumb Code   240  control.o(i.calculate_total_travel)
+    check_calibration_coeficients            0x0800ae09   Thumb Code   154  calib.o(i.check_calibration_coeficients)
+    check_for_stop_button                    0x0800aea9   Thumb Code    22  control.o(i.check_for_stop_button)
+    check_if_digit                           0x0800af35   Thumb Code    52  control.o(i.check_if_digit)
+    check_mc_test_results                    0x0800af6d   Thumb Code   188  control.o(i.check_mc_test_results)
+    clear_sector                             0x0800b0ad   Thumb Code    20  usb_flash_drive.o(i.clear_sector)
+    close_file_and_unmount                   0x0800b0e9   Thumb Code    28  sd_card.o(i.close_file_and_unmount)
+    clrvn                                    0x0800b10d   Thumb Code    16  usb_flash_drive.o(i.clrvn)
+    coil_control                             0x0800b139   Thumb Code   282  control.o(i.coil_control)
+    compare_analog_value                     0x0800b261   Thumb Code   130  control.o(i.compare_analog_value)
+    convert_to_slong_DT_res                  0x0800b2e9   Thumb Code    18  adc.o(i.convert_to_slong_DT_res)
+    define_path                              0x0800b495   Thumb Code    38  sd_card.o(i.define_path)
+    delay_us                                 0x0800b4f1   Thumb Code    12  usb_flash_drive.o(i.delay_us)
+    delete_result_from_the_list              0x0800b4fd   Thumb Code     6  sd_card.o(i.delete_result_from_the_list)
+    disable_printer_communication            0x0800b7c5   Thumb Code    34  bios.o(i.disable_printer_communication)
+    disk_initialize                          0x0800b7f1   Thumb Code    36  diskio.o(i.disk_initialize)
+    disk_ioctl                               0x0800b819   Thumb Code    24  diskio.o(i.disk_ioctl)
+    disk_read                                0x0800b835   Thumb Code    24  diskio.o(i.disk_read)
+    disk_status                              0x0800b851   Thumb Code    18  diskio.o(i.disk_status)
+    disk_write                               0x0800b869   Thumb Code    24  diskio.o(i.disk_write)
+    drive_close_coil                         0x0800b885   Thumb Code   128  control.o(i.drive_close_coil)
+    drive_open_coil                          0x0800b90d   Thumb Code   132  control.o(i.drive_open_coil)
+    enable_printer_communication             0x0800b999   Thumb Code    34  bios.o(i.enable_printer_communication)
+    erase_all_mem_locations                  0x0800b9c5   Thumb Code    48  sd_card.o(i.erase_all_mem_locations)
+    f_close                                  0x0800b9f9   Thumb Code    40  ff.o(i.f_close)
+    f_mount                                  0x0800ba21   Thumb Code    84  ff.o(i.f_mount)
+    f_open                                   0x0800ba79   Thumb Code   520  ff.o(i.f_open)
+    f_read                                   0x0800bc85   Thumb Code   338  ff.o(i.f_read)
+    f_sync                                   0x0800bdd7   Thumb Code   142  ff.o(i.f_sync)
+    f_unlink                                 0x0800be65   Thumb Code   158  ff.o(i.f_unlink)
+    f_write                                  0x0800bf03   Thumb Code   398  ff.o(i.f_write)
+    free                                     0x0800c359   Thumb Code    76  malloc.o(i.free)
+    get_fattime                              0x0800c467   Thumb Code     4  fatfs.o(i.get_fattime)
+    get_range                                0x0800c4a7   Thumb Code    36  calib.o(i.get_range)
+    get_real_adc_values                      0x0800c4cd   Thumb Code   318  adc.o(i.get_real_adc_values)
+    getcharB                                 0x0800c611   Thumb Code   182  comm.o(i.getcharB)
+    init_bat_control                         0x0800c751   Thumb Code    48  init.o(i.init_bat_control)
+    init_coil_control                        0x0800c785   Thumb Code   178  init.o(i.init_coil_control)
+    init_results_vaules                      0x0800c851   Thumb Code   140  control.o(i.init_results_vaules)
+    init_sd_card                             0x0800c8f5   Thumb Code    24  sd_card.o(i.init_sd_card)
+    init_variables                           0x0800c915   Thumb Code    84  init.o(i.init_variables)
+    list_all_mem_locations                   0x0800c9dd   Thumb Code    92  sd_card.o(i.list_all_mem_locations)
+    load_mem_loc_info                        0x0800ca41   Thumb Code    24  sd_card.o(i.load_mem_loc_info)
+    main                                     0x0800ca69   Thumb Code   134  main.o(i.main)
+    malloc                                   0x0800cb15   Thumb Code    92  malloc.o(i.malloc)
+    mem_location_info                        0x0800cb95   Thumb Code    66  sd_card.o(i.mem_location_info)
+    my_getchar                               0x0800cc1d   Thumb Code    22  comm.o(i.my_getchar)
+    my_putchar                               0x0800cc39   Thumb Code    18  comm.o(i.my_putchar)
+    process_data_for_CO_test                 0x0800cc51   Thumb Code   268  control.o(i.process_data_for_CO_test)
+    process_data_for_OCO_test                0x0800cd69   Thumb Code   696  control.o(i.process_data_for_OCO_test)
+    process_data_for_OC_test                 0x0800d02d   Thumb Code   544  control.o(i.process_data_for_OC_test)
+    process_data_for_closing_test            0x0800d259   Thumb Code  1024  control.o(i.process_data_for_closing_test)
+    process_data_for_opening_test            0x0800d671   Thumb Code   782  control.o(i.process_data_for_opening_test)
+    putcharB                                 0x0800da85   Thumb Code   174  comm.o(i.putcharB)
+    putchar_printer                          0x0800db3d   Thumb Code    18  comm.o(i.putchar_printer)
+    read_adc_raw_results                     0x0800db55   Thumb Code   412  adc.o(i.read_adc_raw_results)
+    read_adc_res_sram_test                   0x0800dcf9   Thumb Code   640  adc.o(i.read_adc_res_sram_test)
+    read_all_adc_channels_test               0x0800df85   Thumb Code  3122  adc.o(i.read_all_adc_channels_test)
+    read_all_adcs                            0x0800ebb9   Thumb Code   256  control.o(i.read_all_adcs)
+    read_analog_adc_for_trigger              0x0800ecc9   Thumb Code     2  adc.o(i.read_analog_adc_for_trigger)
+    read_data_from_sd_card                   0x0800eccb   Thumb Code    58  sd_card.o(i.read_data_from_sd_card)
+    read_digital_trans_chs                   0x0800ed05   Thumb Code   394  adc.o(i.read_digital_trans_chs)
+    read_dummy                               0x0800eea9   Thumb Code    18  printer.o(i.read_dummy)
+    read_from_file                           0x0800eebd   Thumb Code   298  sd_card.o(i.read_from_file)
+    read_multiple_ch_adcs                    0x0800f025   Thumb Code  1142  adc.o(i.read_multiple_ch_adcs)
+    reset_flash_drive_MCU                    0x0800f511   Thumb Code    58  usb_flash_drive.o(i.reset_flash_drive_MCU)
+    search_max_current_per_ch                0x0800f551   Thumb Code   114  control.o(i.search_max_current_per_ch)
+    search_min_max_voltage_per_ch            0x0800f5cd   Thumb Code    70  control.o(i.search_min_max_voltage_per_ch)
+    send_data_transfer_over_status           0x0800f619   Thumb Code    46  comm.o(i.send_data_transfer_over_status)
+    send_measuring_samples_to_pc             0x0800f64d   Thumb Code   204  comm.o(i.send_measuring_samples_to_pc)
+    send_test_data_to_pc                     0x0800f71d   Thumb Code   576  comm.o(i.send_test_data_to_pc)
+    set_contact_wipe_results_to_zero         0x0800fa09   Thumb Code    78  control.o(i.set_contact_wipe_results_to_zero)
+    set_osg_or_bsg                           0x0800fa65   Thumb Code    48  control.o(i.set_osg_or_bsg)
+    setdt                                    0x0800fa99   Thumb Code    56  usb_flash_drive.o(i.setdt)
+    slave_deselect_usb_flash_drive           0x0800fad9   Thumb Code    22  usb_flash_drive.o(i.slave_deselect_usb_flash_drive)
+    slave_select_usb_flash_drive             0x0800faf5   Thumb Code    22  usb_flash_drive.o(i.slave_select_usb_flash_drive)
+    spie_master_tx_fast                      0x0800fb11   Thumb Code   160  comm.o(i.spie_master_tx_fast)
+    spie_master_tx_rx                        0x0800fbb9   Thumb Code   168  comm.o(i.spie_master_tx_rx)
+    store_data_to_sd_card                    0x0800fca9   Thumb Code    64  sd_card.o(i.store_data_to_sd_card)
+    store_graphics_to_sd_card                0x0800fced   Thumb Code    52  sd_card.o(i.store_graphics_to_sd_card)
+    store_list_array_into_mem                0x0800fd25   Thumb Code    34  sd_card.o(i.store_list_array_into_mem)
+    store_numerics_to_sd_card                0x0800fd47   Thumb Code    40  sd_card.o(i.store_numerics_to_sd_card)
+    string_to_int                            0x0800fd71   Thumb Code    40  control.o(i.string_to_int)
+    string_to_long                           0x0800fd9d   Thumb Code    40  control.o(i.string_to_long)
+    test_fun                                 0x0800fea3   Thumb Code     4  control.o(i.test_fun)
+    wait_char_from_pc                        0x0800fed9   Thumb Code    56  comm.o(i.wait_char_from_pc)
+    write_to_file                            0x0800ff3d   Thumb Code   454  sd_card.o(i.write_to_file)
+    SD_Driver                                0x08010140   Data          20  sd_diskio.o(.constdata)
+    AHBPrescTable                            0x08010154   Data          16  system_stm32f4xx.o(.constdata)
+    APBPrescTable                            0x08010164   Data           8  system_stm32f4xx.o(.constdata)
+    __ctype_table                            0x08010208   Data         129  ctype_o.o(.constdata)
+    Region$$Table$$Base                      0x08010374   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08010394   Number         0  anon$$obj.o(Region$$Table)
     varijabla                                0x20000000   Data           1  main.o(.data)
     retSD                                    0x20000002   Data           1  fatfs.o(.data)
     SDPath                                   0x20000003   Data           4  fatfs.o(.data)
@@ -4203,9 +4203,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00011108, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00010a14])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00011118, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00010a24])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00010384, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00010394, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -4516,172 +4516,172 @@ Memory Map of the image
     0x08009bc8   0x08009bc8   0x0000004a   Code   RO         1746    i.WriteSPIs         usb_flash_drive.o
     0x08009c12   0x08009c12   0x00000036   Code   RO         1747    i.WriteSPIs_fast    usb_flash_drive.o
     0x08009c48   0x08009c48   0x000001dc   Code   RO         2026    i.Write_Calib_Coef_Comm  calib.o
-    0x08009e24   0x08009e24   0x00000248   Code   RO         1011    i.Write_DRM_Channel  control.o
-    0x0800a06c   0x0800a06c   0x00000028   Code   RO         6332    i.__0sprintf        mc_w.l(printfa.o)
-    0x0800a094   0x0800a094   0x00000008   Code   RO         6431    i.__aeabi_errno_addr  mc_w.l(errno.o)
-    0x0800a09c   0x0800a09c   0x0000000e   Code   RO         6461    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x0800a0aa   0x0800a0aa   0x00000002   Code   RO         6462    i.__scatterload_null  mc_w.l(handlers.o)
-    0x0800a0ac   0x0800a0ac   0x0000000e   Code   RO         6463    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x0800a0ba   0x0800a0ba   0x00000002   PAD
-    0x0800a0bc   0x0800a0bc   0x00000184   Code   RO         6337    i._fp_digits        mc_w.l(printfa.o)
-    0x0800a240   0x0800a240   0x000006dc   Code   RO         6338    i._printf_core      mc_w.l(printfa.o)
-    0x0800a91c   0x0800a91c   0x00000024   Code   RO         6339    i._printf_post_padding  mc_w.l(printfa.o)
-    0x0800a940   0x0800a940   0x0000002e   Code   RO         6340    i._printf_pre_padding  mc_w.l(printfa.o)
-    0x0800a96e   0x0800a96e   0x0000000a   Code   RO         6342    i._sputc            mc_w.l(printfa.o)
-    0x0800a978   0x0800a978   0x0000000a   Code   RO         1012    i.abs_16_bit        control.o
-    0x0800a982   0x0800a982   0x00000002   PAD
-    0x0800a984   0x0800a984   0x00000048   Code   RO         1606    i.add_new_res_to_list  sd_card.o
-    0x0800a9cc   0x0800a9cc   0x00000026   Code   RO         2028    i.apply_offset_correction  calib.o
-    0x0800a9f2   0x0800a9f2   0x00000022   Code   RO         1013    i.calc_max_time     control.o
-    0x0800aa14   0x0800aa14   0x00000022   Code   RO         1014    i.calc_min_time     control.o
-    0x0800aa36   0x0800aa36   0x00000002   PAD
-    0x0800aa38   0x0800aa38   0x00000060   Code   RO         2030    i.calculate_gained_value  calib.o
-    0x0800aa98   0x0800aa98   0x00000070   Code   RO         2031    i.calculate_offset_for_CC_channels  calib.o
-    0x0800ab08   0x0800ab08   0x00000104   Code   RO         1015    i.calculate_overtavel  control.o
-    0x0800ac0c   0x0800ac0c   0x000000ec   Code   RO         1016    i.calculate_rebound  control.o
-    0x0800acf8   0x0800acf8   0x00000100   Code   RO         1017    i.calculate_total_travel  control.o
-    0x0800adf8   0x0800adf8   0x000000a0   Code   RO         2032    i.check_calibration_coeficients  calib.o
-    0x0800ae98   0x0800ae98   0x0000001c   Code   RO         1018    i.check_for_stop_button  control.o
-    0x0800aeb4   0x0800aeb4   0x00000070   Code   RO         5650    i.check_fs          ff.o
-    0x0800af24   0x0800af24   0x00000038   Code   RO         1019    i.check_if_digit    control.o
-    0x0800af5c   0x0800af5c   0x000000c4   Code   RO         1020    i.check_mc_test_results  control.o
-    0x0800b020   0x0800b020   0x0000005c   Code   RO         5651    i.chk_lock          ff.o
-    0x0800b07c   0x0800b07c   0x00000020   Code   RO         5652    i.clear_lock        ff.o
-    0x0800b09c   0x0800b09c   0x00000018   Code   RO         1748    i.clear_sector      usb_flash_drive.o
-    0x0800b0b4   0x0800b0b4   0x00000024   Code   RO         5653    i.clmt_clust        ff.o
-    0x0800b0d8   0x0800b0d8   0x00000024   Code   RO         1607    i.close_file_and_unmount  sd_card.o
-    0x0800b0fc   0x0800b0fc   0x00000014   Code   RO         1749    i.clrvn             usb_flash_drive.o
-    0x0800b110   0x0800b110   0x00000018   Code   RO         5654    i.clust2sect        ff.o
-    0x0800b128   0x0800b128   0x00000128   Code   RO         1021    i.coil_control      control.o
-    0x0800b250   0x0800b250   0x00000088   Code   RO         1022    i.compare_analog_value  control.o
-    0x0800b2d8   0x0800b2d8   0x00000018   Code   RO         1446    i.convert_to_slong_DT_res  adc.o
-    0x0800b2f0   0x0800b2f0   0x000000a4   Code   RO         5655    i.create_chain      ff.o
-    0x0800b394   0x0800b394   0x000000bc   Code   RO         5656    i.create_name       ff.o
-    0x0800b450   0x0800b450   0x00000034   Code   RO         5657    i.dec_lock          ff.o
-    0x0800b484   0x0800b484   0x0000005c   Code   RO         1608    i.define_path       sd_card.o
-    0x0800b4e0   0x0800b4e0   0x0000000c   Code   RO         1751    i.delay_us          usb_flash_drive.o
-    0x0800b4ec   0x0800b4ec   0x00000006   Code   RO         1609    i.delete_result_from_the_list  sd_card.o
-    0x0800b4f2   0x0800b4f2   0x00000064   Code   RO         5658    i.dir_find          ff.o
-    0x0800b556   0x0800b556   0x00000002   PAD
-    0x0800b558   0x0800b558   0x000000f4   Code   RO         5659    i.dir_next          ff.o
-    0x0800b64c   0x0800b64c   0x00000060   Code   RO         5660    i.dir_read          ff.o
-    0x0800b6ac   0x0800b6ac   0x00000066   Code   RO         5661    i.dir_register      ff.o
-    0x0800b712   0x0800b712   0x0000001e   Code   RO         5662    i.dir_remove        ff.o
-    0x0800b730   0x0800b730   0x00000082   Code   RO         5663    i.dir_sdi           ff.o
-    0x0800b7b2   0x0800b7b2   0x00000002   PAD
-    0x0800b7b4   0x0800b7b4   0x0000002c   Code   RO          677    i.disable_printer_communication  bios.o
-    0x0800b7e0   0x0800b7e0   0x00000028   Code   RO         5595    i.disk_initialize   diskio.o
-    0x0800b808   0x0800b808   0x0000001c   Code   RO         5596    i.disk_ioctl        diskio.o
-    0x0800b824   0x0800b824   0x0000001c   Code   RO         5597    i.disk_read         diskio.o
-    0x0800b840   0x0800b840   0x00000018   Code   RO         5598    i.disk_status       diskio.o
-    0x0800b858   0x0800b858   0x0000001c   Code   RO         5599    i.disk_write        diskio.o
-    0x0800b874   0x0800b874   0x00000088   Code   RO         1023    i.drive_close_coil  control.o
-    0x0800b8fc   0x0800b8fc   0x0000008c   Code   RO         1024    i.drive_open_coil   control.o
-    0x0800b988   0x0800b988   0x0000002c   Code   RO          678    i.enable_printer_communication  bios.o
-    0x0800b9b4   0x0800b9b4   0x00000034   Code   RO         1610    i.erase_all_mem_locations  sd_card.o
-    0x0800b9e8   0x0800b9e8   0x00000028   Code   RO         5664    i.f_close           ff.o
-    0x0800ba10   0x0800ba10   0x00000058   Code   RO         5671    i.f_mount           ff.o
-    0x0800ba68   0x0800ba68   0x0000020c   Code   RO         5672    i.f_open            ff.o
-    0x0800bc74   0x0800bc74   0x00000152   Code   RO         5677    i.f_read            ff.o
-    0x0800bdc6   0x0800bdc6   0x0000008e   Code   RO         5681    i.f_sync            ff.o
-    0x0800be54   0x0800be54   0x0000009e   Code   RO         5683    i.f_unlink          ff.o
-    0x0800bef2   0x0800bef2   0x0000018e   Code   RO         5684    i.f_write           ff.o
-    0x0800c080   0x0800c080   0x00000254   Code   RO         5685    i.find_volume       ff.o
-    0x0800c2d4   0x0800c2d4   0x00000074   Code   RO         5686    i.follow_path       ff.o
-    0x0800c348   0x0800c348   0x00000050   Code   RO         6358    i.free              mc_w.l(malloc.o)
-    0x0800c398   0x0800c398   0x000000be   Code   RO         5687    i.get_fat           ff.o
-    0x0800c456   0x0800c456   0x00000004   Code   RO          414    i.get_fattime       fatfs.o
-    0x0800c45a   0x0800c45a   0x0000003c   Code   RO         5689    i.get_ldnumber      ff.o
-    0x0800c496   0x0800c496   0x00000024   Code   RO         2033    i.get_range         calib.o
-    0x0800c4ba   0x0800c4ba   0x00000002   PAD
-    0x0800c4bc   0x0800c4bc   0x00000144   Code   RO         1447    i.get_real_adc_values  adc.o
-    0x0800c600   0x0800c600   0x000000c0   Code   RO          843    i.getcharB          comm.o
-    0x0800c6c0   0x0800c6c0   0x00000080   Code   RO         5690    i.inc_lock          ff.o
-    0x0800c740   0x0800c740   0x00000034   Code   RO         1927    i.init_bat_control  init.o
-    0x0800c774   0x0800c774   0x000000cc   Code   RO         1928    i.init_coil_control  init.o
-    0x0800c840   0x0800c840   0x000000a4   Code   RO         1025    i.init_results_vaules  control.o
-    0x0800c8e4   0x0800c8e4   0x00000020   Code   RO         1611    i.init_sd_card      sd_card.o
-    0x0800c904   0x0800c904   0x00000080   Code   RO         1929    i.init_variables    init.o
-    0x0800c984   0x0800c984   0x00000026   Code   RO         5691    i.ld_clust          ff.o
-    0x0800c9aa   0x0800c9aa   0x00000016   Code   RO         5692    i.ld_dword          ff.o
-    0x0800c9c0   0x0800c9c0   0x0000000a   Code   RO         5693    i.ld_word           ff.o
-    0x0800c9ca   0x0800c9ca   0x00000002   PAD
-    0x0800c9cc   0x0800c9cc   0x00000064   Code   RO         1612    i.list_all_mem_locations  sd_card.o
-    0x0800ca30   0x0800ca30   0x00000028   Code   RO         1613    i.load_mem_loc_info  sd_card.o
-    0x0800ca58   0x0800ca58   0x000000ac   Code   RO           15    i.main              main.o
-    0x0800cb04   0x0800cb04   0x0000006c   Code   RO         6359    i.malloc            mc_w.l(malloc.o)
-    0x0800cb70   0x0800cb70   0x00000012   Code   RO         5694    i.mem_cpy           ff.o
-    0x0800cb82   0x0800cb82   0x00000002   PAD
-    0x0800cb84   0x0800cb84   0x00000048   Code   RO         1614    i.mem_location_info  sd_card.o
-    0x0800cbcc   0x0800cbcc   0x0000000e   Code   RO         5695    i.mem_set           ff.o
-    0x0800cbda   0x0800cbda   0x00000032   Code   RO         5696    i.move_window       ff.o
-    0x0800cc0c   0x0800cc0c   0x0000001c   Code   RO          844    i.my_getchar        comm.o
-    0x0800cc28   0x0800cc28   0x00000018   Code   RO          845    i.my_putchar        comm.o
-    0x0800cc40   0x0800cc40   0x00000118   Code   RO         1026    i.process_data_for_CO_test  control.o
-    0x0800cd58   0x0800cd58   0x000002c4   Code   RO         1027    i.process_data_for_OCO_test  control.o
-    0x0800d01c   0x0800d01c   0x0000022c   Code   RO         1028    i.process_data_for_OC_test  control.o
-    0x0800d248   0x0800d248   0x00000418   Code   RO         1029    i.process_data_for_closing_test  control.o
-    0x0800d660   0x0800d660   0x00000328   Code   RO         1030    i.process_data_for_opening_test  control.o
-    0x0800d988   0x0800d988   0x000000ea   Code   RO         5697    i.put_fat           ff.o
-    0x0800da72   0x0800da72   0x00000002   PAD
-    0x0800da74   0x0800da74   0x000000b8   Code   RO          846    i.putcharB          comm.o
-    0x0800db2c   0x0800db2c   0x00000018   Code   RO          847    i.putchar_printer   comm.o
-    0x0800db44   0x0800db44   0x000001a4   Code   RO         1448    i.read_adc_raw_results  adc.o
-    0x0800dce8   0x0800dce8   0x0000028c   Code   RO         1449    i.read_adc_res_sram_test  adc.o
-    0x0800df74   0x0800df74   0x00000c32   Code   RO         1450    i.read_all_adc_channels_test  adc.o
-    0x0800eba6   0x0800eba6   0x00000002   PAD
-    0x0800eba8   0x0800eba8   0x00000110   Code   RO         1031    i.read_all_adcs     control.o
-    0x0800ecb8   0x0800ecb8   0x00000002   Code   RO         1451    i.read_analog_adc_for_trigger  adc.o
-    0x0800ecba   0x0800ecba   0x0000003a   Code   RO         1615    i.read_data_from_sd_card  sd_card.o
-    0x0800ecf4   0x0800ecf4   0x000001a4   Code   RO         1452    i.read_digital_trans_chs  adc.o
-    0x0800ee98   0x0800ee98   0x00000012   Code   RO         1557    i.read_dummy        printer.o
-    0x0800eeaa   0x0800eeaa   0x00000002   PAD
-    0x0800eeac   0x0800eeac   0x00000168   Code   RO         1616    i.read_from_file    sd_card.o
-    0x0800f014   0x0800f014   0x00000476   Code   RO         1453    i.read_multiple_ch_adcs  adc.o
-    0x0800f48a   0x0800f48a   0x00000074   Code   RO         5700    i.remove_chain      ff.o
-    0x0800f4fe   0x0800f4fe   0x00000002   PAD
-    0x0800f500   0x0800f500   0x00000040   Code   RO         1752    i.reset_flash_drive_MCU  usb_flash_drive.o
-    0x0800f540   0x0800f540   0x0000007c   Code   RO         1032    i.search_max_current_per_ch  control.o
-    0x0800f5bc   0x0800f5bc   0x0000004c   Code   RO         1033    i.search_min_max_voltage_per_ch  control.o
-    0x0800f608   0x0800f608   0x00000034   Code   RO          848    i.send_data_transfer_over_status  comm.o
-    0x0800f63c   0x0800f63c   0x000000d0   Code   RO          849    i.send_measuring_samples_to_pc  comm.o
-    0x0800f70c   0x0800f70c   0x000002ec   Code   RO          851    i.send_test_data_to_pc  comm.o
-    0x0800f9f8   0x0800f9f8   0x0000005c   Code   RO         1034    i.set_contact_wipe_results_to_zero  control.o
-    0x0800fa54   0x0800fa54   0x00000034   Code   RO         1035    i.set_osg_or_bsg    control.o
-    0x0800fa88   0x0800fa88   0x00000040   Code   RO         1753    i.setdt             usb_flash_drive.o
-    0x0800fac8   0x0800fac8   0x0000001c   Code   RO         1754    i.slave_deselect_usb_flash_drive  usb_flash_drive.o
-    0x0800fae4   0x0800fae4   0x0000001c   Code   RO         1755    i.slave_select_usb_flash_drive  usb_flash_drive.o
-    0x0800fb00   0x0800fb00   0x000000a8   Code   RO          852    i.spie_master_tx_fast  comm.o
-    0x0800fba8   0x0800fba8   0x000000b0   Code   RO          853    i.spie_master_tx_rx  comm.o
-    0x0800fc58   0x0800fc58   0x00000028   Code   RO         5701    i.st_clust          ff.o
-    0x0800fc80   0x0800fc80   0x00000010   Code   RO         5702    i.st_dword          ff.o
-    0x0800fc90   0x0800fc90   0x00000008   Code   RO         5703    i.st_word           ff.o
-    0x0800fc98   0x0800fc98   0x00000044   Code   RO         1617    i.store_data_to_sd_card  sd_card.o
-    0x0800fcdc   0x0800fcdc   0x00000038   Code   RO         1618    i.store_graphics_to_sd_card  sd_card.o
-    0x0800fd14   0x0800fd14   0x00000022   Code   RO         1619    i.store_list_array_into_mem  sd_card.o
-    0x0800fd36   0x0800fd36   0x00000028   Code   RO         1620    i.store_numerics_to_sd_card  sd_card.o
-    0x0800fd5e   0x0800fd5e   0x00000002   PAD
-    0x0800fd60   0x0800fd60   0x0000002c   Code   RO         1036    i.string_to_int     control.o
-    0x0800fd8c   0x0800fd8c   0x0000002c   Code   RO         1037    i.string_to_long    control.o
-    0x0800fdb8   0x0800fdb8   0x00000088   Code   RO         5704    i.sync_fs           ff.o
-    0x0800fe40   0x0800fe40   0x00000052   Code   RO         5705    i.sync_window       ff.o
-    0x0800fe92   0x0800fe92   0x00000004   Code   RO         1038    i.test_fun          control.o
-    0x0800fe96   0x0800fe96   0x00000032   Code   RO         5706    i.validate          ff.o
-    0x0800fec8   0x0800fec8   0x00000064   Code   RO          855    i.wait_char_from_pc  comm.o
-    0x0800ff2c   0x0800ff2c   0x00000204   Code   RO         1621    i.write_to_file     sd_card.o
-    0x08010130   0x08010130   0x00000014   Data   RO          359    .constdata          sd_diskio.o
-    0x08010144   0x08010144   0x00000010   Data   RO         5559    .constdata          system_stm32f4xx.o
-    0x08010154   0x08010154   0x00000008   Data   RO         5560    .constdata          system_stm32f4xx.o
-    0x0801015c   0x0801015c   0x0000009c   Data   RO         5708    .constdata          ff.o
-    0x080101f8   0x080101f8   0x00000081   Data   RO         6060    .constdata          mc_w.l(ctype_o.o)
-    0x08010279   0x08010279   0x00000003   PAD
-    0x0801027c   0x0801027c   0x00000004   Data   RO         6061    .constdata          mc_w.l(ctype_o.o)
-    0x08010280   0x08010280   0x000000e1   Data   RO         1040    .conststring        control.o
-    0x08010361   0x08010361   0x00000003   PAD
-    0x08010364   0x08010364   0x00000020   Data   RO         6459    Region$$Table       anon$$obj.o
+    0x08009e24   0x08009e24   0x00000258   Code   RO         1011    i.Write_DRM_Channel  control.o
+    0x0800a07c   0x0800a07c   0x00000028   Code   RO         6332    i.__0sprintf        mc_w.l(printfa.o)
+    0x0800a0a4   0x0800a0a4   0x00000008   Code   RO         6431    i.__aeabi_errno_addr  mc_w.l(errno.o)
+    0x0800a0ac   0x0800a0ac   0x0000000e   Code   RO         6461    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800a0ba   0x0800a0ba   0x00000002   Code   RO         6462    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800a0bc   0x0800a0bc   0x0000000e   Code   RO         6463    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800a0ca   0x0800a0ca   0x00000002   PAD
+    0x0800a0cc   0x0800a0cc   0x00000184   Code   RO         6337    i._fp_digits        mc_w.l(printfa.o)
+    0x0800a250   0x0800a250   0x000006dc   Code   RO         6338    i._printf_core      mc_w.l(printfa.o)
+    0x0800a92c   0x0800a92c   0x00000024   Code   RO         6339    i._printf_post_padding  mc_w.l(printfa.o)
+    0x0800a950   0x0800a950   0x0000002e   Code   RO         6340    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x0800a97e   0x0800a97e   0x0000000a   Code   RO         6342    i._sputc            mc_w.l(printfa.o)
+    0x0800a988   0x0800a988   0x0000000a   Code   RO         1012    i.abs_16_bit        control.o
+    0x0800a992   0x0800a992   0x00000002   PAD
+    0x0800a994   0x0800a994   0x00000048   Code   RO         1606    i.add_new_res_to_list  sd_card.o
+    0x0800a9dc   0x0800a9dc   0x00000026   Code   RO         2028    i.apply_offset_correction  calib.o
+    0x0800aa02   0x0800aa02   0x00000022   Code   RO         1013    i.calc_max_time     control.o
+    0x0800aa24   0x0800aa24   0x00000022   Code   RO         1014    i.calc_min_time     control.o
+    0x0800aa46   0x0800aa46   0x00000002   PAD
+    0x0800aa48   0x0800aa48   0x00000060   Code   RO         2030    i.calculate_gained_value  calib.o
+    0x0800aaa8   0x0800aaa8   0x00000070   Code   RO         2031    i.calculate_offset_for_CC_channels  calib.o
+    0x0800ab18   0x0800ab18   0x00000104   Code   RO         1015    i.calculate_overtavel  control.o
+    0x0800ac1c   0x0800ac1c   0x000000ec   Code   RO         1016    i.calculate_rebound  control.o
+    0x0800ad08   0x0800ad08   0x00000100   Code   RO         1017    i.calculate_total_travel  control.o
+    0x0800ae08   0x0800ae08   0x000000a0   Code   RO         2032    i.check_calibration_coeficients  calib.o
+    0x0800aea8   0x0800aea8   0x0000001c   Code   RO         1018    i.check_for_stop_button  control.o
+    0x0800aec4   0x0800aec4   0x00000070   Code   RO         5650    i.check_fs          ff.o
+    0x0800af34   0x0800af34   0x00000038   Code   RO         1019    i.check_if_digit    control.o
+    0x0800af6c   0x0800af6c   0x000000c4   Code   RO         1020    i.check_mc_test_results  control.o
+    0x0800b030   0x0800b030   0x0000005c   Code   RO         5651    i.chk_lock          ff.o
+    0x0800b08c   0x0800b08c   0x00000020   Code   RO         5652    i.clear_lock        ff.o
+    0x0800b0ac   0x0800b0ac   0x00000018   Code   RO         1748    i.clear_sector      usb_flash_drive.o
+    0x0800b0c4   0x0800b0c4   0x00000024   Code   RO         5653    i.clmt_clust        ff.o
+    0x0800b0e8   0x0800b0e8   0x00000024   Code   RO         1607    i.close_file_and_unmount  sd_card.o
+    0x0800b10c   0x0800b10c   0x00000014   Code   RO         1749    i.clrvn             usb_flash_drive.o
+    0x0800b120   0x0800b120   0x00000018   Code   RO         5654    i.clust2sect        ff.o
+    0x0800b138   0x0800b138   0x00000128   Code   RO         1021    i.coil_control      control.o
+    0x0800b260   0x0800b260   0x00000088   Code   RO         1022    i.compare_analog_value  control.o
+    0x0800b2e8   0x0800b2e8   0x00000018   Code   RO         1446    i.convert_to_slong_DT_res  adc.o
+    0x0800b300   0x0800b300   0x000000a4   Code   RO         5655    i.create_chain      ff.o
+    0x0800b3a4   0x0800b3a4   0x000000bc   Code   RO         5656    i.create_name       ff.o
+    0x0800b460   0x0800b460   0x00000034   Code   RO         5657    i.dec_lock          ff.o
+    0x0800b494   0x0800b494   0x0000005c   Code   RO         1608    i.define_path       sd_card.o
+    0x0800b4f0   0x0800b4f0   0x0000000c   Code   RO         1751    i.delay_us          usb_flash_drive.o
+    0x0800b4fc   0x0800b4fc   0x00000006   Code   RO         1609    i.delete_result_from_the_list  sd_card.o
+    0x0800b502   0x0800b502   0x00000064   Code   RO         5658    i.dir_find          ff.o
+    0x0800b566   0x0800b566   0x00000002   PAD
+    0x0800b568   0x0800b568   0x000000f4   Code   RO         5659    i.dir_next          ff.o
+    0x0800b65c   0x0800b65c   0x00000060   Code   RO         5660    i.dir_read          ff.o
+    0x0800b6bc   0x0800b6bc   0x00000066   Code   RO         5661    i.dir_register      ff.o
+    0x0800b722   0x0800b722   0x0000001e   Code   RO         5662    i.dir_remove        ff.o
+    0x0800b740   0x0800b740   0x00000082   Code   RO         5663    i.dir_sdi           ff.o
+    0x0800b7c2   0x0800b7c2   0x00000002   PAD
+    0x0800b7c4   0x0800b7c4   0x0000002c   Code   RO          677    i.disable_printer_communication  bios.o
+    0x0800b7f0   0x0800b7f0   0x00000028   Code   RO         5595    i.disk_initialize   diskio.o
+    0x0800b818   0x0800b818   0x0000001c   Code   RO         5596    i.disk_ioctl        diskio.o
+    0x0800b834   0x0800b834   0x0000001c   Code   RO         5597    i.disk_read         diskio.o
+    0x0800b850   0x0800b850   0x00000018   Code   RO         5598    i.disk_status       diskio.o
+    0x0800b868   0x0800b868   0x0000001c   Code   RO         5599    i.disk_write        diskio.o
+    0x0800b884   0x0800b884   0x00000088   Code   RO         1023    i.drive_close_coil  control.o
+    0x0800b90c   0x0800b90c   0x0000008c   Code   RO         1024    i.drive_open_coil   control.o
+    0x0800b998   0x0800b998   0x0000002c   Code   RO          678    i.enable_printer_communication  bios.o
+    0x0800b9c4   0x0800b9c4   0x00000034   Code   RO         1610    i.erase_all_mem_locations  sd_card.o
+    0x0800b9f8   0x0800b9f8   0x00000028   Code   RO         5664    i.f_close           ff.o
+    0x0800ba20   0x0800ba20   0x00000058   Code   RO         5671    i.f_mount           ff.o
+    0x0800ba78   0x0800ba78   0x0000020c   Code   RO         5672    i.f_open            ff.o
+    0x0800bc84   0x0800bc84   0x00000152   Code   RO         5677    i.f_read            ff.o
+    0x0800bdd6   0x0800bdd6   0x0000008e   Code   RO         5681    i.f_sync            ff.o
+    0x0800be64   0x0800be64   0x0000009e   Code   RO         5683    i.f_unlink          ff.o
+    0x0800bf02   0x0800bf02   0x0000018e   Code   RO         5684    i.f_write           ff.o
+    0x0800c090   0x0800c090   0x00000254   Code   RO         5685    i.find_volume       ff.o
+    0x0800c2e4   0x0800c2e4   0x00000074   Code   RO         5686    i.follow_path       ff.o
+    0x0800c358   0x0800c358   0x00000050   Code   RO         6358    i.free              mc_w.l(malloc.o)
+    0x0800c3a8   0x0800c3a8   0x000000be   Code   RO         5687    i.get_fat           ff.o
+    0x0800c466   0x0800c466   0x00000004   Code   RO          414    i.get_fattime       fatfs.o
+    0x0800c46a   0x0800c46a   0x0000003c   Code   RO         5689    i.get_ldnumber      ff.o
+    0x0800c4a6   0x0800c4a6   0x00000024   Code   RO         2033    i.get_range         calib.o
+    0x0800c4ca   0x0800c4ca   0x00000002   PAD
+    0x0800c4cc   0x0800c4cc   0x00000144   Code   RO         1447    i.get_real_adc_values  adc.o
+    0x0800c610   0x0800c610   0x000000c0   Code   RO          843    i.getcharB          comm.o
+    0x0800c6d0   0x0800c6d0   0x00000080   Code   RO         5690    i.inc_lock          ff.o
+    0x0800c750   0x0800c750   0x00000034   Code   RO         1927    i.init_bat_control  init.o
+    0x0800c784   0x0800c784   0x000000cc   Code   RO         1928    i.init_coil_control  init.o
+    0x0800c850   0x0800c850   0x000000a4   Code   RO         1025    i.init_results_vaules  control.o
+    0x0800c8f4   0x0800c8f4   0x00000020   Code   RO         1611    i.init_sd_card      sd_card.o
+    0x0800c914   0x0800c914   0x00000080   Code   RO         1929    i.init_variables    init.o
+    0x0800c994   0x0800c994   0x00000026   Code   RO         5691    i.ld_clust          ff.o
+    0x0800c9ba   0x0800c9ba   0x00000016   Code   RO         5692    i.ld_dword          ff.o
+    0x0800c9d0   0x0800c9d0   0x0000000a   Code   RO         5693    i.ld_word           ff.o
+    0x0800c9da   0x0800c9da   0x00000002   PAD
+    0x0800c9dc   0x0800c9dc   0x00000064   Code   RO         1612    i.list_all_mem_locations  sd_card.o
+    0x0800ca40   0x0800ca40   0x00000028   Code   RO         1613    i.load_mem_loc_info  sd_card.o
+    0x0800ca68   0x0800ca68   0x000000ac   Code   RO           15    i.main              main.o
+    0x0800cb14   0x0800cb14   0x0000006c   Code   RO         6359    i.malloc            mc_w.l(malloc.o)
+    0x0800cb80   0x0800cb80   0x00000012   Code   RO         5694    i.mem_cpy           ff.o
+    0x0800cb92   0x0800cb92   0x00000002   PAD
+    0x0800cb94   0x0800cb94   0x00000048   Code   RO         1614    i.mem_location_info  sd_card.o
+    0x0800cbdc   0x0800cbdc   0x0000000e   Code   RO         5695    i.mem_set           ff.o
+    0x0800cbea   0x0800cbea   0x00000032   Code   RO         5696    i.move_window       ff.o
+    0x0800cc1c   0x0800cc1c   0x0000001c   Code   RO          844    i.my_getchar        comm.o
+    0x0800cc38   0x0800cc38   0x00000018   Code   RO          845    i.my_putchar        comm.o
+    0x0800cc50   0x0800cc50   0x00000118   Code   RO         1026    i.process_data_for_CO_test  control.o
+    0x0800cd68   0x0800cd68   0x000002c4   Code   RO         1027    i.process_data_for_OCO_test  control.o
+    0x0800d02c   0x0800d02c   0x0000022c   Code   RO         1028    i.process_data_for_OC_test  control.o
+    0x0800d258   0x0800d258   0x00000418   Code   RO         1029    i.process_data_for_closing_test  control.o
+    0x0800d670   0x0800d670   0x00000328   Code   RO         1030    i.process_data_for_opening_test  control.o
+    0x0800d998   0x0800d998   0x000000ea   Code   RO         5697    i.put_fat           ff.o
+    0x0800da82   0x0800da82   0x00000002   PAD
+    0x0800da84   0x0800da84   0x000000b8   Code   RO          846    i.putcharB          comm.o
+    0x0800db3c   0x0800db3c   0x00000018   Code   RO          847    i.putchar_printer   comm.o
+    0x0800db54   0x0800db54   0x000001a4   Code   RO         1448    i.read_adc_raw_results  adc.o
+    0x0800dcf8   0x0800dcf8   0x0000028c   Code   RO         1449    i.read_adc_res_sram_test  adc.o
+    0x0800df84   0x0800df84   0x00000c32   Code   RO         1450    i.read_all_adc_channels_test  adc.o
+    0x0800ebb6   0x0800ebb6   0x00000002   PAD
+    0x0800ebb8   0x0800ebb8   0x00000110   Code   RO         1031    i.read_all_adcs     control.o
+    0x0800ecc8   0x0800ecc8   0x00000002   Code   RO         1451    i.read_analog_adc_for_trigger  adc.o
+    0x0800ecca   0x0800ecca   0x0000003a   Code   RO         1615    i.read_data_from_sd_card  sd_card.o
+    0x0800ed04   0x0800ed04   0x000001a4   Code   RO         1452    i.read_digital_trans_chs  adc.o
+    0x0800eea8   0x0800eea8   0x00000012   Code   RO         1557    i.read_dummy        printer.o
+    0x0800eeba   0x0800eeba   0x00000002   PAD
+    0x0800eebc   0x0800eebc   0x00000168   Code   RO         1616    i.read_from_file    sd_card.o
+    0x0800f024   0x0800f024   0x00000476   Code   RO         1453    i.read_multiple_ch_adcs  adc.o
+    0x0800f49a   0x0800f49a   0x00000074   Code   RO         5700    i.remove_chain      ff.o
+    0x0800f50e   0x0800f50e   0x00000002   PAD
+    0x0800f510   0x0800f510   0x00000040   Code   RO         1752    i.reset_flash_drive_MCU  usb_flash_drive.o
+    0x0800f550   0x0800f550   0x0000007c   Code   RO         1032    i.search_max_current_per_ch  control.o
+    0x0800f5cc   0x0800f5cc   0x0000004c   Code   RO         1033    i.search_min_max_voltage_per_ch  control.o
+    0x0800f618   0x0800f618   0x00000034   Code   RO          848    i.send_data_transfer_over_status  comm.o
+    0x0800f64c   0x0800f64c   0x000000d0   Code   RO          849    i.send_measuring_samples_to_pc  comm.o
+    0x0800f71c   0x0800f71c   0x000002ec   Code   RO          851    i.send_test_data_to_pc  comm.o
+    0x0800fa08   0x0800fa08   0x0000005c   Code   RO         1034    i.set_contact_wipe_results_to_zero  control.o
+    0x0800fa64   0x0800fa64   0x00000034   Code   RO         1035    i.set_osg_or_bsg    control.o
+    0x0800fa98   0x0800fa98   0x00000040   Code   RO         1753    i.setdt             usb_flash_drive.o
+    0x0800fad8   0x0800fad8   0x0000001c   Code   RO         1754    i.slave_deselect_usb_flash_drive  usb_flash_drive.o
+    0x0800faf4   0x0800faf4   0x0000001c   Code   RO         1755    i.slave_select_usb_flash_drive  usb_flash_drive.o
+    0x0800fb10   0x0800fb10   0x000000a8   Code   RO          852    i.spie_master_tx_fast  comm.o
+    0x0800fbb8   0x0800fbb8   0x000000b0   Code   RO          853    i.spie_master_tx_rx  comm.o
+    0x0800fc68   0x0800fc68   0x00000028   Code   RO         5701    i.st_clust          ff.o
+    0x0800fc90   0x0800fc90   0x00000010   Code   RO         5702    i.st_dword          ff.o
+    0x0800fca0   0x0800fca0   0x00000008   Code   RO         5703    i.st_word           ff.o
+    0x0800fca8   0x0800fca8   0x00000044   Code   RO         1617    i.store_data_to_sd_card  sd_card.o
+    0x0800fcec   0x0800fcec   0x00000038   Code   RO         1618    i.store_graphics_to_sd_card  sd_card.o
+    0x0800fd24   0x0800fd24   0x00000022   Code   RO         1619    i.store_list_array_into_mem  sd_card.o
+    0x0800fd46   0x0800fd46   0x00000028   Code   RO         1620    i.store_numerics_to_sd_card  sd_card.o
+    0x0800fd6e   0x0800fd6e   0x00000002   PAD
+    0x0800fd70   0x0800fd70   0x0000002c   Code   RO         1036    i.string_to_int     control.o
+    0x0800fd9c   0x0800fd9c   0x0000002c   Code   RO         1037    i.string_to_long    control.o
+    0x0800fdc8   0x0800fdc8   0x00000088   Code   RO         5704    i.sync_fs           ff.o
+    0x0800fe50   0x0800fe50   0x00000052   Code   RO         5705    i.sync_window       ff.o
+    0x0800fea2   0x0800fea2   0x00000004   Code   RO         1038    i.test_fun          control.o
+    0x0800fea6   0x0800fea6   0x00000032   Code   RO         5706    i.validate          ff.o
+    0x0800fed8   0x0800fed8   0x00000064   Code   RO          855    i.wait_char_from_pc  comm.o
+    0x0800ff3c   0x0800ff3c   0x00000204   Code   RO         1621    i.write_to_file     sd_card.o
+    0x08010140   0x08010140   0x00000014   Data   RO          359    .constdata          sd_diskio.o
+    0x08010154   0x08010154   0x00000010   Data   RO         5559    .constdata          system_stm32f4xx.o
+    0x08010164   0x08010164   0x00000008   Data   RO         5560    .constdata          system_stm32f4xx.o
+    0x0801016c   0x0801016c   0x0000009c   Data   RO         5708    .constdata          ff.o
+    0x08010208   0x08010208   0x00000081   Data   RO         6060    .constdata          mc_w.l(ctype_o.o)
+    0x08010289   0x08010289   0x00000003   PAD
+    0x0801028c   0x0801028c   0x00000004   Data   RO         6061    .constdata          mc_w.l(ctype_o.o)
+    0x08010290   0x08010290   0x000000e1   Data   RO         1040    .conststring        control.o
+    0x08010371   0x08010371   0x00000003   PAD
+    0x08010374   0x08010374   0x00000020   Data   RO         6459    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08010384, Size: 0x00008410, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x00000690])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08010394, Size: 0x00008410, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x00000690])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -4749,7 +4749,7 @@ Image component sizes
        136         26          0          0          0       3482   bsp_driver_sd.o
       2072        416          0          0          0       9620   calib.o
       2232        312          0          2        100      10846   comm.o
-     20210       2628        225         12         52      73636   control.o
+     20226       2628        225         12         52      73600   control.o
        148         22          0          0          0       3705   diskio.o
         32         10          0          5          0       1452   fatfs.o
       5014         80        156          8         32      41533   ff.o
@@ -4780,7 +4780,7 @@ Image component sizes
       4038        440          0          1        576      20872   usb_flash_drive.o
 
     ----------------------------------------------------------------------
-     60680       5468        852       3448      30348    1116603   Object Totals
+     60696       5468        852       3448      30348    1116567   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         66          0          3          6          7          0   (incl. Padding)
 
@@ -4853,15 +4853,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     65448       5598        988       3460      30348    1082263   Grand Totals
-     65448       5598        988       1680      30348    1082263   ELF Image Totals (compressed)
-     65448       5598        988       1680          0          0   ROM Totals
+     65464       5598        988       3460      30348    1082227   Grand Totals
+     65464       5598        988       1680      30348    1082227   ELF Image Totals (compressed)
+     65464       5598        988       1680          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                66436 (  64.88kB)
+    Total RO  Size (Code + RO Data)                66452 (  64.89kB)
     Total RW  Size (RW Data + ZI Data)             33808 (  33.02kB)
-    Total ROM Size (Code + RO Data + RW Data)      68116 (  66.52kB)
+    Total ROM Size (Code + RO Data + RW Data)      68132 (  66.54kB)
 
 ==============================================================================
 
