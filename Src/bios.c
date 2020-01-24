@@ -533,9 +533,35 @@ void MCU_Battery_Charger_Control(unsigned char port_control, unsigned int on_off
 		HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
 }
 
-void MCU_Coil_Control(unsigned char port_control, unsigned int on_off)
+void Coil_Control(unsigned char coil_select, unsigned int on_off)
 {
-		MCU_Battery_Charger_Control(port_control, on_off);
+		if(coil_select == COIL_CLOSE)
+		{		
+			if(on_off == SET)
+			{
+				MCU_bat_chg_ctrl |= COIL_IGBT1_CTRL;
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
+			}				
+			else if(on_off == RESET)
+			{
+				MCU_bat_chg_ctrl &= ~(COIL_IGBT1_CTRL);
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000); 
+			}				
+		}
+		else if(coil_select == COIL_OPEN)
+		{
+			if(on_off == SET)
+			{
+				MCU_bat_chg_ctrl |= COIL_IGBT2_CTRL;
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
+			}				
+			else if(on_off == RESET)
+			{
+				MCU_bat_chg_ctrl &= ~(COIL_IGBT2_CTRL);
+				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000); 
+			}	
+		}
+		
 }
 
 void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off)

@@ -37,9 +37,10 @@ extern unsigned char PuniPrintBufferAnalogCH(unsigned char parameter1, unsigned 
 extern unsigned char PuniPrintBufferMotion  (unsigned char parameter1, unsigned char parameter2, unsigned char MenOrPrn);
 
 //DRM Functions:
-extern unsigned int test_fun(void);
+extern unsigned int foo_function(void);
 extern unsigned int Toggle_Pins(void);
 extern unsigned int Write_DRM_Channel(void);
-extern unsigned int Read_DRM_ADC();
+extern unsigned int DRM_Get_Results();
 extern unsigned int Battery_Charger_Control(void);
 extern unsigned int Battery_Charger_Control(void);
+extern unsigned int DRM_Start_Test(void);

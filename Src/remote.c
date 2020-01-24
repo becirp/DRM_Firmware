@@ -18,10 +18,15 @@ unsigned int retVal=MAIN_NOK;
              
 if (InputBuffer[0]=='m')
 {
-					//Test function
+					//foo function
+					if((InputBuffer[1]=='F')&&(InputBuffer[2]=='O')&&(InputBuffer[3]=='O'))
+					{
+						return (foo_function());
+					}					
+					//Start DRM test function
 					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='S')&&(InputBuffer[3]=='T'))
 					{
-									return (test_fun());
+									return (DRM_Start_Test());
 					}
 					//Battery charger control
 					if((InputBuffer[1]=='B')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='T'))
@@ -31,12 +36,12 @@ if (InputBuffer[0]=='m')
 					//DRM Read function
 					if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]=='C'))
 					{
-									return (Read_DRM_ADC());			
+									return (DRM_Get_Results());			
 					}
 					//DRM Read all function
 										if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]!='C'))
 					{
-									return (Read_DRM_ADC());
+									return (DRM_Get_Results());
 					}
 					//DRM DIN function
 					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='A'))

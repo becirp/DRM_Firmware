@@ -599,25 +599,27 @@ activetext = printer_texts[language];
 
 void init_coil_control(void)
 {
+	uint8_t MCU_bat_chg_ctrl = 0x02;
+	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
 //uint8_t data=0xC6;
 //	uint8_t data=0xFF;
-HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U607, (uint8_t*)(&PORT607), 1, 1000);
-HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U608, (uint8_t*)(&PORT608), 1, 1000);
-HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U609, (uint8_t*)(&PORT609), 1, 1000);
-HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U610, (uint8_t*)(&PORT610), 1, 1000);
+//HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U607, (uint8_t*)(&PORT607), 1, 1000);
+//HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U608, (uint8_t*)(&PORT608), 1, 1000);
+//HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U609, (uint8_t*)(&PORT609), 1, 1000);
+//HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U610, (uint8_t*)(&PORT610), 1, 1000);
 
-CLR_BREAKING1_RELAY;
-CLR_BREAKING2_RELAY;
-CLR_BREAKING3_RELAY;
-CLR_CLOSING1_RELAY;
-CLR_CLOSING2_RELAY;
-CLR_CLOSING3_RELAY;
-CLR_BREAKING1_IGBT;
-CLR_BREAKING2_IGBT;
-CLR_BREAKING3_IGBT;
-CLR_CLOSING1_IGBT;
-CLR_CLOSING2_IGBT;
-CLR_CLOSING3_IGBT;
+//CLR_BREAKING1_RELAY;
+//CLR_BREAKING2_RELAY;
+//CLR_BREAKING3_RELAY;
+//CLR_CLOSING1_RELAY;
+//CLR_CLOSING2_RELAY;
+//CLR_CLOSING3_RELAY;
+//CLR_BREAKING1_IGBT;
+//CLR_BREAKING2_IGBT;
+//CLR_BREAKING3_IGBT;
+//CLR_CLOSING1_IGBT;
+//CLR_CLOSING2_IGBT;
+//CLR_CLOSING3_IGBT;
 }
 
 void init_bat_control(void)

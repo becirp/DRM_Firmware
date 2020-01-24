@@ -5470,30 +5470,21 @@ unsigned int Write_DRM_Channel(void)
 		return retVal;
 }
 
-unsigned int Read_DRM_ADC(void)
+unsigned int DRM_Get_Results(void)
 {
 		unsigned int retVal = MAIN_OK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
-		unsigned char BuffLen;
 		uint16_t data_voltage1, data_voltage2, data_voltage3;
 		uint16_t data_current1, data_current2, data_current3;
 		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
 	  uint16_t current_array1[sample_size], current_array2[sample_size], current_array3[sample_size];
 		uint16_t i, j;
 		uint32_t sram_address = SRAM_BASE_ADDRESS;	
-		GPIO_InitTypeDef GPIO_InitStruct = {0};
 		
 		//Timer setup and start
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
 		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
     timer1_interrupt=1;
-		
-		//Set PC7 (VOUT2) as input: This pin is also used for USB Comm. After reading data, return it to output.
-		GPIO_InitStruct.Pin = GPIO_PIN_7;
-		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-		GPIO_InitStruct.Pull = GPIO_NOPULL;
-		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-		HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 		
 		//Read ADC and write to RAM
 		for(i=0; i<sample_size; i++)
@@ -5555,21 +5546,13 @@ unsigned int Read_DRM_ADC(void)
 		//End of transfer
 		sprintf(OutputBuffer,"OK");
 		
-		//Set PC7 (VOUT2) back to output: This pin is also used for USB Comm. After reading data, return it to output.
-		GPIO_InitStruct.Pin = GPIO_PIN_7;
-		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-		GPIO_InitStruct.Pull = GPIO_NOPULL;
-		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-		HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-		
 		return retVal;
 }
 
-unsigned int Read_DRM_ADC3(void)
+unsigned int DRM_Get_Results3(void)
 {
 		unsigned int retVal = MAIN_OK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
-		unsigned char BuffLen;
 		uint16_t data_voltage3;
 		uint16_t data_current3;
 		uint16_t voltage_array3[sample_size]; 
@@ -5668,12 +5651,146 @@ unsigned int Battery_Charger_Control(void)
 		return retVal;
 }
 
-unsigned int test_fun(void)
+unsigned int DRM_Start_Test(void)
+{
+	//1. Test: 500ms, 10000 uzoraka, 20kHz, struja maksimalna DAC:65000.
+		unsigned int retVal = MAIN_NOK;
+		uint16_t sample_size = DRM_SAMPLE_SIZE;
+		unsigned int dac_output = 60000;
+		uint16_t data_voltage1, data_voltage2, data_voltage3;
+		uint16_t data_current1, data_current2, data_current3;
+		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
+	  uint16_t current_array1[sample_size], current_array2[sample_size], current_array3[sample_size];
+		uint16_t i;
+		uint32_t sram_address = SRAM_BASE_ADDRESS;
+	
+	//2. Ukljucivanje izlaznih tranzistora.	
+		DRM_Channel_Enable(CHANNEL1);
+		DRM_Channel_Enable(CHANNEL2);
+		DRM_Channel_Enable(CHANNEL3);
+	
+	//3. Ispisati na DAC vrijednost struje. Sacekati 10ms da se izregulise.
+		DRM_DAC_Write(dac_output, CHANNEL1);
+		DRM_DAC_Write(dac_output, CHANNEL2);
+		DRM_DAC_Write(dac_output, CHANNEL3);
+		HAL_Delay(10);
+
+	//4. Ukljuciti spulu (open ili close). Omoguciti odabir spule prije testa. Ubaciti funkcije za ovo i provjeriti pomocu napojne pustanje struje preko coila.
+	//TODO: Ukljuciti spulu
+		if(InputBuffer[4]=='C')
+		{
+			Coil_Control(COIL_CLOSE, SET);
+		}
+		if(InputBuffer[4]=='O')
+		{
+			Coil_Control(COIL_OPEN, SET);
+		}
+		
+	//5. Poceti semplovanje svih kanala.
+	
+	/* Timer setup and start */
+		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
+		timer1_interrupt=1;
+		
+		for(i=0; i<sample_size; i++)
+		{
+			while(timer1_interrupt==0);
+			timer1_interrupt=0;
+			DRM1_ADC_Read_All();
+			data_current1 = ADC_Results.ANCH[0];
+			data_voltage1 = ADC_Results.ANCH[1];
+			data_current2 = ADC_Results.ANCH[2];
+			data_voltage2 = ADC_Results.ANCH[3];
+			data_current3 = ADC_Results.ANCH[4];
+			data_voltage3 = ADC_Results.ANCH[5];
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current1, 1);					
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage1, 1);
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current2, 1);					
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
+			sram_address+=2;	
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);					
+			sram_address+=2;
+			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
+			sram_address+=2;
+			
+			//6. Nakon 100ms iskljuciti coil i zadati 0 struju na prvi kanal. Na 200ms, iskljuciti drugi kanal, na 300ms treci.
+			if(i==2000)
+			{
+				//DRM_DAC_Write(0, CHANNEL1);
+				DRM_Channel_Disable(CHANNEL1);
+				Coil_Control(COIL_OPEN, RESET);
+				Coil_Control(COIL_CLOSE, RESET);		
+			}
+			if(i==4000)
+			{
+				//Posto na CH2 koristimo SYNC1, vrijednost DAC-a im je ista. Mozemo ih preko optocouplera onesposobiti u razlicito vrijeme.
+				DRM_DAC_Write(0, CHANNEL1);
+				DRM_DAC_Write(0, CHANNEL2);	
+				DRM_Channel_Disable(CHANNEL2);
+			}
+			if(i==6000)
+			{
+				DRM_DAC_Write(0, CHANNEL3);
+				DRM_Channel_Disable(CHANNEL3);				
+			}
+		}
+		
+		//7. Radi sigurnosti jos jednom iskljucujemo kanale na kraju testa.
+		DRM_DAC_Write(0, CHANNEL1);
+		DRM_DAC_Write(0, CHANNEL2);	
+		DRM_DAC_Write(0, CHANNEL3);
+		DRM_Channel_Disable(CHANNEL1);
+		DRM_Channel_Disable(CHANNEL2);
+		DRM_Channel_Disable(CHANNEL3);
+		Coil_Control(COIL_OPEN, RESET);
+		Coil_Control(COIL_CLOSE, RESET);
+		
+		//8. Slanje rezultata
+		
+		/* RAM read and send to GUI */
+		sram_address = SRAM_BASE_ADDRESS;
+		for(i=0; i<sample_size; i++)
+		{
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current1, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage1, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current2, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);
+			sram_address+=2;
+			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
+			sram_address+=2;
+			sprintf(OutputBuffer, "%u,%u,%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2, data_current3, data_voltage3);
+			SendOutputBuffer(COMM.port);
+			if(i==2000 | i==4000 | i==6000 | i==8000)
+			{
+				while(getcharB() != 'A') HAL_Delay(10);	
+			}
+		}
+		//End of transfer
+		sprintf(OutputBuffer,"OK");
+		return retVal;
+}
+
+
+
+unsigned int foo_function(void)
 {
 		unsigned int retVal = MAIN_OK;
-		DRM_Channel_Enable(CHANNEL2);
-		HAL_Delay(5000);
-		DRM_Channel_Disable(CHANNEL2);
+		Coil_Control(COIL_CLOSE, SET);
+		HAL_Delay(3000);
+		Coil_Control(COIL_CLOSE, RESET);
+		Coil_Control(COIL_OPEN, SET);
+		HAL_Delay(3000);
+		Coil_Control(COIL_OPEN, RESET);
+		sprintf(OutputBuffer, "Toggle OPEN Coil.");
 		return retVal;
 }
 

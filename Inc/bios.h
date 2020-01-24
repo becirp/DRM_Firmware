@@ -984,7 +984,7 @@ extern void MCU_Battery_Charger_Control(unsigned char port_control, unsigned int
 extern void MCU_Coil_Control(unsigned char port_control, unsigned int on_off);
 extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
 extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
-
+extern void Coil_Control(unsigned char coil_select, unsigned int on_off);
 ////////////////////////////////////////////
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
@@ -995,6 +995,9 @@ extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
 #define CHANNEL2 (unsigned int)2
 #define CHANNEL3 (unsigned int)3
 
+#define COIL_CLOSE (unsigned int)1
+#define COIL_OPEN  (unsigned int)2
+	
 //SRAM
 #define SRAM_BASE_ADDRESS   0x60000000
 
@@ -1046,10 +1049,10 @@ extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
 
 #define MCU_CHG_ON_OFF  			0x01
 #define MCU_CHG_INFO					0x02
-#define MCU_CHG_PWR_ON_OFF  	0x04
+#define MCU_CHG_PWR_CTRL    	0x04
 #define MCU_BAL_ON_OFF		  	0x08
-#define COIL_IGBT1_ON_OFF		  0x10
-#define COIL_IGBT2_ON_OFF		  0x20
+#define COIL_IGBT1_CTRL		    0x10
+#define COIL_IGBT2_CTRL   	  0x20
 
 #define DRM1_ADPT_RLY_CH1			0x01
 #define DRM1_BAL_EN_CH1				0x02
