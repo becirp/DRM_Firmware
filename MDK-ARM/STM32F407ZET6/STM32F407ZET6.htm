@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F407ZET6\STM32F407ZET6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F407ZET6\STM32F407ZET6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Jan 23 13:45:47 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Jan 24 09:19:58 2020
 <BR><P>
 <H3>Maximum Stack Usage =       1360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -952,7 +952,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
+<BR>[Called By]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_fun
+<LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 </UL>
 
 <P><STRONG><a name="[b1]"></a>DRM_Channel_Enable</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, bios.o(i.DRM_Channel_Enable))
@@ -961,10 +962,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
+<BR>[Called By]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_fun
+<LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 </UL>
 
-<P><STRONG><a name="[b2]"></a>DRM_DAC_Write</STRONG> (Thumb, 192 bytes, Stack size 40 bytes, bios.o(i.DRM_DAC_Write))
+<P><STRONG><a name="[b2]"></a>DRM_DAC_Write</STRONG> (Thumb, 238 bytes, Stack size 40 bytes, bios.o(i.DRM_DAC_Write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = DRM_DAC_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
@@ -1151,6 +1153,7 @@ Global Symbols
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSG_OFF_Sequence
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSGSTwoBPPF_ON_Sequence
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSGSOneBPPF_ON_Sequence
+<LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_fun
 <LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_flash_drive_MCU
 <LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Test_Mode_COMM
@@ -2852,7 +2855,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
 
-<P><STRONG><a name="[178]"></a>Write_DRM_Channel</STRONG> (Thumb, 542 bytes, Stack size 104 bytes, control.o(i.Write_DRM_Channel))
+<P><STRONG><a name="[178]"></a>Write_DRM_Channel</STRONG> (Thumb, 550 bytes, Stack size 104 bytes, control.o(i.Write_DRM_Channel))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = Write_DRM_Channel &rArr; DRM1_ADC_Read_All
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
@@ -3932,8 +3935,14 @@ Global Symbols
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MemoryReadByte_Comm
 </UL>
 
-<P><STRONG><a name="[177]"></a>test_fun</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, control.o(i.test_fun))
-<BR><BR>[Called By]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
+<P><STRONG><a name="[177]"></a>test_fun</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, control.o(i.test_fun))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = test_fun &rArr; DRM_Channel_Enable &rArr; __2sprintf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Enable
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Disable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
 
 <P><STRONG><a name="[c8]"></a>wait_char_from_pc</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, comm.o(i.wait_char_from_pc))

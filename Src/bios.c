@@ -468,7 +468,7 @@ void DRM_DAC_Write(unsigned int data, unsigned int channel)
 	
 	DRM1_CLK_HIGH;
 	delay_us(spi_delay);
-	if(channel == CHANNEL1) DRM1_SYNC1_LOW;
+	if(channel == CHANNEL1 | channel == CHANNEL2) DRM1_SYNC1_LOW;
 	//if(channel == CHANNEL2) DRM1_SYNC2_LOW; TODO: pin za SYNC2 visi. Zicom je kratko spojen na SYNC2. Istovremeno se zadaje DAC1 i DAC2 i na istu vrijednost.
 	if(channel == CHANNEL3) DRM1_SYNC3_LOW;
 	delay_us(spi_delay);
@@ -491,7 +491,7 @@ void DRM_DAC_Write(unsigned int data, unsigned int channel)
     delay_us(spi_delay);
 	}
 	delay_us(spi_delay);
-	if(channel == CHANNEL1) DRM1_SYNC1_HIGH;
+	if(channel == CHANNEL1 | channel == CHANNEL2) DRM1_SYNC1_HIGH;
 	//if(channel == CHANNEL2) DRM1_SYNC2_HIGH; TODO: pin za SYNC2 visi
 	if(channel == CHANNEL3) DRM1_SYNC3_HIGH;
 }
