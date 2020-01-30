@@ -21,7 +21,7 @@ if (InputBuffer[0]=='m')
 					//foo function
 					if((InputBuffer[1]=='F')&&(InputBuffer[2]=='O')&&(InputBuffer[3]=='O'))
 					{
-						return (foo_function());
+								return (foo_function());
 					}					
 					//Start DRM test function
 					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='S')&&(InputBuffer[3]=='T'))

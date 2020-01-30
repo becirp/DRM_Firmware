@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F407ZET6\STM32F407ZET6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F407ZET6\STM32F407ZET6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Jan 24 14:44:41 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Jan 30 09:16:57 2020
 <BR><P>
 <H3>Maximum Stack Usage =       1360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -408,8 +408,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[79]"></a>__rt_ctype_table</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, ctype_o.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
+<BR><BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
 </UL>
 
 <P><STRONG><a name="[19b]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
@@ -489,9 +489,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LinearTransducerRes_Prikaz
+<BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LinearTransducerRes_Prikaz
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
+<LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LWriteToFile
 </UL>
 
@@ -500,12 +500,12 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adcs
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adcs
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimePrikaz
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LinearTransducerRes_Prikaz
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBufferAnalogCH
+<LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
 
 <P><STRONG><a name="[74]"></a>__aeabi_ui2d</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, dfltui.o(.text))
@@ -549,8 +549,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[131]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cdrcmple.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LinearTransducerRes_Prikaz
+<BR><BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LinearTransducerRes_Prikaz
+<LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
 
 <P><STRONG><a name="[77]"></a>__aeabi_d2f</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, d2f.o(.text))
@@ -580,10 +580,10 @@ Global Symbols
 <P><STRONG><a name="[200]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
 
 <P><STRONG><a name="[67]"></a>__aeabi_llsr</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, llushr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
@@ -611,9 +611,9 @@ Global Symbols
 <P><STRONG><a name="[73]"></a>_double_round</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, depilogue.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+<BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 </UL>
 
 <P><STRONG><a name="[71]"></a>_double_epilogue</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, depilogue.o(.text))
@@ -623,9 +623,9 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
 
 <P><STRONG><a name="[7b]"></a>__aeabi_dadd</STRONG> (Thumb, 322 bytes, Stack size 48 bytes, dadd.o(.text), UNUSED)
@@ -853,8 +853,8 @@ Global Symbols
 <P><STRONG><a name="[9c]"></a>Battery_Charger_Control</STRONG> (Thumb, 242 bytes, Stack size 24 bytes, control.o(i.Battery_Charger_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = Battery_Charger_Control &rArr; HAL_I2C_Master_Transmit &rArr; I2C_MasterRequestWrite &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Master_Transmit
+<BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Master_Transmit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -897,10 +897,10 @@ Global Symbols
 <P><STRONG><a name="[a7]"></a>CheckBreakerStatus_COMM</STRONG> (Thumb, 514 bytes, Stack size 16 bytes, control.o(i.CheckBreakerStatus_COMM))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = CheckBreakerStatus_COMM &rArr; read_all_adcs &rArr; ADC_Read_MainContacts &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adcs
+<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adcs
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_OPEN_LED_control
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_CLOSE_LED_control
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -957,8 +957,8 @@ Global Symbols
 <P><STRONG><a name="[b1]"></a>DRM_Channel_Disable</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, bios.o(i.DRM_Channel_Disable))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = DRM_Channel_Disable &rArr; __2sprintf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Start_Test
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
@@ -967,8 +967,8 @@ Global Symbols
 <P><STRONG><a name="[b2]"></a>DRM_Channel_Enable</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, bios.o(i.DRM_Channel_Enable))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = DRM_Channel_Enable &rArr; __2sprintf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Start_Test
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
@@ -989,26 +989,23 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Write_16b
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM1_ADC_Read_All
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getcharB
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
 
-<P><STRONG><a name="[bd]"></a>DRM_Start_Test</STRONG> (Thumb, 730 bytes, Stack size 104 bytes, control.o(i.DRM_Start_Test))
+<P><STRONG><a name="[bd]"></a>DRM_Start_Test</STRONG> (Thumb, 732 bytes, Stack size 104 bytes, control.o(i.DRM_Start_Test))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = DRM_Start_Test &rArr; DRM1_ADC_Read_All
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Write_16b
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
@@ -1018,6 +1015,9 @@ Global Symbols
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Enable
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Disable
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Coil_Control
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -1053,9 +1053,9 @@ Global Symbols
 <P><STRONG><a name="[c1]"></a>DigitalTransRes_Prikaz</STRONG> (Thumb, 640 bytes, Stack size 72 bytes, control.o(i.DigitalTransRes_Prikaz))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = DigitalTransRes_Prikaz &rArr; __2sprintf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBufferMotion
 </UL>
@@ -1760,11 +1760,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = LWriteToFile &rArr; SendProgressBar &rArr; SendOutputBuffer &rArr; putcharB &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slave_deselect_usb_flash_drive
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clrvn
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_sector
@@ -1808,13 +1808,13 @@ Global Symbols
 <P><STRONG><a name="[130]"></a>LinearTransducerRes_Prikaz</STRONG> (Thumb, 770 bytes, Stack size 80 bytes, control.o(i.LinearTransducerRes_Prikaz))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = LinearTransducerRes_Prikaz &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBufferMotion
 </UL>
@@ -1895,7 +1895,6 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SET_GPIO_Structures
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SET_GPIOB_Structure
 <LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
@@ -1916,6 +1915,7 @@ Global Symbols
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetAnalogCHRange
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSG_OFF_Sequence
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AUX_dry_wet_control
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adc_channels_test
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculate_offset_for_CC_channels
 </UL>
@@ -1932,10 +1932,10 @@ Global Symbols
 <P><STRONG><a name="[14d]"></a>MemoryReadByte_Comm</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, control.o(i.MemoryReadByte_Comm))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = MemoryReadByte_Comm &rArr; string_to_long &rArr; atol &rArr; strtol &rArr; _strtoul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
+<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_long
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -1944,9 +1944,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = MemoryTest_Comm &rArr; SendOutputBuffer &rArr; putcharB &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Write_16b
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Read_16b
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -1956,11 +1956,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OK_Response
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SRAM_Write_16b
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_long
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_int
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -2033,9 +2033,9 @@ Global Symbols
 <P><STRONG><a name="[154]"></a>PRINT_Header</STRONG> (Thumb, 704 bytes, Stack size 40 bytes, printer.o(i.PRINT_Header))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = PRINT_Header &rArr; PrintEmptyLine &rArr; PrintNewLine &rArr; putchar_printer &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
+<BR>[Calls]<UL><LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
 <LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putchar_printer
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_dummy
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrinterParamters
 <LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintEmptyLine
@@ -2128,8 +2128,7 @@ Global Symbols
 <P><STRONG><a name="[164]"></a>PuniPrintBuffer</STRONG> (Thumb, 1154 bytes, Stack size 224 bytes, control.o(i.PuniPrintBuffer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 352<LI>Call Chain = PuniPrintBuffer &rArr; CalculateMaxMinTimePerPhase &rArr; calc_min_time
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_min_time
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_max_time
@@ -2137,6 +2136,7 @@ Global Symbols
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayText
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalculateMaxMinTimePerPhase
 <LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AddSinglePhaseResult
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
@@ -2145,12 +2145,12 @@ Global Symbols
 <P><STRONG><a name="[168]"></a>PuniPrintBufferAnalogCH</STRONG> (Thumb, 756 bytes, Stack size 96 bytes, control.o(i.PuniPrintBufferAnalogCH))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = PuniPrintBufferAnalogCH &rArr; PrintNewLine &rArr; putchar_printer &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculate_gained_value
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;apply_offset_correction
 </UL>
@@ -2160,10 +2160,10 @@ Global Symbols
 <P><STRONG><a name="[16b]"></a>PuniPrintBufferCurrent</STRONG> (Thumb, 332 bytes, Stack size 48 bytes, control.o(i.PuniPrintBufferCurrent))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = PuniPrintBufferCurrent &rArr; PrintNewLine &rArr; putchar_printer &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimePrikaz
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculate_gained_value
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;apply_offset_correction
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
@@ -2174,10 +2174,10 @@ Global Symbols
 <P><STRONG><a name="[16c]"></a>PuniPrintBufferMotion</STRONG> (Thumb, 180 bytes, Stack size 16 bytes, control.o(i.PuniPrintBufferMotion))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = PuniPrintBufferMotion &rArr; LinearTransducerRes_Prikaz &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
+<BR>[Calls]<UL><LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintNewLine
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LinearTransducerRes_Prikaz
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DigitalTransRes_Prikaz
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -2207,9 +2207,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OK_Response
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adcs
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;abs_16_bit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -2234,12 +2234,12 @@ Global Symbols
 <P><STRONG><a name="[175]"></a>Read_One_ADC_CH_COMM</STRONG> (Thumb, 280 bytes, Stack size 32 bytes, control.o(i.Read_One_ADC_CH_COMM))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = Read_One_ADC_CH_COMM &rArr; read_all_adcs &rArr; ADC_Read_MainContacts &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_int
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_all_adcs
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;abs_16_bit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_to_slong_DT_res
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
@@ -2283,7 +2283,6 @@ Global Symbols
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
 <LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Calibration_COMM
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_flash_drive_MCU
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;foo_function
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
@@ -2309,6 +2308,7 @@ Global Symbols
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBufferAnalogCH
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBuffer
 <LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintResults_Comm
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -2690,9 +2690,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = SetMeasParameters_COMM &rArr; string_to_int &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OK_Response
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_int
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
@@ -2701,9 +2701,9 @@ Global Symbols
 <P><STRONG><a name="[17b]"></a>SetPulseLenghts_COMM</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, control.o(i.SetPulseLenghts_COMM))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = SetPulseLenghts_COMM &rArr; string_to_int &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_int
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;string_to_int
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_if_digit
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -2797,11 +2797,11 @@ Global Symbols
 <P><STRONG><a name="[167]"></a>TimePrikaz</STRONG> (Thumb, 350 bytes, Stack size 24 bytes, control.o(i.TimePrikaz))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = TimePrikaz &rArr; __aeabi_ui2d &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBufferCurrent
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PuniPrintBuffer
@@ -2810,8 +2810,8 @@ Global Symbols
 <P><STRONG><a name="[17c]"></a>Toggle_Pins</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, control.o(i.Toggle_Pins))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Toggle_Pins &rArr; __2sprintf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[19e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
+<BR>[Calls]<UL><LI><a href="#[19e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -2892,7 +2892,6 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = Write_DRM_Channel &rArr; DRM1_ADC_Read_All
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
@@ -2901,6 +2900,7 @@ Global Symbols
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_DAC_Write
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Enable
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Disable
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -3391,8 +3391,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = foo_function &rArr; Coil_Control &rArr; HAL_I2C_Master_Transmit &rArr; I2C_MasterRequestWrite &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Coil_Control
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
@@ -3985,9 +3985,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = wait_char_from_pc &rArr; SendOutputBuffer &rArr; putcharB &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendOutputBuffer
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putcharB
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getcharB
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Measurement_Data_Comm
 <LI><a href="#[1aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_from_file
@@ -4500,11 +4500,11 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[1a3]"></a>_fp_digits</STRONG> (Thumb, 366 bytes, Stack size 64 bytes, printfa.o(i._fp_digits), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core

@@ -5717,7 +5717,7 @@ unsigned int DRM_Start_Test(void)
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
 			sram_address+=2;
 			
-			//6. Nakon 100ms iskljuciti coil i zadati 0 struju na prvi kanal. Na 200ms, iskljuciti drugi kanal, na 300ms treci.
+			//6. Nakon 100ms iskljuciti coil i zadati 0 struju na prvi kanal. Na 150ms, iskljuciti drugi kanal, na 200ms treci.
 			if(i==2000)
 			{
 				//DRM_DAC_Write(0, CHANNEL1);
@@ -5725,14 +5725,14 @@ unsigned int DRM_Start_Test(void)
 				Coil_Control(COIL_OPEN, RESET);
 				Coil_Control(COIL_CLOSE, RESET);		
 			}
-			if(i==4000)
+			if(i==3000)
 			{
 				//Posto na CH2 koristimo SYNC1, vrijednost DAC-a im je ista. Mozemo ih preko optocouplera onesposobiti u razlicito vrijeme.
 				DRM_DAC_Write(0, CHANNEL1);
 				DRM_DAC_Write(0, CHANNEL2);	
 				DRM_Channel_Disable(CHANNEL2);
 			}
-			if(i==6000)
+			if(i==4000)
 			{
 				DRM_DAC_Write(0, CHANNEL3);
 				DRM_Channel_Disable(CHANNEL3);				
