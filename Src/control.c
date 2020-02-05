@@ -5656,7 +5656,7 @@ unsigned int DRM_Start_Test(void)
 	//1. Test: 500ms, 10000 uzoraka, 20kHz, struja maksimalna DAC:65000.
 		unsigned int retVal = MAIN_NOK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
-		unsigned int dac_output = 60000;
+		unsigned int dac_output = 40000;
 		uint16_t data_voltage1, data_voltage2, data_voltage3;
 		uint16_t data_current1, data_current2, data_current3;
 		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
