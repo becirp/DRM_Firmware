@@ -985,6 +985,7 @@ extern void MCU_Coil_Control(unsigned char port_control, unsigned int on_off);
 extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
 extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
 extern void Coil_Control(unsigned char coil_select, unsigned int on_off);
+extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int ramp_up);
 ////////////////////////////////////////////
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
@@ -997,6 +998,9 @@ extern void Coil_Control(unsigned char coil_select, unsigned int on_off);
 
 #define COIL_CLOSE (unsigned int)1
 #define COIL_OPEN  (unsigned int)2
+	
+#define RAMP_UP 	 (unsigned int)1
+#define RAMP_DOWN  (unsigned int)2
 	
 //SRAM
 #define SRAM_BASE_ADDRESS   0x60000000

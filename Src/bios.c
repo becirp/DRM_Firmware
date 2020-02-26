@@ -564,6 +564,52 @@ void Coil_Control(unsigned char coil_select, unsigned int on_off)
 		
 }
 
+//Ramp function
+void Ramp(unsigned int channel, unsigned int dac_output, unsigned int up_down)
+{
+	unsigned int i = 0;
+	unsigned int ramp = 0;
+	unsigned int dac_limit = 30000;
+	if(up_down == RAMP_UP)
+	{
+		ramp = 0;
+		DRM_DAC_Write(ramp, channel);
+		for(i = 0; i < 5; i++)
+		{
+			ramp += (dac_output / 5);
+			if(ramp > dac_limit)
+			{	
+				DRM_DAC_Write(0, channel);
+				DRM_Channel_Disable(channel);
+				break;
+			}
+			DRM_DAC_Write(ramp, channel);
+			HAL_Delay(1);
+		}
+	}
+	else if(up_down == RAMP_DOWN)
+	{
+		ramp = dac_output;
+		DRM_DAC_Write(ramp, channel);
+		for(i = 0; i < 5; i++)
+		{
+			ramp -= (dac_output / 5);
+			if(ramp > dac_limit || ramp < 0)
+			{	
+				DRM_DAC_Write(0, channel);
+				DRM_Channel_Disable(channel);
+				break;
+			}
+			DRM_DAC_Write(ramp, channel);
+			HAL_Delay(1);
+		}
+	}
+}
+
+
+
+
+
 void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off)
 {
 	//TODO: function body

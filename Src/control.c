@@ -5415,58 +5415,44 @@ unsigned int Write_DRM_Channel(void)
 {
 		unsigned int retVal = MAIN_NOK;
 		unsigned int dac_output;
+		unsigned int ramp = 0;
+		unsigned int delay_ms = 100;
+	  unsigned int i = 0;
+		unsigned int offset1 = 470;
+		unsigned int offset2 = 700;
+		unsigned int offset3 = 391;
+		unsigned int dac_limit = 30000;
+	  unsigned int channel;
 		uint16_t drm1_current1, drm1_voltage1;
 		uint16_t drm1_current2, drm1_voltage2;
 		uint16_t drm1_current3, drm1_voltage3;
 		double conversion_factor = 0.00335628458; //conversion_factor = (Vadc(max)/ADC_RANGE)*(Aop/Rsh) = 10/65535*(1/(1+50/0.556))*2000
-		if(InputBuffer[3]=='1')
-		{
-			dac_output = string_to_int(4, 8);			
-			DRM_DAC_Write(dac_output, CHANNEL1);
-			HAL_Delay(10);
-			DRM_Channel_Enable(CHANNEL1);
-			HAL_Delay(100);
-			DRM1_ADC_Read_All();
-			drm1_current1 = ADC_Results.ANCH[0];
-			drm1_voltage1 = ADC_Results.ANCH[1];
-			sprintf(OutputBuffer,"Write %.2fV to DAC1:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current1, 
+		if(InputBuffer[3]=='1') channel = CHANNEL1;
+		if(InputBuffer[3]=='2') channel = CHANNEL2;
+		if(InputBuffer[3]=='3') channel = CHANNEL3;
+		dac_output = string_to_int(4, 8);			
+		DRM_Channel_Enable(channel);
+		Ramp(channel, dac_output, RAMP_UP);
+		HAL_Delay(10);
+		DRM_Channel_Enable(channel);
+		HAL_Delay(delay_ms);
+		DRM1_ADC_Read_All();
+		drm1_current1 = ADC_Results.ANCH[0] - offset1;
+		drm1_voltage1 = ADC_Results.ANCH[1];
+		drm1_current2 = ADC_Results.ANCH[2] - offset2;
+		drm1_voltage2 = ADC_Results.ANCH[3];
+		drm1_current3 = ADC_Results.ANCH[4] - offset3;
+		drm1_voltage3 = ADC_Results.ANCH[5];
+		Ramp(channel, dac_output, RAMP_DOWN);
+		DRM_Channel_Disable(channel);
+		DRM_DAC_Write(0, channel);
+		if(InputBuffer[3]=='1') sprintf(OutputBuffer,"Write %.2fV to DAC1:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current1, 
 			drm1_current1*conversion_factor, drm1_voltage1, drm1_voltage1*10.0/65535);
-			DRM_Channel_Disable(CHANNEL1);
-			DRM_DAC_Write(0, CHANNEL1);
-			retVal = MAIN_OK;
-		}	
-		if(InputBuffer[3]=='2')
-		{//TODO: pin za SYNC2 visi. Zicom je kratko spojen na SYNC2. Istovremeno se zadaje DAC1 i DAC2 i na istu vrijednost. Koristiti DAC1 za pisanje na oba.
-			dac_output = string_to_int(4, 8);		
-			DRM_DAC_Write(dac_output, CHANNEL2);
-			HAL_Delay(10);
-			DRM_Channel_Enable(CHANNEL2);
-			HAL_Delay(100);
-			DRM1_ADC_Read_All();
-			drm1_current2 = ADC_Results.ANCH[2];
-			drm1_voltage2 = ADC_Results.ANCH[3];
-			sprintf(OutputBuffer,"Write %.2fV to DAC2:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current2, 
+		if(InputBuffer[3]=='2') sprintf(OutputBuffer,"Write %.2fV to DAC2:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current2, 
 			drm1_current2*conversion_factor, drm1_voltage2, drm1_voltage2*10.0/65535);
-			DRM_Channel_Disable(CHANNEL2);
-			DRM_DAC_Write(0, CHANNEL2);
-			retVal = MAIN_OK;
-		}
-		if(InputBuffer[3]=='3')
-		{
-			dac_output = string_to_int(4, 8);		
-			DRM_DAC_Write(dac_output, CHANNEL3);
-			HAL_Delay(10);
-			DRM_Channel_Enable(CHANNEL3);
-			HAL_Delay(100);
-			DRM1_ADC_Read_All();
-			drm1_current3 = ADC_Results.ANCH[4];
-			drm1_voltage3 = ADC_Results.ANCH[5];
-			sprintf(OutputBuffer,"Write %.2fV to DAC3:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current3, 
+		if(InputBuffer[3]=='3') sprintf(OutputBuffer,"Write %.2fV to DAC3:\r\nADC current: (%u), %.2fA\r\nADC voltage: (%u)V, %.2f", dac_output*5.0/65535, drm1_current3, 
 			drm1_current3*conversion_factor, drm1_voltage3, drm1_voltage3*10.0/65535);
-			DRM_Channel_Disable(CHANNEL3);
-			DRM_DAC_Write(0, CHANNEL3);
-			retVal = MAIN_OK;
-		}
+		retVal = MAIN_OK;
 		return retVal;
 }
 
@@ -5653,46 +5639,53 @@ unsigned int Battery_Charger_Control(void)
 
 unsigned int DRM_Start_Test(void)
 {
-	//1. Test: 500ms, 10000 uzoraka, 20kHz, struja maksimalna DAC:65000.
+	//1. Test: 500ms, 10000 uzoraka, 20kHz, struja maksimalna DAC:65000. 
+	//Za sada fiksna vrijednost struje za DAC=28000, oko 100A.
+	//Postaviti da se moze odabrati vrijednost struje. Ubaciti regulator uspostavljanja struje. 
+	//Za slozene operacije potrebno ubaciti odabir i kontrolu u petlji.
 		unsigned int retVal = MAIN_NOK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
-		unsigned int dac_output = 40000;
+		unsigned int dac_output = 0;
 		uint16_t data_voltage1, data_voltage2, data_voltage3;
 		uint16_t data_current1, data_current2, data_current3;
 		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
 	  uint16_t current_array1[sample_size], current_array2[sample_size], current_array3[sample_size];
 		uint16_t i;
 		uint32_t sram_address = SRAM_BASE_ADDRESS;
-	
+		
+		dac_output = string_to_int(5, 9);
+		
 	//2. Ukljucivanje izlaznih tranzistora.	
 		DRM_Channel_Enable(CHANNEL1);
 		DRM_Channel_Enable(CHANNEL2);
 		DRM_Channel_Enable(CHANNEL3);
 	
-	//3. Ispisati na DAC vrijednost struje. Sacekati 10ms da se izregulise.
-		DRM_DAC_Write(dac_output, CHANNEL1);
-		DRM_DAC_Write(dac_output, CHANNEL2);
-		DRM_DAC_Write(dac_output, CHANNEL3);
+	//3. Ispisati na DAC vrijednost struje. Sacekati 10ms da se izregulise. Ovdje ubaciti rampu
+//		DRM_DAC_Write(dac_output, CHANNEL1);
+//		DRM_DAC_Write(dac_output, CHANNEL2);
+//		DRM_DAC_Write(dac_output, CHANNEL3);
+		Ramp(CHANNEL1, dac_output, RAMP_UP);
+		//Ramp(CHANNEL2, dac_output, RAMP_UP);
+		Ramp(CHANNEL3, dac_output, RAMP_UP);
 		HAL_Delay(10);
 
 	//4. Ukljuciti spulu (open ili close). Omoguciti odabir spule prije testa. Ubaciti funkcije za ovo i provjeriti pomocu napojne pustanje struje preko coila.
 	//TODO: Ukljuciti spulu
-		if(InputBuffer[4]=='C')
+		if(InputBuffer[4]=='1')
 		{
 			Coil_Control(COIL_CLOSE, SET);
 		}
-		if(InputBuffer[4]=='O')
+		if(InputBuffer[4]=='2')
 		{
 			Coil_Control(COIL_OPEN, SET);
 		}
-		
-	//5. Poceti semplovanje svih kanala.
 	
 	/* Timer setup and start */
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
 		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
 		timer1_interrupt=1;
 		
+	//5. Poceti semplovanje svih kanala.	
 		for(i=0; i<sample_size; i++)
 		{
 			while(timer1_interrupt==0);
@@ -5717,28 +5710,17 @@ unsigned int DRM_Start_Test(void)
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
 			sram_address+=2;
 			
-			//6. Nakon 100ms iskljuciti coil i zadati 0 struju na prvi kanal. Na 150ms, iskljuciti drugi kanal, na 200ms treci.
+			//6. Vremena operacija podesiti. Ovaj put staviti isto trajanje. 2000iteracija = 100ms
 			if(i==2000)
 			{
-				//DRM_DAC_Write(0, CHANNEL1);
-				DRM_Channel_Disable(CHANNEL1);
-				Coil_Control(COIL_OPEN, RESET);
-				Coil_Control(COIL_CLOSE, RESET);		
-			}
-			if(i==3000)
-			{
-				//Posto na CH2 koristimo SYNC1, vrijednost DAC-a im je ista. Mozemo ih preko optocouplera onesposobiti u razlicito vrijeme.
 				DRM_DAC_Write(0, CHANNEL1);
-				DRM_DAC_Write(0, CHANNEL2);	
-				DRM_Channel_Disable(CHANNEL2);
-			}
-			if(i==4000)
-			{
+				//DRM_DAC_Write(0, CHANNEL2);
 				DRM_DAC_Write(0, CHANNEL3);
-				DRM_Channel_Disable(CHANNEL3);				
+				DRM_Channel_Disable(CHANNEL1);
+				DRM_Channel_Disable(CHANNEL2);
+				DRM_Channel_Disable(CHANNEL3);
 			}
 		}
-		
 		//7. Radi sigurnosti jos jednom iskljucujemo kanale na kraju testa.
 		DRM_DAC_Write(0, CHANNEL1);
 		DRM_DAC_Write(0, CHANNEL2);	
