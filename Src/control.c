@@ -5639,11 +5639,11 @@ unsigned int Battery_Charger_Control(void)
 
 unsigned int DRM_Start_Test(void)
 {
-	//1. Test: 500ms, 10000 uzoraka, 20kHz, struja maksimalna DAC:65000. 
+	//1000ms, 20000 uzoraka, 20kHz, struja maksimalna DAC:65000. 
 	//Za sada fiksna vrijednost struje za DAC=28000, oko 100A.
 	//Postaviti da se moze odabrati vrijednost struje. Ubaciti regulator uspostavljanja struje. 
 	//Za slozene operacije potrebno ubaciti odabir i kontrolu u petlji.
-		unsigned int retVal = MAIN_NOK;
+		unsigned int retVal = MAIN_OK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
 		unsigned int dac_output = 0;
 		uint16_t data_voltage1, data_voltage2, data_voltage3;
@@ -5654,7 +5654,7 @@ unsigned int DRM_Start_Test(void)
 		uint32_t sram_address = SRAM_BASE_ADDRESS;
 		
 		dac_output = string_to_int(5, 9);
-		
+	
 	//2. Ukljucivanje izlaznih tranzistora.	
 		DRM_Channel_Enable(CHANNEL1);
 		DRM_Channel_Enable(CHANNEL2);
@@ -5751,7 +5751,7 @@ unsigned int DRM_Start_Test(void)
 			sram_address+=2;
 			sprintf(OutputBuffer, "%u,%u,%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2, data_current3, data_voltage3);
 			SendOutputBuffer(COMM.port);
-			if(i==2000 | i==4000 | i==6000 | i==8000)
+			if(i % 2000 == 0)
 			{
 				while(getcharB() != 'A') HAL_Delay(10);	
 			}

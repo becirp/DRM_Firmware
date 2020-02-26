@@ -990,7 +990,7 @@ extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int ram
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
 
-#define DRM_SAMPLE_SIZE     (uint16_t)10000
+#define DRM_SAMPLE_SIZE     (uint16_t)20000
 
 #define CHANNEL1 (unsigned int)1
 #define CHANNEL2 (unsigned int)2
