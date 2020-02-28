@@ -5646,6 +5646,7 @@ unsigned int DRM_Start_Test(void)
 		unsigned int retVal = MAIN_OK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
 		unsigned int dac_output = 0;
+		unsigned int test_type;
 		uint16_t data_voltage1, data_voltage2, data_voltage3;
 		uint16_t data_current1, data_current2, data_current3;
 		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
@@ -5654,6 +5655,19 @@ unsigned int DRM_Start_Test(void)
 		uint32_t sram_address = SRAM_BASE_ADDRESS;
 		
 		dac_output = string_to_int(5, 9);
+		switch(InputBuffer[4])
+		{
+			case '1': test_type = TEST_C;
+							break;
+			case '2': test_type = TEST_O;
+							break;
+			case '3': test_type = TEST_CO;
+							break;
+			case '4': test_type = TEST_OC;
+							break;
+			case '5': test_type = TEST_OCO;
+							break;			
+		}
 	
 	//2. Ukljucivanje izlaznih tranzistora.	
 		DRM_Channel_Enable(CHANNEL1);
@@ -5671,11 +5685,11 @@ unsigned int DRM_Start_Test(void)
 
 	//4. Ukljuciti spulu (open ili close). Omoguciti odabir spule prije testa. Ubaciti funkcije za ovo i provjeriti pomocu napojne pustanje struje preko coila.
 	//TODO: Ukljuciti spulu
-		if(InputBuffer[4]=='1')
+		if(test_type == TEST_C || test_type == TEST_CO)
 		{
-			Coil_Control(COIL_CLOSE, SET);
+			Coil_Control(COIL_CLOSE, SET);			
 		}
-		if(InputBuffer[4]=='2')
+		if(test_type == TEST_O || test_type == TEST_OC || test_type == TEST_OCO)
 		{
 			Coil_Control(COIL_OPEN, SET);
 		}
@@ -5710,26 +5724,68 @@ unsigned int DRM_Start_Test(void)
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
 			sram_address+=2;
 			
-			//6. Vremena operacija podesiti. Ovaj put staviti isto trajanje. 2000iteracija = 100ms
-			if(i==2000)
+			//6. Test operacije. Vremena: 20 iteracija = 1 ms
+			//Obrisati sprintf ispise na port nakon provjere prolaska kroz petlju.
+			//Provjeriti vremena semplova sa ifovima za test operacije sa izbacenim pisanjem na port. Da li se petlja izvrsava za 50us?
+			//Kako osigurati da tranzistor ne ostaje ukljucen duze od max 160ms?
+			//6.1 Test C
+			if(test_type == TEST_C && i==3200)
 			{
-				DRM_DAC_Write(0, CHANNEL1);
-				//DRM_DAC_Write(0, CHANNEL2);
-				DRM_DAC_Write(0, CHANNEL3);
-				DRM_Channel_Disable(CHANNEL1);
-				DRM_Channel_Disable(CHANNEL2);
-				DRM_Channel_Disable(CHANNEL3);
+				End_Operation();
 			}
+			//6.2 Test O
+			if(test_type == TEST_O && i==1600)
+			{
+				End_Operation();
+			}
+			//6.3 Test CO
+			if(test_type == TEST_CO && i==3200)
+			{
+				Coil_Control(COIL_CLOSE, RESET);
+			}
+			if(test_type == TEST_CO && i==3400)
+			{
+				Coil_Control(COIL_OPEN, SET);
+			}
+			if(test_type == TEST_CO && i==5000)
+			{
+				End_Operation();
+			}
+			//6.4 Test OC
+			if(test_type == TEST_OC && i==1600)
+			{
+				Coil_Control(COIL_OPEN, RESET);
+			}
+			if(test_type == TEST_OC && i==7600)
+			{
+				Coil_Control(COIL_CLOSE, SET);
+			}
+			if(test_type == TEST_OC && i==10800)
+			{
+				End_Operation();
+			}
+			//6.5 Test O-CO
+			if(test_type == TEST_OCO && i==1600)
+			{
+				Coil_Control(COIL_OPEN, RESET);
+			}
+			if(test_type == TEST_OCO && i==7600)
+			{
+				Coil_Control(COIL_CLOSE, SET);
+			}	
+			if(test_type == TEST_OCO && i==10800)
+			{
+				Coil_Control(COIL_CLOSE, RESET);
+			}	
+			if(test_type == TEST_OCO && i==11000)
+			{
+				Coil_Control(COIL_OPEN, SET);
+			}	
+			HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_11);	
 		}
+		
 		//7. Radi sigurnosti jos jednom iskljucujemo kanale na kraju testa.
-		DRM_DAC_Write(0, CHANNEL1);
-		DRM_DAC_Write(0, CHANNEL2);	
-		DRM_DAC_Write(0, CHANNEL3);
-		DRM_Channel_Disable(CHANNEL1);
-		DRM_Channel_Disable(CHANNEL2);
-		DRM_Channel_Disable(CHANNEL3);
-		Coil_Control(COIL_OPEN, RESET);
-		Coil_Control(COIL_CLOSE, RESET);
+		End_Operation();
 		
 		//8. Slanje rezultata
 		

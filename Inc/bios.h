@@ -986,22 +986,28 @@ extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int
 extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
 extern void Coil_Control(unsigned char coil_select, unsigned int on_off);
 extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int ramp_up);
+extern void End_Operation(void);
 ////////////////////////////////////////////
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
 
 #define DRM_SAMPLE_SIZE     (uint16_t)20000
 
-#define CHANNEL1 (unsigned int)1
-#define CHANNEL2 (unsigned int)2
-#define CHANNEL3 (unsigned int)3
+#define CHANNEL1 		(unsigned int)1
+#define CHANNEL2 		(unsigned int)2
+#define CHANNEL3 		(unsigned int)3
 
-#define COIL_CLOSE (unsigned int)1
-#define COIL_OPEN  (unsigned int)2
+#define COIL_CLOSE 	(unsigned int)1
+#define COIL_OPEN  	(unsigned int)2
 	
-#define RAMP_UP 	 (unsigned int)1
-#define RAMP_DOWN  (unsigned int)2
+#define RAMP_UP 	 	(unsigned int)1
+#define RAMP_DOWN  	(unsigned int)2
 	
+#define TEST_C			(unsigned int)1
+#define TEST_O			(unsigned int)2
+#define TEST_CO			(unsigned int)3
+#define TEST_OC			(unsigned int)4	
+#define TEST_OCO		(unsigned int)5
 //SRAM
 #define SRAM_BASE_ADDRESS   0x60000000
 

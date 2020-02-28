@@ -606,7 +606,17 @@ void Ramp(unsigned int channel, unsigned int dac_output, unsigned int up_down)
 	}
 }
 
-
+void End_Operation()
+{
+	DRM_DAC_Write(0, CHANNEL1);
+	DRM_DAC_Write(0, CHANNEL2);
+	DRM_DAC_Write(0, CHANNEL3);
+	DRM_Channel_Disable(CHANNEL1);
+	DRM_Channel_Disable(CHANNEL2);
+	DRM_Channel_Disable(CHANNEL3);
+	Coil_Control(COIL_OPEN, RESET);
+	Coil_Control(COIL_CLOSE, RESET);
+}
 
 
 
