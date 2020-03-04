@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F407ZET6\STM32F407ZET6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F407ZET6\STM32F407ZET6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Feb 28 13:29:41 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Wed Mar 04 14:23:36 2020
 <BR><P>
 <H3>Maximum Stack Usage =       1360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -941,7 +941,6 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Start_Test
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;End_Operation
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;foo_function
 </UL>
 
 <P><STRONG><a name="[ae]"></a>DRM1_ADC_Read_All</STRONG> (Thumb, 542 bytes, Stack size 136 bytes, adc.o(i.DRM1_ADC_Read_All))
@@ -963,6 +962,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ramp
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;End_Operation
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;foo_function
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 </UL>
 
@@ -973,6 +973,7 @@ Global Symbols
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Start_Test
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;foo_function
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 </UL>
 
@@ -984,6 +985,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ramp
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;End_Operation
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;foo_function
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 </UL>
 
@@ -2207,6 +2209,7 @@ Global Symbols
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Disable
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Start_Test
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;foo_function
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Write_DRM_Channel
 </UL>
 
@@ -3416,11 +3419,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_to_file
 </UL>
 
-<P><STRONG><a name="[17c]"></a>foo_function</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, control.o(i.foo_function))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = foo_function &rArr; Coil_Control &rArr; HAL_I2C_Master_Transmit &rArr; I2C_MasterRequestWrite &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
+<P><STRONG><a name="[17c]"></a>foo_function</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, control.o(i.foo_function))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = foo_function &rArr; Ramp &rArr; DRM_DAC_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Coil_Control
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ramp
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_DAC_Write
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Enable
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_Channel_Disable
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch

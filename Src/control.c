@@ -5678,11 +5678,11 @@ unsigned int DRM_Start_Test(void)
 //		DRM_DAC_Write(dac_output, CHANNEL1);
 //		DRM_DAC_Write(dac_output, CHANNEL2);
 //		DRM_DAC_Write(dac_output, CHANNEL3);
+//		HAL_Delay(10);
 		Ramp(CHANNEL1, dac_output, RAMP_UP);
 		//Ramp(CHANNEL2, dac_output, RAMP_UP);
 		Ramp(CHANNEL3, dac_output, RAMP_UP);
 		HAL_Delay(10);
-
 	//4. Ukljuciti spulu (open ili close). Omoguciti odabir spule prije testa. Ubaciti funkcije za ovo i provjeriti pomocu napojne pustanje struje preko coila.
 	//TODO: Ukljuciti spulu
 		if(test_type == TEST_C || test_type == TEST_CO)
@@ -5726,8 +5726,7 @@ unsigned int DRM_Start_Test(void)
 			
 			//6. Test operacije. Vremena: 20 iteracija = 1 ms
 			//Obrisati sprintf ispise na port nakon provjere prolaska kroz petlju.
-			//Provjeriti vremena semplova sa ifovima za test operacije sa izbacenim pisanjem na port. Da li se petlja izvrsava za 50us?
-			//Kako osigurati da tranzistor ne ostaje ukljucen duze od max 160ms?
+			//Provjeriti pustanje struje 100A, 160ms.
 			//6.1 Test C
 			if(test_type == TEST_C && i==3200)
 			{
@@ -5817,18 +5816,16 @@ unsigned int DRM_Start_Test(void)
 		return retVal;
 }
 
-
-
 unsigned int foo_function(void)
 {
 		unsigned int retVal = MAIN_OK;
-		Coil_Control(COIL_CLOSE, SET);
-		HAL_Delay(3000);
-		Coil_Control(COIL_CLOSE, RESET);
-		Coil_Control(COIL_OPEN, SET);
-		HAL_Delay(3000);
-		Coil_Control(COIL_OPEN, RESET);
-		sprintf(OutputBuffer, "Toggle OPEN Coil.");
+		DRM_Channel_Enable(CHANNEL3);
+		Ramp(CHANNEL3, 28500, RAMP_UP);
+		HAL_Delay(160);
+		Ramp(CHANNEL3, 28500, RAMP_DOWN);
+		DRM_DAC_Write(0, CHANNEL3);
+		DRM_Channel_Disable(CHANNEL3);
+		sprintf(OutputBuffer, "Current on 3rd channel.");
 		return retVal;
 }
 
