@@ -44,3 +44,7 @@ extern unsigned int DRM_Get_Results();
 extern unsigned int Battery_Charger_Control(void);
 extern unsigned int Battery_Charger_Control(void);
 extern unsigned int DRM_Start_Test(void);
+
+//SRM Functions
+extern unsigned int SRM_Start_Test(void);
+extern unsigned int SRM_ADC_Start(void);

@@ -466,34 +466,32 @@ void DRM_DAC_Write(unsigned int data, unsigned int channel)
 	full_data = (unsigned long)0x180000;
 	full_data |= ((unsigned long)data);	
 	
-	DRM1_CLK_HIGH;
+	DRM_CLK_HIGH;
 	delay_us(spi_delay);
-	if(channel == CHANNEL1 | channel == CHANNEL2) DRM1_SYNC1_LOW;
-	//if(channel == CHANNEL2) DRM1_SYNC2_LOW; TODO: pin za SYNC2 visi. Zicom je kratko spojen na SYNC2. Istovremeno se zadaje DAC1 i DAC2 i na istu vrijednost.
-	if(channel == CHANNEL3) DRM1_SYNC3_LOW;
+	if(channel == CHANNEL1) DRM_SYNC1_LOW;
+	if(channel == CHANNEL2) DRM_SYNC2_LOW;
 	delay_us(spi_delay);
 	
 	for(i=0; i<24; i++)
 	{
 		if(full_data & bit_operator)
 		{
-			DRM1_DIN_HIGH;
+			DRM_DIN_HIGH;
 		}
 		else
 		{
-			DRM1_DIN_LOW;
+			DRM_DIN_LOW;
 		}
 		delay_us(spi_delay);
-    DRM1_CLK_LOW;
+    DRM_CLK_LOW;
     delay_us(spi_delay);
 		full_data = (full_data << 1); 
-    DRM1_CLK_HIGH;		
+    DRM_CLK_HIGH;		
     delay_us(spi_delay);
 	}
 	delay_us(spi_delay);
-	if(channel == CHANNEL1 | channel == CHANNEL2) DRM1_SYNC1_HIGH;
-	//if(channel == CHANNEL2) DRM1_SYNC2_HIGH; TODO: pin za SYNC2 visi
-	if(channel == CHANNEL3) DRM1_SYNC3_HIGH;
+	if(channel == CHANNEL1) DRM_SYNC1_HIGH;
+	if(channel == CHANNEL2) DRM_SYNC2_HIGH;
 }
 
 void DRM_Channel_Enable(unsigned int channel_number)
@@ -503,7 +501,6 @@ void DRM_Channel_Enable(unsigned int channel_number)
 		{
 			case 1: CHANNEL1_ENABLE; break;
 			case 2: CHANNEL2_ENABLE; break;
-			case 3: CHANNEL3_ENABLE; break;
 			default: sprintf(OutputBuffer,"Error: operator not correct!");
 		}
 }
@@ -515,7 +512,6 @@ void DRM_Channel_Disable(unsigned int channel_number)
 		{
 			case 1: CHANNEL1_DISABLE; break;
 			case 2: CHANNEL2_DISABLE; break;
-			case 3: CHANNEL3_DISABLE; break;
 			default: sprintf(OutputBuffer,"Error: operator not correct!");
 		}
 }

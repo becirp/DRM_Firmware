@@ -18,10 +18,16 @@ unsigned int retVal=MAIN_NOK;
              
 if (InputBuffer[0]=='m')
 {
-					//foo function
+	//foo function: generic test function
 					if((InputBuffer[1]=='F')&&(InputBuffer[2]=='O')&&(InputBuffer[3]=='O'))
 					{
 								return (foo_function());
+					}	
+					
+					//SRM ADC function: za testiranje ADC kola sa podesivim opsezima
+					if((InputBuffer[1]=='S')&&(InputBuffer[2]=='R')&&(InputBuffer[3]=='M'))
+					{
+								return (SRM_ADC_Start());
 					}					
 					//Start DRM test function
 					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='S')&&(InputBuffer[3]=='T'))

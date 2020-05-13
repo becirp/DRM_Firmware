@@ -5776,3 +5776,66 @@ unsigned int foo_function(void)
 		return retVal;
 }
 
+unsigned int SRM_Start_Test(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+	//1.Uzlazna rampa
+	//2.Cekanje smirivanja izlaza
+	//3.Mjerenje i smjestanje u buffer
+	//4.Detektovanje opsega
+	//5.Pustanje testa
+	//6.Silazna rampa
+	//Pseudokod:	
+//	RAMP_UP;		//trajanje 5ms
+//	HAL_Delay(5); //cekanje smirivanja izlaza
+//	DETECT_RANGE; //smjestanje u buffer i detektovanje opsega
+//	START_TEST; //pocetak testa i pustanje struja, mjerenje
+//	RAMP_DOWN;
+	return retVal;
+}
+
+
+//Ovu funkciju ce vjerovatno koristiti SRM_Start_Test
+unsigned int SRM_ADC_Start(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+//	DETECT_RANGE;
+//	SET_OP_AMP;
+//	ADC_START;
+	
+	return retVal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
