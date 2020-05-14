@@ -5429,7 +5429,6 @@ unsigned int Write_DRM_Channel(void)
 		double conversion_factor = 0.00335628458; //conversion_factor = (Vadc(max)/ADC_RANGE)*(Aop/Rsh) = 10/65535*(1/(1+50/0.556))*2000
 		if(InputBuffer[3]=='1') channel = CHANNEL1;
 		if(InputBuffer[3]=='2') channel = CHANNEL2;
-		if(InputBuffer[3]=='3') channel = CHANNEL3;
 		dac_output = string_to_int(4, 8);			
 		DRM_Channel_Enable(channel);
 		Ramp(channel, dac_output, RAMP_UP);
@@ -5589,53 +5588,53 @@ unsigned int DRM_Get_Results3(void)
 
 
 //Battery charger control (I2C) Turn on/off +5V from battery
-unsigned int Battery_Charger_Control(void)
-{
-		unsigned int retVal = MAIN_OK;
-	//Command: BAT11 - ukljuci CHG1, BAT10 - iskljuci CHG1, itd.
-		if(InputBuffer[5] == '1'){
-			if(InputBuffer[4] == '1')
-			{
-				DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH1);
-				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
-				sprintf(OutputBuffer, "Enable PWR Relay CHG1");
-			}
-			if(InputBuffer[4] == '2')
-			{
-				DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH2);	
-				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);				
-				sprintf(OutputBuffer, "Enable PWR Relay CHG2");
-			}
-			if(InputBuffer[4] == '3')
-			{			
-				DRM1_Bat_Chg_Info2 &= ~(DRM1_ADPT_RLY_CH3);	
-				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);	
-				sprintf(OutputBuffer, "Enable PWR Relay CHG3");
-			}
-		}
-		else if(InputBuffer[5] == '0')
-		{
-			if(InputBuffer[4] == '1')
-			{
-				DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH1;
-				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
-				sprintf(OutputBuffer, "Disable PWR Relay CHG1");
-			}
-			if(InputBuffer[4] == '2')
-			{
-				DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH2;
-				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
-				sprintf(OutputBuffer, "Disable PWR Relay CHG2");
-			}
-			if(InputBuffer[4] == '3')
-			{
-				DRM1_Bat_Chg_Info2 |= DRM1_ADPT_RLY_CH3;	
-				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);	
-				sprintf(OutputBuffer, "Disable PWR Relay CHG3");
-			}
-		}
-		return retVal;
-}
+//unsigned int Battery_Charger_Control(void)
+//{
+//		unsigned int retVal = MAIN_OK;
+//	//Command: BAT11 - ukljuci CHG1, BAT10 - iskljuci CHG1, itd.
+//		if(InputBuffer[5] == '1'){
+//			if(InputBuffer[4] == '1')
+//			{
+//				DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH1);
+//				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+//				sprintf(OutputBuffer, "Enable PWR Relay CHG1");
+//			}
+//			if(InputBuffer[4] == '2')
+//			{
+//				DRM1_Bat_Chg_Info1 &= ~(DRM1_ADPT_RLY_CH2);	
+//				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);				
+//				sprintf(OutputBuffer, "Enable PWR Relay CHG2");
+//			}
+//			if(InputBuffer[4] == '3')
+//			{			
+//				DRM1_Bat_Chg_Info2 &= ~(DRM1_ADPT_RLY_CH3);	
+//				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);	
+//				sprintf(OutputBuffer, "Enable PWR Relay CHG3");
+//			}
+//		}
+//		else if(InputBuffer[5] == '0')
+//		{
+//			if(InputBuffer[4] == '1')
+//			{
+//				DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH1;
+//				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+//				sprintf(OutputBuffer, "Disable PWR Relay CHG1");
+//			}
+//			if(InputBuffer[4] == '2')
+//			{
+//				DRM1_Bat_Chg_Info1 |= DRM1_ADPT_RLY_CH2;
+//				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+//				sprintf(OutputBuffer, "Disable PWR Relay CHG2");
+//			}
+//			if(InputBuffer[4] == '3')
+//			{
+//				DRM1_Bat_Chg_Info2 |= DRM1_ADPT_RLY_CH3;	
+//				HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);	
+//				sprintf(OutputBuffer, "Disable PWR Relay CHG3");
+//			}
+//		}
+//		return retVal;
+//}
 
 unsigned int DRM_Start_Test(void)
 {
@@ -5646,10 +5645,10 @@ unsigned int DRM_Start_Test(void)
 		unsigned int retVal = MAIN_OK;
 		uint16_t sample_size = DRM_SAMPLE_SIZE;
 		unsigned int dac_output = 0;
-		uint16_t data_voltage1, data_voltage2, data_voltage3;
-		uint16_t data_current1, data_current2, data_current3;
-		uint16_t voltage_array1[sample_size], voltage_array2[sample_size], voltage_array3[sample_size]; 
-	  uint16_t current_array1[sample_size], current_array2[sample_size], current_array3[sample_size];
+		uint16_t data_voltage1, data_voltage2;
+		uint16_t data_current1, data_current2;
+		uint16_t voltage_array1[sample_size], voltage_array2[sample_size]; 
+	  uint16_t current_array1[sample_size], current_array2[sample_size];
 		uint16_t i;
 		uint32_t sram_address = SRAM_BASE_ADDRESS;
 		
@@ -5658,15 +5657,13 @@ unsigned int DRM_Start_Test(void)
 	//2. Ukljucivanje izlaznih tranzistora.	
 		DRM_Channel_Enable(CHANNEL1);
 		DRM_Channel_Enable(CHANNEL2);
-		DRM_Channel_Enable(CHANNEL3);
 	
 	//3. Ispisati na DAC vrijednost struje. Sacekati 10ms da se izregulise. Ovdje ubaciti rampu
 //		DRM_DAC_Write(dac_output, CHANNEL1);
 //		DRM_DAC_Write(dac_output, CHANNEL2);
 //		DRM_DAC_Write(dac_output, CHANNEL3);
 		Ramp(CHANNEL1, dac_output, RAMP_UP);
-		//Ramp(CHANNEL2, dac_output, RAMP_UP);
-		Ramp(CHANNEL3, dac_output, RAMP_UP);
+		Ramp(CHANNEL2, dac_output, RAMP_UP);
 		HAL_Delay(10);
 
 	//4. Ukljuciti spulu (open ili close). Omoguciti odabir spule prije testa. Ubaciti funkcije za ovo i provjeriti pomocu napojne pustanje struje preko coila.
@@ -5695,8 +5692,6 @@ unsigned int DRM_Start_Test(void)
 			data_voltage1 = ADC_Results.ANCH[1];
 			data_current2 = ADC_Results.ANCH[2];
 			data_voltage2 = ADC_Results.ANCH[3];
-			data_current3 = ADC_Results.ANCH[4];
-			data_voltage3 = ADC_Results.ANCH[5];
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current1, 1);					
 			sram_address+=2;
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage1, 1);
@@ -5705,29 +5700,21 @@ unsigned int DRM_Start_Test(void)
 			sram_address+=2;
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
 			sram_address+=2;	
-			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);					
-			sram_address+=2;
-			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
-			sram_address+=2;
 			
 			//6. Vremena operacija podesiti. Ovaj put staviti isto trajanje. 2000iteracija = 100ms
 			if(i==2000)
 			{
 				DRM_DAC_Write(0, CHANNEL1);
-				//DRM_DAC_Write(0, CHANNEL2);
-				DRM_DAC_Write(0, CHANNEL3);
+				DRM_DAC_Write(0, CHANNEL2);
 				DRM_Channel_Disable(CHANNEL1);
 				DRM_Channel_Disable(CHANNEL2);
-				DRM_Channel_Disable(CHANNEL3);
 			}
 		}
 		//7. Radi sigurnosti jos jednom iskljucujemo kanale na kraju testa.
 		DRM_DAC_Write(0, CHANNEL1);
 		DRM_DAC_Write(0, CHANNEL2);	
-		DRM_DAC_Write(0, CHANNEL3);
 		DRM_Channel_Disable(CHANNEL1);
 		DRM_Channel_Disable(CHANNEL2);
-		DRM_Channel_Disable(CHANNEL3);
 		Coil_Control(COIL_OPEN, RESET);
 		Coil_Control(COIL_CLOSE, RESET);
 		
@@ -5745,11 +5732,7 @@ unsigned int DRM_Start_Test(void)
 			sram_address+=2;
 			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
 			sram_address+=2;
-			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);
-			sram_address+=2;
-			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
-			sram_address+=2;
-			sprintf(OutputBuffer, "%u,%u,%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2, data_current3, data_voltage3);
+			sprintf(OutputBuffer, "%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2);
 			SendOutputBuffer(COMM.port);
 			if(i % 2000 == 0)
 			{
@@ -5809,7 +5792,16 @@ unsigned int SRM_ADC_Start(void)
 }
 
 
-
+unsigned int Get_BAT_Voltage(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+	VBAT_ADC_Read();
+	sprintf(OutputBuffer, "%u,%u", ADC_Results.ANCH[4],ADC_Results.ANCH[5]);
+	SendOutputBuffer(COMM.port);
+	
+	return retVal;
+}
 
 
 

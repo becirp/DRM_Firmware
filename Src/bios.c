@@ -516,19 +516,6 @@ void DRM_Channel_Disable(unsigned int channel_number)
 		}
 }
 
-void MCU_Battery_Charger_Control(unsigned char port_control, unsigned int on_off)
-{
-		if(on_off == 1)
-		{
-				MCU_bat_chg_ctrl |= port_control;
-		}
-		else
-		{
-				MCU_bat_chg_ctrl &= ~(port_control);
-		}
-		HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
-}
-
 void Coil_Control(unsigned char coil_select, unsigned int on_off)
 {
 		if(coil_select == COIL_CLOSE)
@@ -602,18 +589,83 @@ void Ramp(unsigned int channel, unsigned int dac_output, unsigned int up_down)
 	}
 }
 
-
-
-
-
-void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off)
-{
-	//TODO: function body
+//Balancer control function
+void Battery_Balancer_Control(unsigned int channel, unsigned int on_off)
+{	
+		if(channel == CHANNEL1)
+		{
+			if(on_off == ON) BAL1_ENABLE;
+			else if(on_off == OFF) BAL1_DISABLE;
+		}
+		if(channel == CHANNEL2)
+		{
+			if(on_off == ON) BAL2_ENABLE;
+			else if(on_off == OFF) BAL2_DISABLE;
+		}	
 }
 
-void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff)
+//Pwr on/off control
+void Pwr_Control(unsigned int channel, unsigned int on_off)
 {
-
+	if(channel == CHANNEL1)
+	{
+		if(on_off == ON) PWR1_ENABLE;
+		if(on_off == OFF) PWR1_DISABLE;
+	}
+	if(channel == CHANNEL2)
+	{
+		if(on_off == ON) PWR2_ENABLE;
+		if(on_off == OFF) PWR2_DISABLE;
+	}
 }
+
+//Charger control function
+void Battery_Charger_Control(unsigned int channel, unsigned int on_off)
+{
+	if(channel == CHANNEL1)
+	{
+		if(on_off == ON) CHG1_ENABLE;
+		if(on_off == OFF) CHG1_DISABLE;
+	}
+	if(channel == CHANNEL2)
+	{
+		if(on_off == ON) CHG2_ENABLE;
+		if(on_off == OFF) CHG2_DISABLE;
+	}
+}
+
+unsigned int Battery_Charging_Status(unsigned int channel)
+{
+	unsigned int batChargeStatus;
+	if(channel == CHANNEL1)
+	{
+		if(CHG1_INFO == GPIO_PIN_SET) batChargeStatus = BAT_NOT_CHARGING;
+		else if(CHG1_INFO == GPIO_PIN_RESET) batChargeStatus = BAT_CHARGING;
+	}
+	if(channel == CHANNEL2)
+	{
+		if(CHG2_INFO == GPIO_PIN_SET) batChargeStatus = BAT_NOT_CHARGING;
+		else if(CHG2_INFO == GPIO_PIN_RESET) batChargeStatus = BAT_CHARGING;
+	}
+	return batChargeStatus;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

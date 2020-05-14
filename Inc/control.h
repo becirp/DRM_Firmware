@@ -41,8 +41,7 @@ extern unsigned int foo_function(void);
 extern unsigned int Toggle_Pins(void);
 extern unsigned int Write_DRM_Channel(void);
 extern unsigned int DRM_Get_Results();
-extern unsigned int Battery_Charger_Control(void);
-extern unsigned int Battery_Charger_Control(void);
+//extern unsigned int Battery_Charger_Control(void);
 extern unsigned int DRM_Start_Test(void);
 
 //SRM Functions

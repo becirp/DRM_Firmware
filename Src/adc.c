@@ -1316,8 +1316,8 @@ ADC_Results.LT[2]+=(ADC_8bit_results.LT_L[2]);
 void DRM1_ADC1_Read(void)
 {
 	unsigned int i;
-	uint8_t current_data[16] = 0;
-	uint8_t voltage_data[16] = 0;
+	uint8_t current_data[16];
+	uint8_t voltage_data[16];
 	uint16_t bit_operator = 0x8000;
 	//DRM Channels buffers
 	ADC_Results.ANCH[0]=0; 
@@ -1325,24 +1325,24 @@ void DRM1_ADC1_Read(void)
 //	ADC_Results.ANCH[4]=0; 
 //	ADC_Results.ANCH[5]=0;
 	
-	DRM_ADC_CLK_RESET;
+	DRM_ADC_CLK_LOW;
 	DELAY_IN_us;
 	DRM_ADC_CS_RESET;
 	for(i=0; i<6; i++)
 	{
 		DELAY_IN_us;
-		DRM_ADC_CLK_SET;
+		DRM_ADC_CLK_HIGH;
 		DELAY_IN_us;
-		DRM_ADC_CLK_RESET;
+		DRM_ADC_CLK_LOW;
 	}
 	for(i=0; i<16; i++)
 	{
 		DELAY_IN_us;
-		DRM_ADC_CLK_SET;
+		DRM_ADC_CLK_HIGH;
 		DELAY_IN_us;
 		current_data[i] = DRM_ADC_CURR1;
 		voltage_data[i] = DRM_ADC_VOUT1;
-		DRM_ADC_CLK_RESET;
+		DRM_ADC_CLK_LOW;
 	}
 	DELAY_IN_us;
 	DRM_ADC_CS_SET;
@@ -1362,10 +1362,10 @@ void DRM1_ADC1_Read(void)
 void DRM1_ADC_Read_All(void)
 {
 	unsigned int i;
-	uint8_t current_data1[16] = 0;
-	uint8_t voltage_data1[16] = 0;
-	uint8_t current_data2[16] = 0;
-	uint8_t voltage_data2[16] = 0;
+	uint8_t current_data1[16];
+	uint8_t voltage_data1[16];
+	uint8_t current_data2[16];
+	uint8_t voltage_data2[16];
 	uint16_t bit_operator = 0x8000;
 	//DRM Channels buffers
 	ADC_Results.ANCH[0]=0; 
@@ -1373,26 +1373,26 @@ void DRM1_ADC_Read_All(void)
 	ADC_Results.ANCH[2]=0; 
 	ADC_Results.ANCH[3]=0;
 	
-	DRM_ADC_CLK_RESET;
+	DRM_ADC_CLK_LOW;
 	DELAY_IN_us;
 	DRM_ADC_CS_RESET;
 	for(i=0; i<6; i++)
 	{
 		DELAY_IN_us;
-		DRM_ADC_CLK_SET;
+		DRM_ADC_CLK_HIGH;
 		DELAY_IN_us;
-		DRM_ADC_CLK_RESET;
+		DRM_ADC_CLK_LOW;
 	}
-		for(i=0; i<16; i++)
+	for(i=0; i<16; i++)
 	{
 		DELAY_IN_us;
-		DRM_ADC_CLK_SET;
+		DRM_ADC_CLK_HIGH;
 		DELAY_IN_us;
 		current_data1[i] = DRM_ADC_CURR1;
 		voltage_data1[i] = DRM_ADC_VOUT1;
 		current_data2[i] = DRM_ADC_CURR2;
 		voltage_data2[i] = DRM_ADC_VOUT2;
-		DRM_ADC_CLK_RESET;
+		DRM_ADC_CLK_LOW;
 	}
 	DELAY_IN_us;
 	DRM_ADC_CS_SET;
@@ -1406,6 +1406,79 @@ void DRM1_ADC_Read_All(void)
 		bit_operator = bit_operator >> 1;
 	}	
 }
+
+void VBAT_ADC_Read(void)
+{
+	unsigned int i;
+	uint8_t vbat_data1[16];
+	uint8_t vbat_data2[16];
+	uint16_t bit_operator = 0x8000;
+	ADC_Results.ANCH[4]=0;
+	ADC_Results.ANCH[5]=0;
+	
+	VBAT_ADC_CLK_LOW;
+	DELAY_IN_us;
+	VBAT_ADC_CS_RESET;
+	for(i=0; i<6; i++)
+	{
+		DELAY_IN_us;
+		VBAT_ADC_CLK_HIGH;
+		DELAY_IN_us;
+		VBAT_ADC_CLK_LOW;
+	}
+	for(i=0; i<16; i++)
+	{
+		DELAY_IN_us;
+		VBAT_ADC_CLK_HIGH;
+		DELAY_IN_us;
+		vbat_data1[i] = VBAT_ADC_DATA1;
+		vbat_data2[i] = VBAT_ADC_DATA2;
+		VBAT_ADC_CLK_LOW;
+	}
+	DELAY_IN_us;
+	VBAT_ADC_CS_SET;
+	for(i=0; i<16; i++)
+	{
+		if(vbat_data1[i] == 1) ADC_Results.ANCH[4] |= bit_operator;
+		if(vbat_data2[i] == 1) ADC_Results.ANCH[5] |= bit_operator;
+		bit_operator = bit_operator >> 1;
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

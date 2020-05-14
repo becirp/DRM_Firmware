@@ -480,8 +480,8 @@ extern STICK_STRUCT           STICK;
 //////////////////////////////////////////////////////////
 #define BSG_CONTROL_PINS GPIO_EXPANSION_U612
 
-#define OFF 0
-#define ON  1
+#define OFF (unsigned int)0
+#define ON  (unsigned int)1
 
 #define SET_LED_CLOSE      I2C_CLOSE_LED_control(I2C_EXPANDER_LED_CTRL, ON); //PORTH.OUTSET=PIN0; //ovo je prebceno na I2C expander, treba definisati funkciju u bios.c
 #define CLR_LED_CLOSE      I2C_CLOSE_LED_control(I2C_EXPANDER_LED_CTRL, OFF); //PORTH.OUTCLR=PIN0; //ovo je prebceno na I2C expander, treba definisati funkciju u bios.c
@@ -977,31 +977,36 @@ extern STICK_STRUCT           STICK;
 // 							DRM FUNCTIONS						  //
 ////////////////////////////////////////////
 
-extern void DRM_DAC_Write(unsigned int data, unsigned int channel);
-extern void DRM_Channel_Enable(unsigned int channel_number);
-extern void DRM_Channel_Disable(unsigned int channel_number);
-extern void MCU_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
-extern void MCU_Coil_Control(unsigned char port_control, unsigned int on_off);
-extern void DRM_Battery_Charger_Control(unsigned char port_control, unsigned int on_off);
-extern void DRM_Pwr_Cfg_Ch1(unsigned int setOnOff);
-extern void Coil_Control(unsigned char coil_select, unsigned int on_off);
-extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int ramp_up);
+extern void DRM_DAC_Write(unsigned int, unsigned int );
+extern void DRM_Channel_Enable(unsigned int);
+extern void DRM_Channel_Disable(unsigned int);
+extern void MCU_Coil_Control(unsigned char, unsigned int);
+extern void Coil_Control(unsigned char, unsigned int);
+extern void Ramp(unsigned int, unsigned int, unsigned int);
+
+//Battery Charger Control Functions
+extern void Battery_Balancer_Control(unsigned int, unsigned int);
+extern void Pwr_Control(unsigned int, unsigned int);
+extern void Battery_Charger_Control(unsigned int, unsigned int);
+extern unsigned int Battery_Charging_Status(unsigned int);
 ////////////////////////////////////////////
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
 
 #define DRM_SAMPLE_SIZE     (uint16_t)20000
 
-#define CHANNEL1 (unsigned int)1
-#define CHANNEL2 (unsigned int)2
-#define CHANNEL3 (unsigned int)3
+#define CHANNEL1 		 						(unsigned int)1
+#define CHANNEL2 							  (unsigned int)2
 
-#define COIL_CLOSE (unsigned int)1
-#define COIL_OPEN  (unsigned int)2
+#define COIL_CLOSE	 						(unsigned int)1
+#define COIL_OPEN  	 						(unsigned int)2
 	
-#define RAMP_UP 	 (unsigned int)1
-#define RAMP_DOWN  (unsigned int)2
-	
+#define RAMP_UP 	 	 						(unsigned int)1
+#define RAMP_DOWN    						(unsigned int)2
+
+#define BAT_CHARGING 						(unsigned int)1
+#define BAT_NOT_CHARGING 				(unsigned int)0
+
 //SRAM
 #define SRAM_BASE_ADDRESS   0x60000000
 
@@ -1018,8 +1023,8 @@ extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int ram
 #define DRM_SYNC1_LOW						HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_SYNC2_HIGH					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET)			//izmijenjen
 #define DRM_SYNC2_LOW						HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET)		//izmijenjen	
-#define DRM_ADC_CLK_SET		  		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET)			//izmijenjen
-#define DRM_ADC_CLK_RESET	  		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_RESET)		//izmijenjen
+#define DRM_ADC_CLK_HIGH		  	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET)			//izmijenjen
+#define DRM_ADC_CLK_LOW	  			HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_ADC_CS_SET					HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET)			//izmijenjen
 #define DRM_ADC_CS_RESET				HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_ADC_CURR1						HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_14)										//izmijenjen
@@ -1030,8 +1035,9 @@ extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int ram
 //VBAT Monitor
 #define VBAT_ADC_CS_SET					HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET)
 #define VBAT_ADC_CS_RESET				HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_RESET)
-//#define VBAT_ADC_CLK_HIGH				"NIJE POVEZAN"
-//#define VBAT_ADC_CLK_LOW				"NIJE POVEZAN"
+//VBAT_CLK linija nije povezana na procesor; privremeno stavljeno na PH1 dok se ne proradi plocica
+#define VBAT_ADC_CLK_HIGH				HAL_GPIO_WritePin(GPIOH, GPIO_PIN_1, GPIO_PIN_SET)
+#define VBAT_ADC_CLK_LOW				HAL_GPIO_WritePin(GPIOH, GPIO_PIN_1, GPIO_PIN_RESET)
 #define	VBAT_ADC_DATA1					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_10)
 #define	VBAT_ADC_DATA2					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11)
 
