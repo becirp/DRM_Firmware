@@ -5718,6 +5718,10 @@ unsigned int DRM_Start_Test(void)
 		Coil_Control(COIL_OPEN, RESET);
 		Coil_Control(COIL_CLOSE, RESET);
 		
+		//7.1 Iskljuci timer
+		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);
+		HAL_TIM_Base_Stop_IT(&htim2);
+		
 		//8. Slanje rezultata
 		
 		/* RAM read and send to GUI */
@@ -5744,8 +5748,6 @@ unsigned int DRM_Start_Test(void)
 		return retVal;
 }
 
-
-
 unsigned int foo_function(void)
 {
 		unsigned int retVal = MAIN_OK;
@@ -5759,6 +5761,19 @@ unsigned int foo_function(void)
 		return retVal;
 }
 
+unsigned int Get_BAT_Voltage(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+	VBAT_ADC_Read();
+	sprintf(OutputBuffer, "%u,%u", ADC_Results.ANCH[4],ADC_Results.ANCH[5]);
+	SendOutputBuffer(COMM.port);
+	
+	return retVal;
+}
+
+
+//Funkcija za SRM test: sastoji se od jedne glavne funkcije GetSmp, koja ovisno od faze testa radi uzorkovanje. GetSmp se izvrsava na timer overflow. 
 unsigned int SRM_Start_Test(void)
 {
 	unsigned int retVal = MAIN_OK;
@@ -5775,31 +5790,6 @@ unsigned int SRM_Start_Test(void)
 //	DETECT_RANGE; //smjestanje u buffer i detektovanje opsega
 //	START_TEST; //pocetak testa i pustanje struja, mjerenje
 //	RAMP_DOWN;
-	return retVal;
-}
-
-
-//Ovu funkciju ce vjerovatno koristiti SRM_Start_Test
-unsigned int SRM_ADC_Start(void)
-{
-	unsigned int retVal = MAIN_OK;
-	
-//	DETECT_RANGE;
-//	SET_OP_AMP;
-//	ADC_START;
-	
-	return retVal;
-}
-
-
-unsigned int Get_BAT_Voltage(void)
-{
-	unsigned int retVal = MAIN_OK;
-	
-	VBAT_ADC_Read();
-	sprintf(OutputBuffer, "%u,%u", ADC_Results.ANCH[4],ADC_Results.ANCH[5]);
-	SendOutputBuffer(COMM.port);
-	
 	return retVal;
 }
 

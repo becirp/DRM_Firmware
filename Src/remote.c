@@ -32,7 +32,7 @@ if (InputBuffer[0]=='m')
 					//SRM ADC function: za testiranje ADC kola sa podesivim opsezima
 					if((InputBuffer[1]=='S')&&(InputBuffer[2]=='R')&&(InputBuffer[3]=='M'))
 					{
-									return (SRM_ADC_Start());
+									return (SRM_Start_Test());
 					}					
 					//Start DRM test function
 					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='S')&&(InputBuffer[3]=='T'))

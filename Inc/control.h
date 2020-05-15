@@ -46,4 +46,6 @@ extern unsigned int DRM_Start_Test(void);
 
 //SRM Functions
 extern unsigned int SRM_Start_Test(void);
-extern unsigned int SRM_ADC_Start(void);
+
+//BAT Functions
+extern unsigned int Get_BAT_Voltage(void);

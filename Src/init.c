@@ -12,6 +12,7 @@
 
 SD_HandleTypeDef hsd;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart1;
 SRAM_HandleTypeDef hsram1;
 I2C_HandleTypeDef hi2c1;
@@ -139,7 +140,7 @@ void MX_TIM2_Init(void)
   //onda je prescaler = 84 Mhz * 0.01 ms -1 = 840 -1 
   //dok onda period uzimas koliko brojis ovakvih impulsa... Npr 10*100kHz = 10 kHz...  	
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 5-1; //ovo broji 10 puta (period 10)
+  htim2.Init.Period = 5-1; //ovo broji 10 puta (period 10) ili ako broji samo 5 puta period 5 (20 kHz)
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
@@ -159,8 +160,53 @@ void MX_TIM2_Init(void)
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
-
 }
+
+void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+	
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+	//Prescaler se bira kao TimerClock(ABP1)*DesiredPeriod(sec)-1. Npr ako mi je desiredperiod=0.01 ms, A ABP1=84Mhz
+  //onda je prescaler = 84 Mhz * 0.01 ms -1 = 840 -1 
+  //dok onda period uzimas koliko brojis ovakvih impulsa... Npr 10*100kHz = 10kHz ili 5*100kHz = 20kHz
+	//Za slucaj da hocemo Ts = 1ms. Uzmemo period za prescaler Tp = 0.1ms.
+	// Prescaler je 84MHz * 0.1 ms - 1 = 84 - 1
+	// To brojimo 10 puta da dobijemo period  1ms. Fs = 1kHz.
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 84-1;	
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 10-1;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 3 */
+
+  /* USER CODE END TIM2_Init 3 */
+}
+
+
 
 void MX_I2C1_Init(void)
 {
