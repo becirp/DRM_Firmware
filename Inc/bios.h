@@ -1007,6 +1007,9 @@ extern unsigned int Battery_Charging_Status(unsigned int);
 #define BAT_CHARGING 						(unsigned int)1
 #define BAT_NOT_CHARGING 				(unsigned int)0
 
+#define SELECT_CHIP							(unsigned int)1
+#define UNSELECT_CHIP						(unsigned int)0
+	
 //SRAM
 #define SRAM_BASE_ADDRESS   0x60000000
 
@@ -1079,6 +1082,13 @@ extern unsigned int Battery_Charging_Status(unsigned int);
 #define SRM2_CS2_SET						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET)
 #define SRM2_CS2_RESET					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET)
 #define SRM2_RDY2								HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15)
+
+//SRM ADC
+#define SRM1_ADC1								(unsigned int)1
+#define SRM1_ADC2								(unsigned int)2
+#define SRM2_ADC1								(unsigned int)3
+#define SRM2_ADC2								(unsigned int)4
+
 
 //I2C Battery Control
 //Ovo takodjer promijeniti u funkcijama koje ih pozivaju, a onda obrisati.

@@ -83,4 +83,6 @@ extern void DRM1_ADC_Read_All(void);
 //VBAT Monitor function
 extern void VBAT_ADC_Read(void);
 
-
+//SRM functions
+extern void SRM_Write_ADC_Byte(unsigned int, unsigned char);
+extern unsigned char SRM_Read_ADC_Byte(unsigned int);

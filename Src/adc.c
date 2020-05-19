@@ -1445,9 +1445,75 @@ void VBAT_ADC_Read(void)
 	}	
 }
 
+void SRM_ADC_Select(unsigned int channel, unsigned int select)
+{
+	if(select == SELECT_CHIP)
+	{
+		switch(channel)
+		{
+			case SRM1_ADC1: SRM1_CS1_RESET; break;
+			case SRM1_ADC2: SRM1_CS2_RESET; break;
+			case SRM2_ADC1: SRM2_CS1_RESET; break;
+			case SRM2_ADC2: SRM2_CS2_RESET; break;
+		}
+	}
+	else if(select == UNSELECT_CHIP)
+	{
+		switch(channel)
+		{
+		case SRM1_ADC1: SRM1_CS1_SET; break;
+		case SRM1_ADC2: SRM1_CS2_SET; break;
+		case SRM2_ADC1: SRM2_CS1_SET; break;
+		case SRM2_ADC2: SRM2_CS2_SET; break;
+		}
+	}
+}
 
+void SRM_Write_ADC_Byte(unsigned int channel, unsigned char data)
+{
+	unsigned int i;
+	SRM_ADC_Select(channel, SELECT_CHIP);
+	DELAY_IN_us;
+	for(i=0; i<8; i++)
+	{
+		if(data & 0x80)
+		{
+			SRM_DIN_HIGH;
+		}
+		else
+		{
+			SRM_DIN_LOW;
+		}
+		data = data << 1;
+		DELAY_IN_us;
+		SRM_CLK_LOW;
+		DELAY_IN_us;
+		SRM_CLK_HIGH;
+	}
+	DELAY_IN_us;
+	SRM_DIN_HIGH;
+	SRM_ADC_Select(channel, UNSELECT_CHIP);
+}
 
-
+unsigned char SRM_Read_ADC_Byte(unsigned int channel)
+{
+	unsigned int i;
+	unsigned char data = 0x00;
+	SRM_ADC_Select(channel, SELECT_CHIP);
+	DELAY_IN_us;
+	for(i=0; i<8; i++)
+	{
+		data = data << 1;
+		DELAY_IN_us;
+		SRM_CLK_LOW;
+		DELAY_IN_us;
+		SRM_CLK_HIGH;
+		if(SRM_DOUT == GPIO_PIN_SET) data |= 0x01;
+	}
+	DELAY_IN_us;
+	SRM_ADC_Select(channel, UNSELECT_CHIP);
+	return data;
+}
 
 
 
