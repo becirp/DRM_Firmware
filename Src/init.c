@@ -135,12 +135,17 @@ void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 840-1; //0.01 ms (ili 100kHz) . Ovo trba brojati 10 puta! 
-	//Prescaler se bira kao TimerClock(ABP1)*DesiredPeriod(sec)-1. Npr ako mi je desiredperiod=0.01 ms, A ABP1=84Mhz
-  //onda je prescaler = 84 Mhz * 0.01 ms -1 = 840 -1 
-  //dok onda period uzimas koliko brojis ovakvih impulsa... Npr 10*100kHz = 10 kHz...  	
+	
+	//Hocemo da dobijemo frekvenciju fs = 20kHz ili Ts = 0.05ms za semplovanje. 
+	//Vremenski period za preskaler biramo uzimajuci u obzir da je on 16bit.
+	//Uzmemo manji period za preskaler nego za Ts, npr Tp = 0.01ms.
+	//Odrediti za koji je clock vezan timer: Tc = APB1 Clock
+	//Prescaler = Tc(Hz) * Tp(s) - 1 = 84MHz * 0.01ms - 1 = 840 - 1
+	//Period za brojac uzimamo, koliko zelimo puta da izbroji do prescaler vrijednosti da bi dobili zeljeni period. Za timer3 period je 16bit vrijednost.
+	//PeriodCounter = (Ts / Tp) - 1 = (0.05 / 0.01) - 1 = 10 - 1 
+  htim2.Init.Prescaler = 840-1; 	
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 5-1; //ovo broji 10 puta (period 10) ili ako broji samo 5 puta period 5 (20 kHz)
+  htim2.Init.Period = 5-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
@@ -165,27 +170,28 @@ void MX_TIM2_Init(void)
 void MX_TIM3_Init(void)
 {
 
-  /* USER CODE BEGIN TIM1_Init 0 */
+  /* USER CODE BEGIN TIM3_Init 0 */
 
-  /* USER CODE END TIM1_Init 0 */
+  /* USER CODE END TIM3_Init 0 */
 	
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN TIM1_Init 1 */
+  /* USER CODE BEGIN TIM3_Init 1 */
 
-  /* USER CODE END TIM1_Init 1 */
-	//Prescaler se bira kao TimerClock(ABP1)*DesiredPeriod(sec)-1. Npr ako mi je desiredperiod=0.01 ms, A ABP1=84Mhz
-  //onda je prescaler = 84 Mhz * 0.01 ms -1 = 840 -1 
-  //dok onda period uzimas koliko brojis ovakvih impulsa... Npr 10*100kHz = 10kHz ili 5*100kHz = 20kHz
-	//Za slucaj da hocemo Ts = 1ms. Uzmemo period za prescaler Tp = 0.1ms.
-	// Prescaler je 84MHz * 0.1 ms - 1 = 84 - 1
-	// To brojimo 10 puta da dobijemo period  1ms. Fs = 1kHz.
+  /* USER CODE END TIM3_Init 1 */
+	//Hocemo da dobijemo frekvenciju fs = 1kHz ili Ts = 1ms za semplovanje. 
+	//Vremenski period za preskaler biramo uzimajuci u obzir da je on 16bit.
+	//Uzmemo manji period za preskaler nego za Ts, npr Tp = 0.1ms.
+	//Odrediti za koji je clock vezan timer: Tc = APB1 Clock
+	//Prescaler = Tc(Hz) * Tp(s) - 1 = 84MHz * 0.1ms - 1 = 8400 - 1
+	//Period za brojac uzimamo, koliko zelimo puta da izbroji do prescaler vrijednosti da bi dobili zeljeni period. Za timer3 period je 16bit vrijednost.
+	//PeriodCounter = (Ts / Tp) - 1 = (1 / 0.1) - 1 = 10 - 1 
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 84-1;	
-  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 10-1;
-  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.Prescaler = 8400-1;	
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 10-1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
   {
     Error_Handler();

@@ -60,6 +60,7 @@
 #include "remote.h"
 #include "init.h"
 #include "calib.h"
+#include "control.h"
 
 unsigned char varijabla=0;
 unsigned char nova_varijabla=0; 
@@ -69,9 +70,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* Prevent unused argument(s) compilation warning */
 	//HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
-	//varijabla=1;
-	timer1_interrupt=1;
-	varijabla=1;
+	//varijabla=1; 
+
+	if(timer1_DRM_ON)
+	{
+		timer1_interrupt=1;
+		varijabla=1;
+	}
+	else if(timer2_SRM_ON)
+	{
+		SRM_Get_Samples();
+	}
+		
 	//__HAL_TIM_CLEAR_IT(&htim2, TIM_IT_UPDATE);	
   /* NOTE : This function Should not be modified, when the callback is needed,
             the __HAL_TIM_PeriodElapsedCallback could be implemented in the user file
@@ -131,6 +141,7 @@ int main(void)
   MX_FSMC_Init();
   MX_FATFS_Init();
   MX_TIM2_Init();
+	MX_TIM3_Init();
 	MX_I2C1_Init();
 	init_variables();
 	init_coil_control();

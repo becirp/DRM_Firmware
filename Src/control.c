@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <math.h>
+#include <stdbool.h>
 
 #include "bios.h"
 #include "comm.h"
@@ -16,6 +17,9 @@
 
 volatile unsigned char timer1_interrupt;
 volatile unsigned char control_after_first_contact_touched;
+
+unsigned char timer1_DRM_ON;
+unsigned char timer2_SRM_ON;
 
 //DRM I2C control
 uint8_t DRM1_Bat_Chg_Info1 = 0x10;
@@ -5678,6 +5682,7 @@ unsigned int DRM_Start_Test(void)
 		}
 	
 	/* Timer setup and start */
+		timer1_DRM_ON = 1;
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
 		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
 		timer1_interrupt=1;
@@ -5721,7 +5726,7 @@ unsigned int DRM_Start_Test(void)
 		//7.1 Iskljuci timer
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);
 		HAL_TIM_Base_Stop_IT(&htim2);
-		
+		timer1_DRM_ON = false;
 		//8. Slanje rezultata
 		
 		/* RAM read and send to GUI */
@@ -5773,6 +5778,10 @@ unsigned int Get_BAT_Voltage(void)
 }
 
 
+void SRM_Get_Samples(void)
+{
+}
+
 //Funkcija za SRM test: sastoji se od jedne glavne funkcije GetSmp, koja ovisno od faze testa radi uzorkovanje. GetSmp se izvrsava na timer overflow. 
 unsigned int SRM_Start_Test(void)
 {
@@ -5790,10 +5799,24 @@ unsigned int SRM_Start_Test(void)
 //	DETECT_RANGE; //smjestanje u buffer i detektovanje opsega
 //	START_TEST; //pocetak testa i pustanje struja, mjerenje
 //	RAMP_DOWN;
+	
+	//Kod Timura se poziva unutar timer interrupt handlera.
+	//Kod DRM funkcije, interrupt podesava vrijeme semplova.
+	
+	timer2_SRM_ON = 1;
+	__HAL_TIM_CLEAR_FLAG(&htim3, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+	HAL_TIM_Base_Start_IT(&htim3); //pokreni tajmer
+	//SRM funkcija na kraju izvrsavanja iskljucuje ovaj interrupt
+	
+	while(1)
+	{
+		if(timer2_SRM_ON == 0) break;
+	}
+	
+	
+	
 	return retVal;
 }
-
-
 
 
 

@@ -40,6 +40,7 @@ stm32f407zet6\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
 stm32f407zet6\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32f407zet6\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 stm32f407zet6\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+stm32f407zet6\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 stm32f407zet6\control.o: ../Inc/bios.h
 stm32f407zet6\control.o: ../Inc/comm.h
 stm32f407zet6\control.o: ../Inc/lang.h

@@ -85,4 +85,6 @@ extern void VBAT_ADC_Read(void);
 
 //SRM functions
 extern void SRM_Write_ADC_Byte(unsigned int, unsigned char);
+extern void SRM_Write_ADC_24Bits(unsigned int, unsigned long);
 extern unsigned char SRM_Read_ADC_Byte(unsigned int);
+extern unsigned char SRM_Read_ADC_16Bits(unsigned int);
