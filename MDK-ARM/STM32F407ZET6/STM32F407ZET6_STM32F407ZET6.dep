@@ -48,12 +48,12 @@ I (../Middlewares/Third_Party/FatFs/src/diskio.h)(0x5E7A0712)
 I (../Inc/sd_diskio.h)(0x5E7A0712)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588BD7A4)
 I (../Inc/dwt_delay.h)(0x5E7A0712)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/comm.h)(0x5E7A0712)
 I (../Inc/remote.h)(0x5E7A0712)
 I (../Inc/init.h)(0x5EC6706E)
 I (../Inc/calib.h)(0x5E7A0712)
-I (../Inc/control.h)(0x5EC7B35C)
+I (../Inc/control.h)(0x5ECD007F)
 F (../Src/bsp_driver_sd.c)(0x5E7A0712)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\bsp_driver_sd.o --omf_browse stm32f407zet6\bsp_driver_sd.crf --depend stm32f407zet6\bsp_driver_sd.d)
 I (../Inc/bsp_driver_sd.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5E7A0711)
@@ -257,7 +257,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5E7A0711)
-F (..\Src\remote.c)(0x5EBE81D6)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\remote.o --omf_browse stm32f407zet6\remote.crf --depend stm32f407zet6\remote.d)
+F (..\Src\remote.c)(0x5ECCE3AB)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\remote.o --omf_browse stm32f407zet6\remote.crf --depend stm32f407zet6\remote.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BD7A4)
 I (../Inc/main.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5E7A0711)
@@ -295,14 +295,14 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5E7A0711)
 I (../Inc/remote.h)(0x5E7A0712)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/comm.h)(0x5E7A0712)
-I (../Inc/control.h)(0x5EC7B35C)
+I (../Inc/control.h)(0x5ECD007F)
 I (../Inc/calib.h)(0x5E7A0712)
 I (../Inc/adc.h)(0x5EC3CB15)
 I (../Inc/printer.h)(0x5E7A0712)
 I (../Inc/usb_flash_drive.h)(0x5E7A0712)
-F (..\Src\bios.c)(0x5EBD2F86)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\bios.o --omf_browse stm32f407zet6\bios.crf --depend stm32f407zet6\bios.d)
+F (..\Src\bios.c)(0x5ECD0DE2)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\bios.o --omf_browse stm32f407zet6\bios.crf --depend stm32f407zet6\bios.d)
 I (../Inc/main.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5E7A0711)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5E7A0712)
@@ -339,7 +339,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5E7A0711)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/fatfs.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/ff.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/integer.h)(0x5E7A0712)
@@ -400,10 +400,10 @@ I (../Inc/bsp_driver_sd.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/diskio.h)(0x5E7A0712)
 I (../Inc/sd_diskio.h)(0x5E7A0712)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/adc.h)(0x5EC3CB15)
 I (../Inc/init.h)(0x5EC6706E)
-F (..\Src\control.c)(0x5EC7B4EC)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\control.o --omf_browse stm32f407zet6\control.crf --depend stm32f407zet6\control.d)
+F (..\Src\control.c)(0x5ECD0075)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\control.o --omf_browse stm32f407zet6\control.crf --depend stm32f407zet6\control.d)
 I (../Inc/main.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5E7A0711)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5E7A0712)
@@ -445,7 +445,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588BD7A4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x588BD7A4)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x588BD7A4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588BD7A4)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/comm.h)(0x5E7A0712)
 I (../Inc/lang.h)(0x5E7A0712)
 I (../Inc/adc.h)(0x5EC3CB15)
@@ -490,7 +490,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5E7A0711)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588BD7A4)
 I (../Inc/calib.h)(0x5E7A0712)
 I (../Inc/adc.h)(0x5EC3CB15)
@@ -500,8 +500,8 @@ F (..\Src\printer.c)(0x5E7A0712)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W 
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BD7A4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588BD7A4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588BD7A4)
-I (../Inc/bios.h)(0x5EC27D23)
-I (../Inc/control.h)(0x5EC7B35C)
+I (../Inc/bios.h)(0x5ECD0D56)
+I (../Inc/control.h)(0x5ECD007F)
 I (../Inc/comm.h)(0x5E7A0712)
 I (../Inc/lang.h)(0x5E7A0712)
 I (../Inc/adc.h)(0x5EC3CB15)
@@ -553,7 +553,7 @@ I (../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/diskio.h)(0x5E7A0712)
 I (../Inc/sd_diskio.h)(0x5E7A0712)
 I (../Inc/comm.h)(0x5E7A0712)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/adc.h)(0x5EC3CB15)
 F (..\Src\usb_flash_drive.c)(0x5E7A0712)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\usb_flash_drive.o --omf_browse stm32f407zet6\usb_flash_drive.crf --depend stm32f407zet6\usb_flash_drive.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BD7A4)
@@ -593,7 +593,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5E7A0711)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/comm.h)(0x5E7A0712)
 I (../Inc/usb_flash_drive.h)(0x5E7A0712)
 I (../Inc/adc.h)(0x5EC3CB15)
@@ -635,7 +635,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h)(0x5E7A0712)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5E7A0711)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5E7A0711)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/fatfs.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/ff.h)(0x5E7A0712)
 I (../Middlewares/Third_Party/FatFs/src/integer.h)(0x5E7A0712)
@@ -652,11 +652,11 @@ F (..\Src\lang.c)(0x5E7A0712)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3
 I (../Inc/lang.h)(0x5E7A0712)
 F (..\Src\calib.c)(0x5E7A0712)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\calib.o --omf_browse stm32f407zet6\calib.crf --depend stm32f407zet6\calib.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BD7A4)
-I (../Inc/bios.h)(0x5EC27D23)
+I (../Inc/bios.h)(0x5ECD0D56)
 I (../Inc/adc.h)(0x5EC3CB15)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BD7A4)
 I (../Inc/comm.h)(0x5E7A0712)
-I (../Inc/control.h)(0x5EC7B35C)
+I (../Inc/control.h)(0x5ECD007F)
 F (..\Src\dwt_delay.c)(0x5E7A0712)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FatFs/src -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_STM32F407ZET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f407zet6\dwt_delay.o --omf_browse stm32f407zet6\dwt_delay.crf --depend stm32f407zet6\dwt_delay.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5E7A0711)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5E7A0712)
