@@ -17,33 +17,37 @@ unsigned char byte;
 unsigned int retVal=MAIN_NOK; 	
              
 if (InputBuffer[0]=='m')
-{
+{	
 					//foo function: generic test function
 					if((InputBuffer[1]=='F')&&(InputBuffer[2]=='O')&&(InputBuffer[3]=='O'))
 					{
 									return (foo_function());
 					}	
+					//Channel PWR on/off
+					if((InputBuffer[1]=='P')&&(InputBuffer[2]=='W')&&(InputBuffer[3]=='R'))
+					{
+									return (Channel_Power_Control());
+					}
 					//VBAT get battery voltage
 					if((InputBuffer[1]=='V')&&(InputBuffer[2]=='B')&&(InputBuffer[3]=='T'))
 					{
 									return (Get_BAT_Voltage());
-					}	
-					
+					}						
 					//SRM ADC function: za testiranje ADC kola sa podesivim opsezima
 					if((InputBuffer[1]=='S')&&(InputBuffer[2]=='R')&&(InputBuffer[3]=='M'))
 					{
 									return (SRM_Start_Test());
 					}					
 					//Start DRM test function
-					if((InputBuffer[1]=='T')&&(InputBuffer[2]=='S')&&(InputBuffer[3]=='T'))
+					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='R')&&(InputBuffer[3]=='M'))
 					{
 									return (DRM_Start_Test());
 					}
 					//Battery charger control
-					if((InputBuffer[1]=='B')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='T'))
-					{
-									//return (Battery_Charger_Control()); //izmijeniti ovu funkciju i iskoristiti nove makroe; nema i2c vise
-					}
+//					if((InputBuffer[1]=='B')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='T'))
+//					{
+//									
+//					}
 					//DRM Read function
 					if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]=='C'))
 					{

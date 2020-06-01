@@ -46,10 +46,12 @@ extern unsigned int DRM_Start_Test(void);
 
 //SRM Functions
 extern unsigned int SRM_Start_Test(void);
-extern void SRM_Get_Samples(void);
 
 //BAT Functions
 extern unsigned int Get_BAT_Voltage(void);
+
+//PWR Control
+extern unsigned int Channel_Power_Control(void);
 
 //Timer variables
 extern unsigned char timer1_DRM_ON;

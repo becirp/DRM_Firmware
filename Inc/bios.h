@@ -974,7 +974,7 @@ extern STICK_STRUCT           STICK;
 
 
 ////////////////////////////////////////////
-// 							DRM FUNCTIONS						  //
+// 							DSRM FUNCTIONS						//
 ////////////////////////////////////////////
 
 extern void DRM_DAC_Write(unsigned int, unsigned int );
@@ -989,6 +989,10 @@ extern void Battery_Balancer_Control(unsigned int, unsigned int);
 extern void Pwr_Control(unsigned int, unsigned int);
 extern void Battery_Charger_Control(unsigned int, unsigned int);
 extern unsigned int Battery_Charging_Status(unsigned int);
+
+//SRM Functions
+extern void SRM_Get_Samples(void);
+
 ////////////////////////////////////////////
 // 							DRM MACROS							  //
 ////////////////////////////////////////////
@@ -1089,6 +1093,18 @@ extern unsigned int Battery_Charging_Status(unsigned int);
 #define SRM2_ADC1								(unsigned int)3
 #define SRM2_ADC2								(unsigned int)4
 
+//SRM PHASES
+#define NULL_PHASE             	(unsigned char) 0
+#define START_PHASE             (unsigned char) 1
+#define RAMP_UP_PHASE           (unsigned char) 2
+#define DETECT_RANGE1_PHASE     (unsigned char) 3
+#define DETECT_RANGE2_PHASE     (unsigned char) 4
+#define GET_SAMPLES_PHASE       (unsigned char) 5
+#define RAMP_DOWN_PHASE         (unsigned char) 6
+#define PAUSE_PHASE             (unsigned char) 7
+#define DT_RANGE_PHASE          (unsigned char) 8
+#define DT_PAUSE_PHASE          (unsigned char) 9
+#define DT_PAUSE2_PHASE         (unsigned char) 10
 
 //I2C Battery Control
 //Ovo takodjer promijeniti u funkcijama koje ih pozivaju, a onda obrisati.

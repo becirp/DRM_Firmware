@@ -5777,11 +5777,6 @@ unsigned int Get_BAT_Voltage(void)
 	return retVal;
 }
 
-
-void SRM_Get_Samples(void)
-{
-}
-
 //Funkcija za SRM test: sastoji se od jedne glavne funkcije GetSmp, koja ovisno od faze testa radi uzorkovanje. GetSmp se izvrsava na timer overflow. 
 unsigned int SRM_Start_Test(void)
 {
@@ -5813,13 +5808,27 @@ unsigned int SRM_Start_Test(void)
 		if(timer2_SRM_ON == 0) break;
 	}
 	
-	
-	
 	return retVal;
 }
 
 
-
+unsigned int Channel_Power_Control(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+	if(InputBuffer[4]=='1')
+	{
+		if(InputBuffer[5]=='1') Pwr_Control(CHANNEL1, ON);
+		else if(InputBuffer[5]=='0') Pwr_Control(CHANNEL1, OFF);
+	}
+	else if(InputBuffer[4]=='2')
+	{
+				if(InputBuffer[5]=='1') Pwr_Control(CHANNEL2, ON);
+		else if(InputBuffer[5]=='0') Pwr_Control(CHANNEL2, OFF);
+	}
+	
+	return retVal;
+}
 
 
 
