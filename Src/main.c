@@ -65,6 +65,7 @@
 unsigned char varijabla=0;
 unsigned char nova_varijabla=0; 
 extern volatile unsigned char timer1_interrupt;
+unsigned int Test_Counter;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -80,6 +81,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	else if(timer2_SRM_ON)
 	{
 		SRM_Get_Samples();
+		Test_Counter++;
 	}
 		
 	//__HAL_TIM_CLEAR_IT(&htim2, TIM_IT_UPDATE);	

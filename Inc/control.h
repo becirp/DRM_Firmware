@@ -27,8 +27,8 @@ extern unsigned int MemoryReadByte_Comm(void);
 extern unsigned int Internal_SD_Mem_Comm(void);
 
 extern void OK_Response(void);
-extern unsigned int check_if_digit(unsigned char, unsigned char);
-extern unsigned int string_to_int(unsigned char, unsigned char);
+extern unsigned int check_if_digit(unsigned char first, unsigned char last);
+extern unsigned int string_to_int(unsigned char first, unsigned char last);
 
 //RESULTS:
 extern unsigned char PuniPrintBuffer        (unsigned char parameter1, unsigned char parameter2, unsigned char parameter3, unsigned char MenOrPrn, unsigned char PreinsertionR);
@@ -54,5 +54,9 @@ extern unsigned int Get_BAT_Voltage(void);
 extern unsigned int Channel_Power_Control(void);
 
 //Timer variables
+extern unsigned char timer1_DRM_ON;
+extern unsigned char timer2_SRM_ON;
+
+//SRM variables
 extern unsigned char timer1_DRM_ON;
 extern unsigned char timer2_SRM_ON;

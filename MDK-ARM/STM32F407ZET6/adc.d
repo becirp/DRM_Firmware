@@ -42,3 +42,4 @@ stm32f407zet6\adc.o: ../Inc/calib.h
 stm32f407zet6\adc.o: ../Inc/adc.h
 stm32f407zet6\adc.o: ../Inc/init.h
 stm32f407zet6\adc.o: ../Inc/comm.h
+stm32f407zet6\adc.o: ../Inc/control.h

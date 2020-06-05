@@ -18,8 +18,8 @@
 volatile unsigned char timer1_interrupt;
 volatile unsigned char control_after_first_contact_touched;
 
-unsigned char timer1_DRM_ON;
-unsigned char timer2_SRM_ON;
+volatile unsigned char timer1_DRM_ON;
+volatile unsigned char timer2_SRM_ON;
 
 //DRM I2C control
 uint8_t DRM1_Bat_Chg_Info1 = 0x10;
@@ -5808,9 +5808,11 @@ unsigned int SRM_Start_Test(void)
 		if(timer2_SRM_ON == 0) break;
 	}
 	
+	__HAL_TIM_CLEAR_FLAG(&htim3, TIM_IT_UPDATE);
+	HAL_TIM_Base_Stop_IT(&htim3); //zaustavi tajmer
+	
 	return retVal;
 }
-
 
 unsigned int Channel_Power_Control(void)
 {

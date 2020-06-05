@@ -7,6 +7,7 @@
 #include "adc.h"
 #include "init.h"
 #include "comm.h"
+#include "control.h"
 
 ADC_STRUCT     ADC_Results;
 ADC8BIT_STRUCT ADC_8bit_results;
@@ -14,6 +15,56 @@ ADC8BIT_STRUCT ADC_8bit_results;
 unsigned char ADCdataL[8];
 unsigned char ADCdataH[8];
 
+//SRM ADC settings
+unsigned int Test_Phase = 0;
+float SRM1_C_Gain = 1.0;
+float SRM1_V_Gain = 1.0;
+float SRM1_C_Offset = 0.0;
+float SRM1_V_Offset = 0.0;
+float SRM2_C_Gain = 1.0;
+float SRM2_V_Gain = 1.0;
+float SRM2_C_Offset = 0.0;
+float SRM2_V_Offset = 0.0;
+unsigned int SRM1_G_I, SRM2_G_I;
+unsigned int SRM1_G_V, SRM2_G_V;
+//Ovi koeficijenti u RMO200H firmveru idu u eeprom. Odrediti gdje ce ici na DSRM kontroli.
+unsigned long SRM1_C_CH0_Gain[4];
+unsigned long SRM2_C_CH0_Gain[4];
+unsigned int SRM1_C_CH0_Sign[4];
+unsigned int SRM2_C_CH0_Sign[4];
+unsigned long SRM1_C_CH0_Offset[4];
+unsigned long SRM2_C_CH0_Offset[4];
+unsigned long SRM1_C_CH1_Gain[4];
+unsigned long SRM2_C_CH1_Gain[4];
+unsigned int SRM1_C_CH1_Sign[4];
+unsigned int SRM2_C_CH1_Sign[4];
+unsigned long SRM1_C_CH1_Offset[4];
+unsigned long SRM2_C_CH1_Offset[4];
+unsigned long SRM1_V_CH0_Gain[4];
+unsigned long SRM2_V_CH0_Gain[4];
+unsigned int SRM1_V_CH0_Sign[4];
+unsigned int SRM2_V_CH0_Sign[4];
+unsigned long SRM1_V_CH0_Offset[4];
+unsigned long SRM2_V_CH0_Offset[4];
+unsigned long SRM1_V_CH1_Gain[4];
+unsigned long SRM2_V_CH1_Gain[4];
+unsigned int SRM1_V_CH1_Sign[4];
+unsigned int SRM2_V_CH1_Sign[4];
+unsigned long SRM1_V_CH1_Offset[4];
+unsigned long SRM2_V_CH1_Offset[4];
+unsigned long Curr_Gain;
+unsigned char Curr_Sign;
+unsigned long Curr_Offset;
+
+//SRM variables
+volatile unsigned int cptr[4];
+unsigned int C_buffer[4][322];
+unsigned int C_buffer_RET[2];
+unsigned int Test_Count;
+unsigned int DACV_Reg[5];
+unsigned int Test_Current; //inace u eepromu
+unsigned int RemoteTest_h;
+unsigned int RemoteTest;
 //TODO: ponovo definisati:
 void read_analog_adc_for_trigger(unsigned char ex_trig_channel){}
 	
@@ -1561,12 +1612,420 @@ unsigned char SRM_Read_ADC_16Bits(unsigned int channel)
 	return data;
 }
 
+//Access clamp and calibrate registers on SRM ADC circuit.
+void SRM_ADC_ClampAndCalibrate(unsigned int adc_channel)
+{
+	switch(adc_channel)
+	{
+		case SRM1_ADC1_CH1:
+			SRM_Write_ADC_Byte(SRM1_ADC1, 0x38);
+			SRM_Write_ADC_Byte(SRM1_ADC1, 0x01);
+			SRM_Write_ADC_Byte(SRM1_ADC1, 0x18);
+		break;
+		case SRM1_ADC1_CH2:
+			SRM_Write_ADC_Byte(SRM1_ADC1, 0x3A);
+			SRM_Write_ADC_Byte(SRM1_ADC1, 0x01);
+			SRM_Write_ADC_Byte(SRM1_ADC1, 0x1A);
+		break;
+		case SRM1_ADC2_CH1:
+			SRM_Write_ADC_Byte(SRM1_ADC2, 0x38);
+			SRM_Write_ADC_Byte(SRM1_ADC2, 0x01);
+			SRM_Write_ADC_Byte(SRM1_ADC2, 0x18);
+		break;
+		case SRM1_ADC2_CH2:
+			SRM_Write_ADC_Byte(SRM1_ADC2, 0x3A);
+			SRM_Write_ADC_Byte(SRM1_ADC2, 0x01);
+			SRM_Write_ADC_Byte(SRM1_ADC2, 0x1A);
+		break;
+		case SRM2_ADC1_CH1:
+			SRM_Write_ADC_Byte(SRM2_ADC1, 0x38);
+			SRM_Write_ADC_Byte(SRM2_ADC1, 0x01);
+			SRM_Write_ADC_Byte(SRM2_ADC1, 0x18);
+		break;
+		case SRM2_ADC1_CH2:
+			SRM_Write_ADC_Byte(SRM2_ADC1, 0x3A);
+			SRM_Write_ADC_Byte(SRM2_ADC1, 0x01);
+			SRM_Write_ADC_Byte(SRM2_ADC1, 0x1A);
+		break;
+		case SRM2_ADC2_CH1:
+			SRM_Write_ADC_Byte(SRM2_ADC2, 0x38);
+			SRM_Write_ADC_Byte(SRM2_ADC2, 0x01);
+			SRM_Write_ADC_Byte(SRM2_ADC2, 0x18);
+		break;
+		case SRM2_ADC2_CH2:
+			SRM_Write_ADC_Byte(SRM2_ADC2, 0x3A);
+			SRM_Write_ADC_Byte(SRM2_ADC2, 0x01);
+			SRM_Write_ADC_Byte(SRM2_ADC2, 0x1A);
+		break;
+	}
+}
 
+void Set_ADC_Gain(unsigned int srm_adc_channel, unsigned int gain)
+{
+	SRM_ADC_ClampAndCalibrate(srm_adc_channel);
+	switch(gain)
+	{
+		case 1:
+			SRM_Write_ADC_24Bits(srm_adc_channel,0x200000); //pojacanje 1
+			switch(srm_adc_channel)
+			{
+				//SRM Channel 1
+				case SRM1_ADC1_CH1:
+					SRM1_G_I = 2;
+					SRM1_C_Gain = (float)SRM1_C_CH0_Gain[0]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH0_Offset[0]/1000000;
+					if(SRM1_C_CH0_Sign[0] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC1_CH2:
+					SRM1_G_I = 32;
+					SRM1_C_Gain = (float)SRM1_C_CH1_Gain[0]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH1_Offset[0]/1000000;
+					if(SRM1_C_CH1_Sign[0] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH1:
+					SRM1_G_V = 1;
+					SRM1_V_Gain = (float)SRM1_V_CH0_Gain[0]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH0_Gain[0]/1000000;
+					if(SRM1_V_CH0_Sign[0] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH2:
+					SRM1_G_V = 16;
+					SRM1_V_Gain = (float)SRM1_V_CH1_Gain[0]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH1_Gain[0]/1000000;
+					if(SRM1_V_CH1_Sign[0] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				//SRM Channel 2
+				case SRM2_ADC1_CH1:
+					SRM2_G_I = 2;
+					SRM2_C_Gain = (float)SRM2_C_CH0_Gain[0]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH0_Offset[0]/1000000;
+					if(SRM2_C_CH0_Sign[0] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC1_CH2:
+					SRM2_G_I = 32;
+					SRM2_C_Gain = (float)SRM2_C_CH1_Gain[0]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH1_Offset[0]/1000000;
+					if(SRM2_C_CH1_Sign[0] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH1:
+					SRM2_G_V = 1;
+					SRM2_V_Gain = (float)SRM2_V_CH0_Gain[0]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH0_Gain[0]/1000000;
+					if(SRM2_V_CH0_Sign[0] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH2:
+					SRM2_G_V = 16;
+					SRM2_V_Gain = (float)SRM2_V_CH1_Gain[0]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH1_Gain[0]/1000000;
+					if(SRM2_V_CH1_Sign[0] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+			}
+		break;
+		case 2:
+			SRM_Write_ADC_24Bits(srm_adc_channel,0x400000); //pojacanje 2
+			switch(srm_adc_channel)
+			{
+				//SRM Channel 1
+				case SRM1_ADC1_CH1:
+					SRM1_G_I = 4;
+					SRM1_C_Gain = (float)SRM1_C_CH0_Gain[1]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH0_Offset[1]/1000000;
+					if(SRM1_C_CH0_Sign[1] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC1_CH2:
+					SRM1_G_I = 64;
+					SRM1_C_Gain = (float)SRM1_C_CH1_Gain[1]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH1_Offset[1]/1000000;
+					if(SRM1_C_CH1_Sign[1] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH1:
+					SRM1_G_V = 2;
+					SRM1_V_Gain = (float)SRM1_V_CH0_Gain[1]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH0_Gain[1]/1000000;
+					if(SRM1_V_CH0_Sign[1] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH2:
+					SRM1_G_V = 32;
+					SRM1_V_Gain = (float)SRM1_V_CH1_Gain[1]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH1_Gain[1]/1000000;
+					if(SRM1_V_CH1_Sign[1] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				//SRM Channel 2
+				case SRM2_ADC1_CH1:
+					SRM2_G_I = 4;
+					SRM2_C_Gain = (float)SRM2_C_CH0_Gain[1]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH0_Offset[1]/1000000;
+					if(SRM2_C_CH0_Sign[1] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC1_CH2:
+					SRM2_G_I = 64;
+					SRM2_C_Gain = (float)SRM2_C_CH1_Gain[1]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH1_Offset[1]/1000000;
+					if(SRM2_C_CH1_Sign[1] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH1:
+					SRM2_G_V = 2;
+					SRM2_V_Gain = (float)SRM2_V_CH0_Gain[1]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH0_Gain[1]/1000000;
+					if(SRM2_V_CH0_Sign[1] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH2:
+					SRM2_G_V = 32;
+					SRM2_V_Gain = (float)SRM2_V_CH1_Gain[1]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH1_Gain[1]/1000000;
+					if(SRM2_V_CH1_Sign[1] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+			}
+		break;
+		case 4:
+			SRM_Write_ADC_24Bits(srm_adc_channel,0x800000); //pojacanje 4
+			switch(srm_adc_channel)
+			{
+				//SRM Channel 1
+				case SRM1_ADC1_CH1:
+					SRM1_G_I = 8;
+					SRM1_C_Gain = (float)SRM1_C_CH0_Gain[2]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH0_Offset[2]/1000000;
+					if(SRM1_C_CH0_Sign[2] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC1_CH2:
+					SRM1_G_I = 128;
+					SRM1_C_Gain = (float)SRM1_C_CH1_Gain[2]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH1_Offset[2]/1000000;
+					if(SRM1_C_CH1_Sign[2] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH1:
+					SRM1_G_V = 4;
+					SRM1_V_Gain = (float)SRM1_V_CH0_Gain[2]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH0_Gain[2]/1000000;
+					if(SRM1_V_CH0_Sign[2] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH2:
+					SRM1_G_V = 64;
+					SRM1_V_Gain = (float)SRM1_V_CH1_Gain[2]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH1_Gain[2]/1000000;
+					if(SRM1_V_CH1_Sign[2] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				//SRM Channel 2
+				case SRM2_ADC1_CH1:
+					SRM2_G_I = 8;
+					SRM2_C_Gain = (float)SRM2_C_CH0_Gain[2]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH0_Offset[2]/1000000;
+					if(SRM2_C_CH0_Sign[2] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC1_CH2:
+					SRM2_G_I = 128;
+					SRM2_C_Gain = (float)SRM2_C_CH1_Gain[2]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH1_Offset[2]/1000000;
+					if(SRM2_C_CH1_Sign[2] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH1:
+					SRM2_G_V = 4;
+					SRM2_V_Gain = (float)SRM2_V_CH0_Gain[2]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH0_Gain[2]/1000000;
+					if(SRM2_V_CH0_Sign[2] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH2:
+					SRM2_G_V = 64;
+					SRM2_V_Gain = (float)SRM2_V_CH1_Gain[2]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH1_Gain[2]/1000000;
+					if(SRM2_V_CH1_Sign[2] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+			}
+		break;
+		case 8:
+			SRM_Write_ADC_24Bits(srm_adc_channel,0xFFFFFF); //pojacanje 8
+			switch(srm_adc_channel)
+			{
+				//SRM Channel 1
+				case SRM1_ADC1_CH1:
+					SRM1_G_I = 16;
+					SRM1_C_Gain = (float)SRM1_C_CH0_Gain[3]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH0_Offset[3]/1000000;
+					if(SRM1_C_CH0_Sign[3] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC1_CH2:
+					SRM1_G_I = 255;
+					SRM1_C_Gain = (float)SRM1_C_CH1_Gain[3]/1000000;
+					SRM1_C_Offset = (float)SRM1_C_CH1_Offset[3]/1000000;
+					if(SRM1_C_CH1_Sign[3] == '-') SRM1_C_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH1:
+					SRM1_G_V = 8;
+					SRM1_V_Gain = (float)SRM1_V_CH0_Gain[3]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH0_Gain[3]/1000000;
+					if(SRM1_V_CH0_Sign[3] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				case SRM1_ADC2_CH2:
+					SRM1_G_V = 128;
+					SRM1_V_Gain = (float)SRM1_V_CH1_Gain[3]/1000000;
+					SRM1_V_Offset = (float)SRM1_V_CH1_Gain[3]/1000000;
+					if(SRM1_V_CH1_Sign[3] == '-') SRM1_V_Offset *= (-1.0);
+				break;
+				//SRM Channel 2
+				case SRM2_ADC1_CH1:
+					SRM2_G_I = 16;
+					SRM2_C_Gain = (float)SRM2_C_CH0_Gain[3]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH0_Offset[3]/1000000;
+					if(SRM2_C_CH0_Sign[3] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC1_CH2:
+					SRM2_G_I = 255;
+					SRM2_C_Gain = (float)SRM2_C_CH1_Gain[3]/1000000;
+					SRM2_C_Offset = (float)SRM2_C_CH1_Offset[3]/1000000;
+					if(SRM2_C_CH1_Sign[3] == '-') SRM2_C_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH1:
+					SRM2_G_V = 8;
+					SRM2_V_Gain = (float)SRM2_V_CH0_Gain[3]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH0_Gain[3]/1000000;
+					if(SRM2_V_CH0_Sign[3] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+				case SRM2_ADC2_CH2:
+					SRM2_G_V = 128;
+					SRM2_V_Gain = (float)SRM2_V_CH1_Gain[3]/1000000;
+					SRM2_V_Offset = (float)SRM2_V_CH1_Gain[3]/1000000;
+					if(SRM2_V_CH1_Sign[3] == '-') SRM2_V_Offset *= (-1.0);
+				break;
+			}
+		break;
+	}
+	
+	switch(srm_adc_channel)
+	{
+		case SRM1_ADC1_CH1:
+		case SRM1_ADC2_CH1:
+		case SRM2_ADC1_CH1:	
+		case SRM2_ADC2_CH1:	
+			SRM_Write_ADC_Byte(srm_adc_channel, 0x38);
+		break;
+		case SRM1_ADC1_CH2:
+		case SRM1_ADC2_CH2:
+		case SRM2_ADC1_CH2:
+		case SRM2_ADC2_CH2:
+			SRM_Write_ADC_Byte(srm_adc_channel, 0x3A);
+		break;
+	}
+	SRM_Write_ADC_Byte(srm_adc_channel, 0x21);
+}
 
-
-
-
-
+//Test_Current inicijaliziran na nulu, promijeniti u toku testiranja. Kasnije napraviti da se moze odabrati.
+void SRM_Get_Samples(void)
+{
+	Test_Phase = START_PHASE;
+	switch(Test_Phase)
+	{
+		case START_PHASE:
+			cptr[0]=0;
+      cptr[1]=0;
+      cptr[2]=0;
+      cptr[3]=0;
+			C_buffer_RET[0]=0; 
+			C_buffer_RET[1]=0;
+			C_buffer[0][0]=32768; C_buffer[1][0]=32768; C_buffer[2][0]=32768; C_buffer[3][0]=32768;
+      C_buffer[0][1]=32768; C_buffer[1][1]=32768; C_buffer[2][1]=32768; C_buffer[3][1]=32768;
+			if(RemoteTest_h == 0)
+			{
+				Set_ADC_Gain(SRM1_ADC1_CH1, 1);
+				Set_ADC_Gain(SRM1_ADC1_CH2, 1);
+				Set_ADC_Gain(SRM1_ADC2_CH1, 1);
+				Set_ADC_Gain(SRM1_ADC2_CH2, 1);
+				Set_ADC_Gain(SRM2_ADC1_CH1, 1);
+				Set_ADC_Gain(SRM2_ADC1_CH2, 1);
+				Set_ADC_Gain(SRM2_ADC2_CH1, 1);
+				Set_ADC_Gain(SRM2_ADC2_CH2, 1);
+				SRM1_G_I = 32;
+				SRM1_G_V = 16;
+				SRM2_G_I = 32;
+				SRM2_G_V = 16;
+			}
+			Test_Count = 0;
+			SRM_SYNC_HIGH;
+			DRM_DAC_Write(0, CHANNEL1);
+			DRM_DAC_Write(0, CHANNEL2);
+			Test_Phase = RAMP_UP_PHASE;
+			break;
+		case RAMP_UP_PHASE:
+			//ramp function for SRM: postavljeno da zadaje istu vrijednost na oba kanala
+			if(Test_Count == 2)
+			{
+				DRM_DAC_Write(DACV_Reg[1], CHANNEL1);
+				DRM_DAC_Write(DACV_Reg[1], CHANNEL2);
+			}
+			if(Test_Count == 4)
+			{
+				DRM_DAC_Write(DACV_Reg[2], CHANNEL1);
+				DRM_DAC_Write(DACV_Reg[2], CHANNEL2);
+			}	
+			if(Test_Count == 6)
+			{
+				DRM_DAC_Write(DACV_Reg[3], CHANNEL1);
+				DRM_DAC_Write(DACV_Reg[3], CHANNEL2);
+			}	
+			if(Test_Count == 8)
+			{
+				DRM_DAC_Write(DACV_Reg[4], CHANNEL1);
+				DRM_DAC_Write(DACV_Reg[4], CHANNEL2);
+			}	
+			if(Test_Current < 5)
+			{
+				if(Test_Count >= 48)
+				{
+					if(RemoteTest == 0)
+					{
+						Test_Phase = DETECT_RANGE1_PHASE; 
+						Test_Count = 0;
+					}
+					else
+					{
+						cptr[0]=0;
+						cptr[1]=0;
+						cptr[2]=0;
+						cptr[3]=0;
+						Test_Count = 0;
+						Test_Phase = PAUSE_PHASE;
+					}
+				}
+			}
+			else if(Test_Count >= 18)
+			{
+				if(RemoteTest == 0)
+				{
+					Test_Phase = DETECT_RANGE1_PHASE
+				}
+				else
+				{
+						cptr[0]=0;
+						cptr[1]=0;
+						cptr[2]=0;
+						cptr[3]=0;
+						Test_Phase = PAUSE_PHASE;
+				}
+				Test_Count = 0;
+			}
+			break;
+		case DETECT_RANGE1_PHASE:
+			//detect range function	1
+			Test_Phase = DETECT_RANGE2_PHASE;
+			break;
+		case DETECT_RANGE2_PHASE:
+			//detect range function	2
+			Test_Phase = PAUSE_PHASE;
+			break;
+		case PAUSE_PHASE:
+			//pause test
+			Test_Phase = RAMP_DOWN_PHASE;
+			break;
+		case RAMP_DOWN_PHASE:
+			//ramp function
+			Test_Phase = END_PHASE;
+			break;
+		case END_PHASE:
+			timer2_SRM_ON = 0;
+			//end test
+			break;
+	}	
+}
 
 
 

@@ -47,7 +47,9 @@ stm32f407zet6\bios.o: ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h
 stm32f407zet6\bios.o: ../Middlewares/Third_Party/FatFs/src/diskio.h
 stm32f407zet6\bios.o: ../Inc/sd_diskio.h
 stm32f407zet6\bios.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f407zet6\bios.o: ../Inc/adc.h
 stm32f407zet6\bios.o: ../Inc/bios.h
 stm32f407zet6\bios.o: ../Inc/comm.h
 stm32f407zet6\bios.o: ../Inc/init.h
+stm32f407zet6\bios.o: ../Inc/control.h
 stm32f407zet6\bios.o: ../Inc/dwt_delay.h

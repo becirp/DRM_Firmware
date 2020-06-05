@@ -4,17 +4,17 @@
 #include "stdio.h"
 #include "string.h"
 
+#include "adc.h"
 #include "bios.h"
 #include "comm.h"
 #include "init.h"
+#include "control.h"
 #include "dwt_delay.h"
 
 //MCU Battery Charger Control
 uint8_t MCU_bat_chg_ctrl = 0x02;
 
 unsigned char language = 0; //English is default language
-
-unsigned int test_phase = 0;
 
 uint8_t PORT607; 
 uint8_t PORT608;
@@ -39,8 +39,6 @@ ANALOG_RESULTS_STRUCT  AnalogCH_Results;
 LINEAR_RESULTS_STRUCT  LTransd_Results;
 DIGITAL_RESULTS_STRUCT DTransd_Results;
 RMO_RESULTS_STRUCT     RMO_Results;
-
-
 
 void BSGRelayControl(unsigned char BSG_RELAY, unsigned char On_Off)
 {
@@ -652,34 +650,7 @@ unsigned int Battery_Charging_Status(unsigned int channel)
 	return batChargeStatus;
 }
 
-void SRM_Get_Samples(void)
-{
-	test_phase = START_PHASE;
-	switch(test_phase)
-	{
-		case START_PHASE:
-			//clear buffers
-			//set adc gain
-			//sync
-			test_phase = RAMP_UP_PHASE;
-		break;
-		case RAMP_UP_PHASE:
-			//ramp function for SRM
-		break;
-		case DETECT_RANGE1_PHASE:
-			//detect range function	1
-		break;
-		case DETECT_RANGE2_PHASE:
-			//detect range function	2
-		break;
-		case PAUSE_PHASE:
-			//pause test
-		break;
-		case RAMP_DOWN_PHASE:
-			//ramp function
-		break;
-	}	
-}
+
 
 
 

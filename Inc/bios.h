@@ -977,21 +977,17 @@ extern STICK_STRUCT           STICK;
 // 							DSRM FUNCTIONS						//
 ////////////////////////////////////////////
 
-extern void DRM_DAC_Write(unsigned int, unsigned int );
-extern void DRM_Channel_Enable(unsigned int);
-extern void DRM_Channel_Disable(unsigned int);
-extern void MCU_Coil_Control(unsigned char, unsigned int);
-extern void Coil_Control(unsigned char, unsigned int);
-extern void Ramp(unsigned int, unsigned int, unsigned int);
+extern void DRM_DAC_Write(unsigned int data, unsigned int channel);
+extern void DRM_Channel_Enable(unsigned int channel_number);
+extern void DRM_Channel_Disable(unsigned int channel_number);
+extern void Coil_Control(unsigned char coil_select, unsigned int on_off);
+extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int up_down);
 
 //Battery Charger Control Functions
-extern void Battery_Balancer_Control(unsigned int, unsigned int);
-extern void Pwr_Control(unsigned int, unsigned int);
-extern void Battery_Charger_Control(unsigned int, unsigned int);
-extern unsigned int Battery_Charging_Status(unsigned int);
-
-//SRM Functions
-extern void SRM_Get_Samples(void);
+extern void Battery_Balancer_Control(unsigned int channel, unsigned int on_off);
+extern void Pwr_Control(unsigned int channel, unsigned int on_off);
+extern void Battery_Charger_Control(unsigned int channel, unsigned int on_off);
+extern unsigned int Battery_Charging_Status(unsigned int channel);
 
 ////////////////////////////////////////////
 // 							DRM MACROS							  //
@@ -1092,6 +1088,14 @@ extern void SRM_Get_Samples(void);
 #define SRM1_ADC2								(unsigned int)2
 #define SRM2_ADC1								(unsigned int)3
 #define SRM2_ADC2								(unsigned int)4
+#define SRM1_ADC1_CH1						(unsigned int)10
+#define SRM1_ADC1_CH2						(unsigned int)11
+#define SRM1_ADC2_CH1						(unsigned int)12
+#define SRM1_ADC2_CH2						(unsigned int)13	
+#define SRM2_ADC1_CH1						(unsigned int)14
+#define SRM2_ADC1_CH2						(unsigned int)15
+#define SRM2_ADC2_CH1						(unsigned int)16
+#define SRM2_ADC2_CH2						(unsigned int)17
 
 //SRM PHASES
 #define NULL_PHASE             	(unsigned char) 0
@@ -1105,6 +1109,7 @@ extern void SRM_Get_Samples(void);
 #define DT_RANGE_PHASE          (unsigned char) 8
 #define DT_PAUSE_PHASE          (unsigned char) 9
 #define DT_PAUSE2_PHASE         (unsigned char) 10
+#define END_PHASE         			(unsigned char) 11
 
 //I2C Battery Control
 //Ovo takodjer promijeniti u funkcijama koje ih pozivaju, a onda obrisati.
