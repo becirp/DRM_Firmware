@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F407ZET6\STM32F407ZET6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F407ZET6\STM32F407ZET6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Jun 05 13:43:45 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Tue Jun 09 13:32:56 2020
 <BR><P>
 <H3>Maximum Stack Usage =       1360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1642,7 +1642,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[10f]"></a>HAL_TIM_IRQHandler</STRONG> (Thumb, 358 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; Set_ADC_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; SRM_ADC_Set_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_TriggerCallback
@@ -1665,7 +1665,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[113]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, main.o(i.HAL_TIM_PeriodElapsedCallback))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; Set_ADC_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; SRM_ADC_Set_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
 </UL>
 <BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Get_Samples
 </UL>
@@ -2633,7 +2633,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Write_ADC_Byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_ADC_Gain
+<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_Set_Gain
 </UL>
 
 <P><STRONG><a name="[1a2]"></a>SRM_ADC_Select</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, adc.o(i.SRM_ADC_Select))
@@ -2645,12 +2645,22 @@ Global Symbols
 <LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Write_ADC_24Bits
 </UL>
 
-<P><STRONG><a name="[117]"></a>SRM_Get_Samples</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, adc.o(i.SRM_Get_Samples))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = SRM_Get_Samples &rArr; Set_ADC_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
+<P><STRONG><a name="[1a3]"></a>SRM_ADC_Set_Gain</STRONG> (Thumb, 1728 bytes, Stack size 56 bytes, adc.o(i.SRM_ADC_Set_Gain))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = SRM_ADC_Set_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Write_ADC_Byte
+<LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Write_ADC_24Bits
+<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_ClampAndCalibrate
+</UL>
+<BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Get_Samples
+</UL>
+
+<P><STRONG><a name="[117]"></a>SRM_Get_Samples</STRONG> (Thumb, 178 bytes, Stack size 16 bytes, adc.o(i.SRM_Get_Samples))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = SRM_Get_Samples &rArr; SRM_ADC_Set_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRM_DAC_Write
-<LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_ADC_Gain
+<LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_Set_Gain
 </UL>
 <BR>[Called By]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
@@ -2670,7 +2680,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_Select
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_ADC_Gain
+<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_Set_Gain
 </UL>
 
 <P><STRONG><a name="[1a1]"></a>SRM_Write_ADC_Byte</STRONG> (Thumb, 168 bytes, Stack size 24 bytes, adc.o(i.SRM_Write_ADC_Byte))
@@ -2679,7 +2689,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_Select
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_ADC_Gain
+<BR>[Called By]<UL><LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_Set_Gain
 <LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_ClampAndCalibrate
 </UL>
 
@@ -2833,16 +2843,6 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteCommandSwitch
 </UL>
 
-<P><STRONG><a name="[1a3]"></a>Set_ADC_Gain</STRONG> (Thumb, 1728 bytes, Stack size 56 bytes, adc.o(i.Set_ADC_Gain))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = Set_ADC_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
-</UL>
-<BR>[Calls]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Write_ADC_Byte
-<LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Write_ADC_24Bits
-<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_ADC_ClampAndCalibrate
-</UL>
-<BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SRM_Get_Samples
-</UL>
-
 <P><STRONG><a name="[18b]"></a>Set_Active_Language_Comm</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, control.o(i.Set_Active_Language_Comm))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Set_Active_Language_Comm &rArr; OK_Response &rArr; __2sprintf
 </UL>
@@ -2898,14 +2898,14 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
 <P><STRONG><a name="[26]"></a>TIM2_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM2_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = TIM2_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; Set_ADC_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = TIM2_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; SRM_ADC_Set_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[27]"></a>TIM3_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM3_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = TIM3_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; Set_ADC_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = TIM3_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SRM_Get_Samples &rArr; SRM_ADC_Set_Gain &rArr; SRM_ADC_ClampAndCalibrate &rArr; SRM_Write_ADC_Byte &rArr; SRM_ADC_Select
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>

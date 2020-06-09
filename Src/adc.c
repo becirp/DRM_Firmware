@@ -65,6 +65,10 @@ unsigned int DACV_Reg[5];
 unsigned int Test_Current; //inace u eepromu
 unsigned int RemoteTest_h;
 unsigned int RemoteTest;
+volatile unsigned int AD[4];
+unsigned int TestDuration = 226;
+
+
 //TODO: ponovo definisati:
 void read_analog_adc_for_trigger(unsigned char ex_trig_channel){}
 	
@@ -1660,7 +1664,7 @@ void SRM_ADC_ClampAndCalibrate(unsigned int adc_channel)
 	}
 }
 
-void Set_ADC_Gain(unsigned int srm_adc_channel, unsigned int gain)
+void SRM_ADC_Set_Gain(unsigned int srm_adc_channel, unsigned int gain)
 {
 	SRM_ADC_ClampAndCalibrate(srm_adc_channel);
 	switch(gain)
@@ -1926,14 +1930,14 @@ void SRM_Get_Samples(void)
       C_buffer[0][1]=32768; C_buffer[1][1]=32768; C_buffer[2][1]=32768; C_buffer[3][1]=32768;
 			if(RemoteTest_h == 0)
 			{
-				Set_ADC_Gain(SRM1_ADC1_CH1, 1);
-				Set_ADC_Gain(SRM1_ADC1_CH2, 1);
-				Set_ADC_Gain(SRM1_ADC2_CH1, 1);
-				Set_ADC_Gain(SRM1_ADC2_CH2, 1);
-				Set_ADC_Gain(SRM2_ADC1_CH1, 1);
-				Set_ADC_Gain(SRM2_ADC1_CH2, 1);
-				Set_ADC_Gain(SRM2_ADC2_CH1, 1);
-				Set_ADC_Gain(SRM2_ADC2_CH2, 1);
+				SRM_ADC_Set_Gain(SRM1_ADC1_CH1, 1);
+				SRM_ADC_Set_Gain(SRM1_ADC1_CH2, 1);
+				SRM_ADC_Set_Gain(SRM1_ADC2_CH1, 1);
+				SRM_ADC_Set_Gain(SRM1_ADC2_CH2, 1);
+				SRM_ADC_Set_Gain(SRM2_ADC1_CH1, 1);
+				SRM_ADC_Set_Gain(SRM2_ADC1_CH2, 1);
+				SRM_ADC_Set_Gain(SRM2_ADC2_CH1, 1);
+				SRM_ADC_Set_Gain(SRM2_ADC2_CH2, 1);
 				SRM1_G_I = 32;
 				SRM1_G_V = 16;
 				SRM2_G_I = 32;
@@ -1991,7 +1995,7 @@ void SRM_Get_Samples(void)
 			{
 				if(RemoteTest == 0)
 				{
-					Test_Phase = DETECT_RANGE1_PHASE
+					Test_Phase = DETECT_RANGE1_PHASE;
 				}
 				else
 				{
@@ -2005,29 +2009,275 @@ void SRM_Get_Samples(void)
 			}
 			break;
 		case DETECT_RANGE1_PHASE:
-			//detect range function	1
-			Test_Phase = DETECT_RANGE2_PHASE;
+			if(Test_Count % 2 == 0) //If test counter is even read ADC1 IC, if odd read ADC2 IC. Ubaciti i za SRM 2 citanje.
+			{
+				if(Check_ADC_Ready(SRM1_ADC1) == 1)
+				{
+					SRM_Write_ADC_Byte(SRM1_ADC1, 0x44); //Check ADC status register
+					if((SRM_Read_ADC_Byte(SRM1_ADC1) & 0x01) == 0x01) //If status RDY0 == 1
+					{
+						SRM_Write_ADC_Byte(SRM1_ADC1, 0x48); //Setup read from Channel Data register
+						AD[0] = SRM_Read_ADC_16Bits(SRM1_ADC1);
+						if(AD[0]>C_buffer[0][0])C_buffer[0][0]=AD[0];
+						if(AD[0]<C_buffer[0][1])C_buffer[0][1]=AD[0];
+						C_buffer[0][cptr[0]]=AD[0];
+						if(cptr[0] >= 214) cptr[0] = 200;
+						else cptr[0]++; 
+					}
+					SRM_Write_ADC_Byte(SRM1_ADC1, 0x44);
+					if((SRM_Read_ADC_Byte(SRM1_ADC1) & 0x04) == 0x04)
+					{
+						SRM_Write_ADC_Byte(SRM1_ADC1, 0x4A);
+						AD[2] = SRM_Read_ADC_16Bits(SRM1_ADC1);
+						if(AD[2]>C_buffer[2][0])C_buffer[2][0]=AD[2];
+						if(AD[2]<C_buffer[2][1])C_buffer[2][1]=AD[2];
+						C_buffer[2][cptr[2]]=AD[2];
+						if(cptr[2] >= 214) cptr[2] = 200;
+						else cptr[2]++; 
+					}
+				}				
+			}
+			else	
+			{
+				if(Check_ADC_Ready(SRM1_ADC2) == 1)
+				{
+					SRM_Write_ADC_Byte(SRM1_ADC2, 0x44);
+					if((SRM_Read_ADC_Byte(SRM1_ADC2) & 0x01) == 0x01) //If status RDY0 == 1
+					{
+						SRM_Write_ADC_Byte(SRM1_ADC2, 0x48); //Setup read from Channel Data register
+						AD[1] = SRM_Read_ADC_16Bits(SRM1_ADC2);
+						if(AD[1]>C_buffer[1][0])C_buffer[1][0]=AD[1];
+						if(AD[1]<C_buffer[1][1])C_buffer[1][1]=AD[1];
+						C_buffer[1][cptr[1]]=AD[1];
+						if(cptr[1] >= 214) cptr[1] = 200;
+						else cptr[1]++; 
+					}
+					SRM_Write_ADC_Byte(SRM1_ADC2, 0x44);
+					if((SRM_Read_ADC_Byte(SRM1_ADC2) & 0x04) == 0x04)
+					{
+						SRM_Write_ADC_Byte(SRM1_ADC2, 0x4A);
+						AD[3] = SRM_Read_ADC_16Bits(SRM1_ADC2);
+						if(AD[3]>C_buffer[3][0])C_buffer[3][0]=AD[3];
+						if(AD[3]<C_buffer[3][1])C_buffer[3][1]=AD[3];
+						C_buffer[3][cptr[3]]=AD[3];
+						if(cptr[3] >= 214) cptr[3] = 200;
+						else cptr[3]++; 
+					}
+				}
+			}
+			if(Test_Count >= 30)
+			{
+				Test_Phase = DT_PAUSE_PHASE;
+				Test_Count = 0;
+				if((C_buffer[0][0]-32768)<(32768-(C_buffer[0][1]))){C_buffer[0][0]=C_buffer[0][1];}
+				if((C_buffer[1][0]-32768)<(32768-(C_buffer[1][1]))){C_buffer[1][0]=C_buffer[1][1];}
+				if((C_buffer[2][0]-32768)<(32768-(C_buffer[2][1]))){C_buffer[2][0]=C_buffer[2][1];}
+				if((C_buffer[3][0]-32768)<(32768-(C_buffer[3][1]))){C_buffer[3][0]=C_buffer[3][1];}
+      }
 			break;
 		case DETECT_RANGE2_PHASE:
-			//detect range function	2
-			Test_Phase = PAUSE_PHASE;
+			if(Test_Count == 1)
+			{
+				if((C_buffer[2][0] > 48000)||(C_buffer[2][0] < 17536)){
+					if((C_buffer[0][0] < 34500)&&(C_buffer[0][0] > 31036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC1_CH1, 8);
+						C_buffer_RET[0]=C_buffer[0][0];
+					}
+					else                                                    
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC1_CH1, 4);
+						C_buffer_RET[0]=C_buffer[0][0];
+					}
+				}
+				else
+				{
+					if((C_buffer[2][0] < 34500)&&(C_buffer[2][0] > 31036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC1_CH2, 8);
+						C_buffer_RET[0]=C_buffer[2][0];
+					}
+					else if((C_buffer[2][0] < 36500)&&(C_buffer[2][0] > 29036)) 
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC1_CH2, 4);
+						C_buffer_RET[0]=C_buffer[2][0];
+					}
+					else if((C_buffer[2][0] < 39500)&&(C_buffer[2][0] > 26036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC1_CH2, 2);
+						C_buffer_RET[0]=C_buffer[2][0];
+					}
+				}
+			}
+			if(Test_Count == 2)
+			{
+				if((C_buffer[3][0] > 48000)||(C_buffer[3][0] < 17536))
+				{
+					if((C_buffer[1][0] < 34500)&&(C_buffer[1][0] > 31036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH1, 8);
+						C_buffer_RET[1]=C_buffer[1][0];
+					}
+					else if((C_buffer[1][0] < 36500)&&(C_buffer[1][0] > 29036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH1, 4);
+						C_buffer_RET[1]=C_buffer[1][0];
+					}
+					else if((C_buffer[1][0] < 39500)&&(C_buffer[1][0] > 26036)) 
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH1, 2);
+						C_buffer_RET[1]=C_buffer[1][0];
+					}
+					else
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH1, 1);
+						C_buffer_RET[1]=C_buffer[1][0];
+					}
+				}
+				else
+				{
+					if((C_buffer[3][0] < 34500)&&(C_buffer[3][0] > 31036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH2, 8);
+						C_buffer_RET[1]=C_buffer[3][0];
+					}
+					else if((C_buffer[3][0] < 36500)&&(C_buffer[3][0] > 29036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH2, 4);
+						C_buffer_RET[1]=C_buffer[3][0];
+					}
+					else if((C_buffer[3][0] < 39500)&&(C_buffer[3][0] > 26036))  
+					{
+						SRM_ADC_Set_Gain(SRM1_ADC2_CH2, 2);
+						C_buffer_RET[1]=C_buffer[3][0];
+					}
+				}
+			}
+			if(Test_Count >= 3)
+			{
+				cptr[0]=0;
+				cptr[1]=0;
+				cptr[2]=0;
+				cptr[3]=0;
+				Test_Count = 0;
+				//if(DeadTank){ Test_Phase = DT_PAUSE_PH; }
+				Test_Phase = GET_SAMPLES_PHASE;
+			}			
 			break;
 		case PAUSE_PHASE:
-			//pause test
-			Test_Phase = RAMP_DOWN_PHASE;
+			if(Test_Count >= 34)
+			{
+				cptr[0]=0;
+				cptr[1]=0;
+				cptr[2]=0;
+				cptr[3]=0;
+				Test_Count = 0;
+				Test_Phase = GET_SAMPLES_PHASE;
+			}
+			break;
+		case DT_PAUSE_PHASE:
+//			if(DeadTank==2){
+//					Test_Count = 0;
+//					Test_Phase = DETECT_RANGE2_PH;
+//			}
+		break;
+		case GET_SAMPLES_PHASE:
+			if(Test_Count%2 == 0){  				
+				if(Check_ADC_Ready(SRM1_ADC1))
+				{
+					SRM_Write_ADC_Byte(SRM1_ADC1, 0x44); 
+					if((SRM_Read_ADC_Byte(SRM1_ADC1)&0x01)==0x01)
+					{
+							SRM_Write_ADC_Byte(SRM1_ADC1,0x48);
+							AD[0]=SRM_Read_ADC_16Bits(SRM1_ADC1);
+							C_buffer[0][cptr[0]]=AD[0];
+							cptr[0]++;
+							if(cptr[0]==320) cptr[0]=0;
+					}
+					SRM_Write_ADC_Byte(SRM1_ADC1, 0x44);
+					if((SRM_Read_ADC_Byte(SRM1_ADC1)&0x04)==0x04)
+					{
+							SRM_Write_ADC_Byte(SRM1_ADC1,0x4A);
+							AD[2]=SRM_Read_ADC_16Bits(SRM1_ADC1);
+							C_buffer[2][cptr[2]]=AD[2];
+							cptr[2]++;
+							if(cptr[2]==320) cptr[2]=0;
+					}
+				}
+			}
+		  else{    
+				if(Check_ADC_Ready(SRM1_ADC2))
+				{
+					SRM_Write_ADC_Byte(SRM1_ADC2, 0x44);
+					if((SRM_Read_ADC_Byte(SRM1_ADC2)&0x01)==0x01)
+					{
+							SRM_Write_ADC_Byte(SRM1_ADC2,0x48);
+							AD[1]=SRM_Read_ADC_16Bits(SRM1_ADC2);
+							C_buffer[1][cptr[1]]=AD[1];
+							cptr[1]++;
+							if(cptr[1]==320) cptr[1]=0;
+					}
+					SRM_Write_ADC_Byte(SRM1_ADC2, 0x44);
+					if((SRM_Read_ADC_Byte(SRM1_ADC2)&0x04)==0x04)
+					{
+							SRM_Write_ADC_Byte(SRM1_ADC2,0x4A);
+							AD[3]=SRM_Read_ADC_16Bits(SRM1_ADC2);
+							C_buffer[3][cptr[3]]=AD[3];
+							cptr[3]++;
+							if(cptr[3]==320) cptr[3]=0;
+					}
+				}
+      }
+			if(Test_Count >= TestDuration)
+			{
+				//if(DeadTank==2) Test_Phase = DT_PAUSE2_PH;
+				//else{Test_Phase = RAMP2_PH;}
+				Test_Phase = RAMP_DOWN_PHASE;
+				Test_Count = 0;
+			}
 			break;
 		case RAMP_DOWN_PHASE:
-			//ramp function
-			Test_Phase = END_PHASE;
+			if(Test_Count > 1) DRM_DAC_Write(DACV_Reg[3], CHANNEL1);
+			else if(Test_Count > 3) DRM_DAC_Write(DACV_Reg[2], CHANNEL1);
+			else if(Test_Count > 5) DRM_DAC_Write(DACV_Reg[1], CHANNEL1);
+			else if(Test_Count > 7) DRM_DAC_Write(DACV_Reg[0], CHANNEL1);						
+			else if(Test_Count > 9)
+			{/*TestSTOP;*/ 
+//				SyncSTOP;
+//				Meas_flag = Test_Count; 
+//				SPI_24_Write(0); 
+//				OutSTOP; 
+//				UV_Enable; 
+				Test_Phase = END_PHASE;
+			}
 			break;
 		case END_PHASE:
 			timer2_SRM_ON = 0;
-			//end test
+			//Dodati ovdje dodatna osiguranja da je tranzistor zatvoren.
 			break;
 	}	
 }
 
-
+unsigned int Check_ADC_Ready(unsigned int channel)
+{
+	unsigned int ADC_ready = 0;
+	switch(channel)
+	{
+		case SRM1_ADC1:		
+			if(SRM1_RDY1 == RESET) ADC_ready = 1;
+		break;
+		case SRM1_ADC2:	
+			if(SRM1_RDY2 == RESET) ADC_ready = 1;
+		break;
+		case SRM2_ADC1:
+			if(SRM2_RDY1 == RESET) ADC_ready = 1;
+		break;
+		case SRM2_ADC2:	
+			if(SRM2_RDY2 == RESET) ADC_ready = 1;
+		break;
+	}
+	return ADC_ready;
+}
 
 
 

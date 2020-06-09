@@ -61,6 +61,7 @@
 #include "init.h"
 #include "calib.h"
 #include "control.h"
+#include "adc.h"
 
 unsigned char varijabla=0;
 unsigned char nova_varijabla=0; 

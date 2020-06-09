@@ -53,3 +53,4 @@ stm32f407zet6\main.o: ../Inc/remote.h
 stm32f407zet6\main.o: ../Inc/init.h
 stm32f407zet6\main.o: ../Inc/calib.h
 stm32f407zet6\main.o: ../Inc/control.h
+stm32f407zet6\main.o: ../Inc/adc.h
