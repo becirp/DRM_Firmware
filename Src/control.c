@@ -5470,6 +5470,10 @@ unsigned int DRM_Get_Results(void)
 		uint16_t i, j;
 		uint32_t sram_address = SRAM_BASE_ADDRESS;	
 		
+		DRM1_ADC_Read_All();
+	
+		//Onesposobljeno u toku proradjivanja mjernih kanala
+		#if 0
 		//Timer setup and start
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
 		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
@@ -5486,8 +5490,6 @@ unsigned int DRM_Get_Results(void)
 			data_voltage1 = ADC_Results.ANCH[1];
 			data_current2 = ADC_Results.ANCH[2];
 			data_voltage2 = ADC_Results.ANCH[3];
-			data_current3 = ADC_Results.ANCH[4];
-			data_voltage3 = ADC_Results.ANCH[5];
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current1, 1);					
 			sram_address+=2;
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage1, 1);
@@ -5496,10 +5498,6 @@ unsigned int DRM_Get_Results(void)
 			sram_address+=2;
 			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
 			sram_address+=2;	
-			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);					
-			sram_address+=2;
-			HAL_SRAM_Write_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
-			sram_address+=2;
 		}		
 		
 		//RAM read and send to GUI
@@ -5514,18 +5512,12 @@ unsigned int DRM_Get_Results(void)
 			sram_address+=2;
 			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage2, 1);
 			sram_address+=2;
-			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_current3, 1);
-			sram_address+=2;
-			HAL_SRAM_Read_16b(&hsram1, (uint32_t *)sram_address, &data_voltage3, 1);
-			sram_address+=2;
 			if(InputBuffer[3]=='C')
-				sprintf(OutputBuffer, "%u,%u,%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2, data_current3, data_voltage3);
+				sprintf(OutputBuffer, "%u,%u,%u,%u;", data_current1, data_voltage1, data_current2, data_voltage2);
 			if(InputBuffer[3]=='1')
 				sprintf(OutputBuffer, "%u,%u;", data_current1, data_voltage1);
 			if(InputBuffer[3]=='2')
 				sprintf(OutputBuffer, "%u,%u;", data_current2, data_voltage2);
-			if(InputBuffer[3]=='3')
-				sprintf(OutputBuffer, "%u,%u;", data_current3, data_voltage3);
 			SendOutputBuffer(COMM.port);
 			if(i==2000 | i==4000 | i==6000 | i==8000)
 			{
@@ -5534,7 +5526,8 @@ unsigned int DRM_Get_Results(void)
 		}		
 		//End of transfer
 		sprintf(OutputBuffer,"OK");
-		
+		#endif
+				
 		return retVal;
 }
 
@@ -5592,7 +5585,7 @@ unsigned int DRM_Get_Results3(void)
 
 
 //Battery charger control (I2C) Turn on/off +5V from battery
-//unsigned int Battery_Charger_Control(void)
+//unsigned int Battery_Battery_Charger_Control(void)
 //{
 //		unsigned int retVal = MAIN_OK;
 //	//Command: BAT11 - ukljuci CHG1, BAT10 - iskljuci CHG1, itd.
@@ -5756,23 +5749,20 @@ unsigned int DRM_Start_Test(void)
 unsigned int foo_function(void)
 {
 		unsigned int retVal = MAIN_OK;
-		Coil_Control(COIL_CLOSE, SET);
-		HAL_Delay(3000);
-		Coil_Control(COIL_CLOSE, RESET);
-		Coil_Control(COIL_OPEN, SET);
-		HAL_Delay(3000);
-		Coil_Control(COIL_OPEN, RESET);
-		sprintf(OutputBuffer, "Toggle OPEN Coil.");
 		return retVal;
 }
 
 unsigned int Get_BAT_Voltage(void)
 {
 	unsigned int retVal = MAIN_OK;
+	float batVoltage1 = 0.0;
+	float batVoltage2 = 0.0;
 	
-	VBAT_ADC_Read();
-	sprintf(OutputBuffer, "%u,%u", ADC_Results.ANCH[4],ADC_Results.ANCH[5]);
-	SendOutputBuffer(COMM.port);
+	VBAT_ADC_Read();	
+	batVoltage1 = ADC_Results.ANCH[4] * 10.1 / 65535;
+	batVoltage2 = ADC_Results.ANCH[5] * 10.14 / 65535;	
+	
+	sprintf(OutputBuffer, "%.2f, %.2f", batVoltage1, batVoltage2);
 	
 	return retVal;
 }
@@ -5820,22 +5810,118 @@ unsigned int Channel_Power_Control(void)
 	
 	if(InputBuffer[4]=='1')
 	{
-		if(InputBuffer[5]=='1') Pwr_Control(CHANNEL1, ON);
-		else if(InputBuffer[5]=='0') Pwr_Control(CHANNEL1, OFF);
+		if(InputBuffer[5]=='1') 
+		{
+			Pwr_Control(CHANNEL1, ON);
+			sprintf(OutputBuffer, "Channel 1 Power ON");
+		}
+		else if(InputBuffer[5]=='0') 
+		{
+			Pwr_Control(CHANNEL1, OFF);
+		  sprintf(OutputBuffer, "Channel 1 Power OFF");
+		}
 	}
 	else if(InputBuffer[4]=='2')
 	{
-				if(InputBuffer[5]=='1') Pwr_Control(CHANNEL2, ON);
-		else if(InputBuffer[5]=='0') Pwr_Control(CHANNEL2, OFF);
+		if(InputBuffer[5]=='1')
+		{
+			Pwr_Control(CHANNEL2, ON);
+			sprintf(OutputBuffer, "Channel 2 Power ON");
+		}			
+		else if(InputBuffer[5]=='0')
+		{
+			Pwr_Control(CHANNEL2, OFF);
+			sprintf(OutputBuffer, "Channel 2 Power OFF");
+		}			
 	}
 	
 	return retVal;
 }
 
+unsigned int Battery_Charger_Control(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+	if(InputBuffer[4]=='1')
+	{
+		if(InputBuffer[5]=='1') 
+		{
+			CHG1_ENABLE;
+			sprintf(OutputBuffer, "Charger 1 ON");
+		}
+		else if(InputBuffer[5]=='0') 
+		{
+			CHG1_DISABLE;
+		  sprintf(OutputBuffer, "Charger 1 OFF");
+		}
+	}
+		else if(InputBuffer[4]=='2')
+	{
+		if(InputBuffer[5]=='1')
+		{
+			CHG2_ENABLE;
+			sprintf(OutputBuffer, "Charger 2 ON");
+		}			
+		else if(InputBuffer[5]=='0')
+		{
+			CHG2_DISABLE;
+			sprintf(OutputBuffer, "Charger 2 OFF");
+		}			
+	}
+	return retVal;
+}
 
+unsigned int DRM_Current_Control(void)
+{
+	unsigned int retVal = MAIN_OK;
+	
+	if(InputBuffer[4]=='1')
+	{
+		if(InputBuffer[5]=='1')
+		{
+			CURRENT_CH1_ENABLE;
+		}
+		if(InputBuffer[5]=='0')
+		{
+			CURRENT_CH1_DISABLE;
+		}
+	}
+		if(InputBuffer[4]=='2')
+	{
+		if(InputBuffer[5]=='1')
+		{
+			CURRENT_CH2_ENABLE;
+		}
+		if(InputBuffer[5]=='0')
+		{
+			CURRENT_CH2_DISABLE;
+		}
+	}
+	return retVal;
+}
 
-
-
+unsigned int DRM_DAC_Test(void)
+{
+		unsigned int retVal = MAIN_OK;
+		unsigned int dacValue = 0;
+		
+		sprintf(OutputBuffer, "DRM DAC test");
+			
+		if(check_if_digit(5, 9) == MAIN_OK)
+		{
+			dacValue = string_to_int(5, 9);
+		}	
+		if(InputBuffer[4]=='1')
+		{	
+			DRM_DAC_Write(dacValue, CHANNEL1);
+		}
+		if(InputBuffer[4]=='2')
+		{
+			DRM_DAC_Write(dacValue, CHANNEL2);
+		}
+		
+		return retVal;
+}
 
 
 

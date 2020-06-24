@@ -986,7 +986,7 @@ extern void Ramp(unsigned int channel, unsigned int dac_output, unsigned int up_
 //Battery Charger Control Functions
 extern void Battery_Balancer_Control(unsigned int channel, unsigned int on_off);
 extern void Pwr_Control(unsigned int channel, unsigned int on_off);
-extern void Battery_Charger_Control(unsigned int channel, unsigned int on_off);
+extern void Battery_Battery_Charger_Control(unsigned int channel, unsigned int on_off);
 extern unsigned int Battery_Charging_Status(unsigned int channel);
 
 ////////////////////////////////////////////
@@ -1014,12 +1014,12 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define SRAM_BASE_ADDRESS   0x60000000
 
 //DRM Control
-#define CHANNEL1_ENABLE 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET)			//izmijenjen
-#define CHANNEL1_DISABLE 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET)		//izmijenjen
-#define CHANNEL2_ENABLE 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET)			//izmijenjen
-#define CHANNEL2_DISABLE 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET)		//izmijenjen
-#define DRM_CLK_HIGH  					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET)			//izmijenjen
-#define DRM_CLK_LOW  						HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET)		//izmijenjen
+#define CURRENT_CH1_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET)			//izmijenjen
+#define CURRENT_CH1_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET)		//izmijenjen
+#define CURRENT_CH2_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET)			//izmijenjen
+#define CURRENT_CH2_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET)		//izmijenjen
+#define DRM_CLK_HIGH  					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET)			//izmijenjen
+#define DRM_CLK_LOW  						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_DIN_HIGH						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET)  		//izmijenjen
 #define DRM_DIN_LOW				  		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_SYNC1_HIGH					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET)			//izmijenjen
@@ -1036,11 +1036,11 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define DRM_ADC_VOUT2			  		HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6)										  //izmijenjen	
 
 //VBAT Monitor
-#define VBAT_ADC_CS_SET					HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET)
-#define VBAT_ADC_CS_RESET				HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_RESET)
+#define VBAT_ADC_CS_SET					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET)
+#define VBAT_ADC_CS_RESET				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET)
 //VBAT_CLK linija nije povezana na procesor; privremeno stavljeno na PH1 dok se ne proradi plocica
-#define VBAT_ADC_CLK_HIGH				HAL_GPIO_WritePin(GPIOH, GPIO_PIN_1, GPIO_PIN_SET)
-#define VBAT_ADC_CLK_LOW				HAL_GPIO_WritePin(GPIOH, GPIO_PIN_1, GPIO_PIN_RESET)
+#define VBAT_ADC_CLK_HIGH				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET)
+#define VBAT_ADC_CLK_LOW				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET)
 #define	VBAT_ADC_DATA1					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_10)
 #define	VBAT_ADC_DATA2					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11)
 

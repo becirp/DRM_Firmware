@@ -268,14 +268,14 @@ extern void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_RESET);
 	
 	//PORTA
-	/*Configure GPIO pins : PA0 PA1 PA2 PA3 PA4 PA5 PA12 PA15 OUTPUT*/
-	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_12 | GPIO_PIN_15;
+	/*Configure GPIO pins : PA0 PA1 PA2 PA3 PA5 PA8 PA12 PA15 OUTPUT*/
+	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3  | GPIO_PIN_5 | GPIO_PIN_8 | GPIO_PIN_12 | GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-	/*Configure GPIO pins : PA6 PA8 INPUT*/
-	GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_8;
+	/*Configure GPIO pins : PA4 PA6 PA8 INPUT*/
+	GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -289,7 +289,7 @@ extern void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	/*Configure GPIO pins : PB3 PB8 PB11 PB13 PB14 PB15 INPUT*/
-	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_8 | GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_8 | GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -310,8 +310,8 @@ extern void MX_GPIO_Init(void)
 //  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 	
 	//PORTD
-	/*Configure GPIO pins : PD6 OUTPUT */	
-	GPIO_InitStruct.Pin = GPIO_PIN_5;
+	/*Configure GPIO pins : PD3 PD6 OUTPUT */	
+	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_6;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -324,6 +324,7 @@ extern void MX_GPIO_Init(void)
 //  GPIO_InitStruct.Pull = GPIO_NOPULL;
 //  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 //  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
 	/*Configure GPIO pins : PE2 PE6 INPUT*/
 	GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -338,17 +339,24 @@ extern void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-	/*Configure GPIO pins : PF7 PF9 INPUT*/
-	GPIO_InitStruct.Pin = GPIO_PIN_7 | GPIO_PIN_9;
+	/*Configure GPIO pins : PF9 INPUT*/
+	GPIO_InitStruct.Pin = GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+	
+	//USB Comm config
+	
+	/*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_8, GPIO_PIN_SET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_RESET);
 	
 	//PORTG
 	/*Configure GPIO pins : PG8 PG9 PG12 PG13 OUTPUT*/
-  GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9  | GPIO_PIN_12 | GPIO_PIN_13;
+  GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12 | GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -675,8 +683,8 @@ activetext = printer_texts[language];
 
 void init_coil_control(void)
 {
-	uint8_t MCU_bat_chg_ctrl = 0x02;
-	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
+//	uint8_t MCU_bat_chg_ctrl = 0x02;
+//	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U3, (uint8_t*)&MCU_bat_chg_ctrl, 1, 1000);
 //uint8_t data=0xC6;
 //	uint8_t data=0xFF;
 //HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U607, (uint8_t*)(&PORT607), 1, 1000);
@@ -700,12 +708,12 @@ void init_coil_control(void)
 
 void init_bat_control(void)
 {
-	uint8_t DRM1_Bat_Chg_Info1 = 0x10;
-	uint8_t DRM1_Bat_Chg_Info2 = 0x42;
-	DRM1_Bat_Chg_Info1 |= (DRM1_ADPT_RLY_CH1 | DRM1_ADPT_RLY_CH2);
-	DRM1_Bat_Chg_Info2 |= DRM1_ADPT_RLY_CH3;
-	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
-	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);
+//	uint8_t DRM1_Bat_Chg_Info1 = 0x10;
+//	uint8_t DRM1_Bat_Chg_Info2 = 0x42;
+//	DRM1_Bat_Chg_Info1 |= (DRM1_ADPT_RLY_CH1 | DRM1_ADPT_RLY_CH2);
+//	DRM1_Bat_Chg_Info2 |= DRM1_ADPT_RLY_CH3;
+//	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U2, (uint8_t*)&DRM1_Bat_Chg_Info1, 1, 1000);
+//	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);
 }
 
 

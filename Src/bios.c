@@ -499,8 +499,8 @@ void DRM_Channel_Enable(unsigned int channel_number)
 	//TODO: dodati case za ostale kanale
 		switch(channel_number)
 		{
-			case 1: CHANNEL1_ENABLE; break;
-			case 2: CHANNEL2_ENABLE; break;
+			case 1: CURRENT_CH1_ENABLE; break;
+			case 2: CURRENT_CH2_ENABLE; break;
 			default: sprintf(OutputBuffer,"Error: operator not correct!");
 		}
 }
@@ -510,8 +510,8 @@ void DRM_Channel_Disable(unsigned int channel_number)
 			//TODO: dodati case za ostale kanale
 		switch(channel_number)
 		{
-			case 1: CHANNEL1_DISABLE; break;
-			case 2: CHANNEL2_DISABLE; break;
+			case 1: CURRENT_CH1_DISABLE; break;
+			case 2: CURRENT_CH2_DISABLE; break;
 			default: sprintf(OutputBuffer,"Error: operator not correct!");
 		}
 }
@@ -609,8 +609,16 @@ void Pwr_Control(unsigned int channel, unsigned int on_off)
 {
 	if(channel == CHANNEL1)
 	{
-		if(on_off == ON) PWR1_ENABLE;
-		if(on_off == OFF) PWR1_DISABLE;
+		if(on_off == ON) 
+		{
+			PWR1_ENABLE;
+			//sprintf(OutputBuffer, "PWR1_ENABLE");
+		}
+		if(on_off == OFF)
+		{
+			PWR1_DISABLE;
+			//sprintf(OutputBuffer, "PWR1_DISABLE");
+		}			
 	}
 	if(channel == CHANNEL2)
 	{
@@ -620,7 +628,7 @@ void Pwr_Control(unsigned int channel, unsigned int on_off)
 }
 
 //Charger control function
-void Battery_Charger_Control(unsigned int channel, unsigned int on_off)
+void Battery_Battery_Charger_Control(unsigned int channel, unsigned int on_off)
 {
 	if(channel == CHANNEL1)
 	{

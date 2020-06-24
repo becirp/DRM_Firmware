@@ -22,7 +22,18 @@ if (InputBuffer[0]=='m')
 					if((InputBuffer[1]=='F')&&(InputBuffer[2]=='O')&&(InputBuffer[3]=='O'))
 					{
 									return (foo_function());
-					}	
+					}					
+					//Return board version
+					if((InputBuffer[1]=='R')&&(InputBuffer[2]=='G')&&(InputBuffer[3]=='F'))
+          {
+									sprintf(OutputBuffer, "DSRM Control Board V1.1");
+									return (MAIN_OK);
+          }
+					//CHG on/off
+					if((InputBuffer[1]=='C')&&(InputBuffer[2]=='H')&&(InputBuffer[3]=='G'))
+          {									
+									return (Battery_Charger_Control());
+          }
 					//Channel PWR on/off
 					if((InputBuffer[1]=='P')&&(InputBuffer[2]=='W')&&(InputBuffer[3]=='R'))
 					{
@@ -37,7 +48,17 @@ if (InputBuffer[0]=='m')
 					if((InputBuffer[1]=='S')&&(InputBuffer[2]=='R')&&(InputBuffer[3]=='M'))
 					{
 									return (SRM_Start_Test());
-					}					
+					}		
+					//DRM DAC write value test
+					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='C'))
+					{
+									return (DRM_DAC_Test());
+					}	
+					//Manual disable/enable current DRM channel
+					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='E')&&(InputBuffer[3]=='N'))
+					{
+						      return (DRM_Current_Control());
+					}
 					//Start DRM test function
 					if((InputBuffer[1]=='D')&&(InputBuffer[2]=='R')&&(InputBuffer[3]=='M'))
 					{
@@ -300,11 +321,7 @@ if (InputBuffer[0]=='m')
 							OK_Response();                                                                                                                                                                                                              
 							return(MAIN_OK);
 					}      
-					if((InputBuffer[1]=='R')&&(InputBuffer[2]=='G')&&(InputBuffer[3]=='F'))
-          {
-              sprintf(OutputBuffer, "DRM Control Board V1.3");
-              return (MAIN_OK);
-          }   
+   
 					if((InputBuffer[1]=='M')&&(InputBuffer[2]=='T')&&(InputBuffer[3]=='C'))
 					{
 							sprintf(OutputBuffer, "SRAM_TEST_PROCEDURE_STARTS");

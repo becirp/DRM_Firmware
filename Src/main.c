@@ -151,6 +151,21 @@ int main(void)
 	init_bat_control();
 	MAIN_CONTACTS_INIT_SEQ;
 	
+	//Ugasiti kanal na pocetku
+	PWR1_DISABLE;
+	PWR2_DISABLE;
+	//Ugasiti punjac na pocetku -- CHG ne radi dok se ne ukljuci TPS kolo, koje pravi +5V koje se referencira za ove upravljacke signale. Ovo treba prepraviti u hardveru.
+	CHG1_DISABLE;
+	CHG2_DISABLE;
+	
+	//DAC Start state
+	DRM_SYNC1_HIGH;
+	DRM_SYNC2_HIGH;
+	DRM_CLK_LOW;
+	DRM_DIN_LOW;
+	
+	VBAT_ADC_CLK_HIGH;
+	
 	//PRIVREMENO SE UPISUJU JEDINICNI KOEFICIJENTI:
 	Reset_Calibration_COMM();
 	

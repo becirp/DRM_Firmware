@@ -41,14 +41,17 @@ extern unsigned int foo_function(void);
 extern unsigned int Toggle_Pins(void);
 extern unsigned int Write_DRM_Channel(void);
 extern unsigned int DRM_Get_Results();
-//extern unsigned int Battery_Charger_Control(void);
+//extern unsigned int Battery_Battery_Charger_Control(void);
 extern unsigned int DRM_Start_Test(void);
+extern unsigned int DRM_Current_Control(void);
+extern unsigned int DRM_DAC_Test(void);
 
 //SRM Functions
 extern unsigned int SRM_Start_Test(void);
 
 //BAT Functions
 extern unsigned int Get_BAT_Voltage(void);
+extern unsigned int Battery_Charger_Control(void);
 
 //PWR Control
 extern unsigned int Channel_Power_Control(void);
