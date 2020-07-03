@@ -5871,6 +5871,8 @@ unsigned int Channel_Power_Control(void)
 		}	
 	}
 	
+	InitADC();
+	
 	return retVal;
 }
 
@@ -5959,60 +5961,60 @@ unsigned int DRM_DAC_Test(void)
 		return retVal;
 }
 
-unsigned int SRM_ADC_GetData(void)
-{
-	unsigned int retVal = MAIN_OK;
-
-	//Channel setup
-	InitADC();
-	
-	/*All communications to the AD7732 start with a write operation to
-		the communications register followed by either reading or
-		writing the addressed register*/
-//	SRM_Write_ADC_Byte(SRM1_ADC2, ADC_MODE_CHANNEL2_REG);
-//	SRM_Write_ADC_Byte(SRM1_ADC2, ADC_SINGLE_CONVERSION_MODE);
-	
-	delay_us(10);
-	
-	//Write to communications register that we are going to read ADC Status register
-	SRM_Write_ADC_Byte(SRM1_ADC2, READ_ADC_STATUS_REG); 
-	
-	//Read from ADC Status register -- wait for RDY signal
-	while((SRM_Read_ADC_Byte(SRM1_ADC2) & SRM_ADC_RDY2) != SRM_ADC_RDY2);
-
-	//Next operation is read from ADC channel 2 data register
-	SRM_Write_ADC_Byte(SRM1_ADC2, READ_ADC_CHANNEL2_DATA);
-	//Read from channel 2 data register
-	AD[0] = SRM_Read_ADC_16Bits(SRM1_ADC2);
-	
-	sprintf(OutputBuffer, "%d", AD[0]);
-	
-	return retVal;
-}
-
 void Read_ADC_Chip_Revision()
 {
 	unsigned int d;
 	
 	SRM_Write_ADC_Byte(SRM1_ADC1, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM1_ADC1);
-	sprintf(OutputBuffer, "%d", d);
+	sprintf(OutputBuffer, "SRM1 ADC1 Chip Revision: %d", d);
 	SendOutputBuffer(COMM.port);
 	
 	SRM_Write_ADC_Byte(SRM1_ADC2, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM1_ADC2);
-	sprintf(OutputBuffer, "%d", d);
+	sprintf(OutputBuffer, "SRM1 ADC2 Chip Revision: %d", d);
 	SendOutputBuffer(COMM.port);
 	
 	SRM_Write_ADC_Byte(SRM2_ADC1, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM2_ADC1);
-	sprintf(OutputBuffer, "%d", d);
+	sprintf(OutputBuffer, "SRM2 ADC1 Chip Revision: %d", d);
 	SendOutputBuffer(COMM.port);
 
 	SRM_Write_ADC_Byte(SRM2_ADC2, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM2_ADC2);
-	sprintf(OutputBuffer, "%d", d);
+	sprintf(OutputBuffer, "SRM2 ADC2 Chip Revision: %d", d);
+	SendOutputBuffer(COMM.port);
+	
 }
+
+unsigned int SRM_ADC_GetData(void)
+{
+	unsigned int retVal = MAIN_OK;
+	volatile unsigned char d = 0;
+	/*All communications to the AD7732 start with a write operation to
+		the communications register followed by either reading or
+		writing the addressed register*/
+//	SRM_Write_ADC_Byte(SRM1_ADC1, ADC_MODE_CHANNEL1_REG);
+//	SRM_Write_ADC_Byte(SRM1_ADC1, ADC_SINGLE_CONVERSION_MODE);
+	
+	//Read_ADC_Chip_Revision();
+	
+	#if 0
+	SRM_Write_ADC_Byte(SRM1_ADC1, 0x70);
+	d = SRM_Read_ADC_Byte(SRM1_ADC1);    
+	sprintf(OutputBuffer, "SRM1 ADC1 CH0 Conversion Time Register: 0x%X", d);
+	#endif
+	
+	#if 1
+	SRM_Write_ADC_Byte(SRM1_ADC1, 0x41);
+	d = SRM_Read_ADC_Byte(SRM1_ADC1);    
+	sprintf(OutputBuffer, "SRM1 ADC1 IO Port Register: 0x%X", d);
+	#endif
+	
+	return retVal;
+}
+
+
 
 
 

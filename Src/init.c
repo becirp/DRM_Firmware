@@ -855,29 +855,50 @@ void InitADC(void)
     //me=0;
     for(i=1;i<3;i++)
     {    
-        SRM_Write_ADC_Byte(i,0xff);        //Reset
+        SRM_Write_ADC_Byte(i,0xff);       //Software Reset
         SRM_Write_ADC_Byte(i,0xff);
         SRM_Write_ADC_Byte(i,0xff);
         SRM_Write_ADC_Byte(i,0xff);
-    
-        // IO reg
+				
+				delay_us(1000);
+				
+        //IO Port register
         SRM_Write_ADC_Byte(i,0x01);      //Write the next comm to reg. 0x01 - I/O Port
         SRM_Write_ADC_Byte(i,0x31);      //P0/P1 = input, SYNC = 1
         
-        //clock
-        SRM_Write_ADC_Byte(i,0x30);    //Write the next comm to reg. 0x30 - Channel Converion Time
-        SRM_Write_ADC_Byte(i,0x9e);		//SRM_Write_ADC_Byte(i,0xbc);   //c5  //Chop = 1, FW = 14 -> Conv. Time = 1 ms 
+        //Channel Conversion Time register
+				//CH1 0x30
+				//CHOP = 1, continuous conversion with two channels enabled. 
+				//Conversion Time (µs) = (FW * 128 + 249) / MCLK Frequency (MHz), the FW range is 2 to 127.
+				// FW = (Conversion Time(us) * MCLK (MHz) - 249) / 128
+        SRM_Write_ADC_Byte(i,0x30);      //ADD 0x30 - Channel Conversion Time
+        SRM_Write_ADC_Byte(i,0x9D);		   //Chop = 1, FW = 29, MCLK = 4MHz -> Conv. Time = 1 ms 
+				//CH2 0x32
+        SRM_Write_ADC_Byte(i,0x32);    	 //Write the next comm to reg. 0x32 - Channel Converion Time
+        SRM_Write_ADC_Byte(i,0x9D);			 //Chop = 1, FW = 29, MCLK = 4MHz -> Conv. Time = 1 ms
+			
+        //Channel Setup register
+				if(i==1)
+				{
+					SRM_Write_ADC_Byte(i,0x28);    //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x08);    //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
+				}
+				if(i==2)
+				{
+					SRM_Write_ADC_Byte(i,0x28);    //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x08);    //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
+				}
+				if (i==1)
+				{
+					SRM_Write_ADC_Byte(i,0x2A);     //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x08);     //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
+				}
+				if (i==2)
+				{
+					SRM_Write_ADC_Byte(i,0x2A);     //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x08);     //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
+				}
 
-        // Channel setup (CH00) //naponski kanali opseg 0-10 V, strujni kanali opseg 0-5 V
-				if(i==0){
-					SRM_Write_ADC_Byte(i,0x28);      //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x0b);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0 do +5V
-				}
-				else if(i==1){
-					SRM_Write_ADC_Byte(i,0x28);      //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x09);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0 do +10V
-				}
-        
         #if ADC24bit
 				// Mode reg  (CH00)
         SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
@@ -886,25 +907,6 @@ void InitADC(void)
 				SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
         SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
 				#endif
-        
-        //clock-channel convertion time register
-        SRM_Write_ADC_Byte(i,0x32);    //Write the next comm to reg. 0x30 - Channel Converion Time
-        SRM_Write_ADC_Byte(i,0x9e);		//SRM_Write_ADC_Byte(i,0xbc);   //c5  //Chop = 1, FW = 29 -> Conv. Time = 1 ms
-        
-        // Channel setup (CH01) //naponski kanali opseg 0-10 V, strujni kanali opseg 0-5 V
-				if (i==0){
-					SRM_Write_ADC_Byte(i,0x2A);      //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x0b);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0V do +5V
-				}
-				else if (i==1){
-					SRM_Write_ADC_Byte(i,0x2A);      //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x09);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0V do +10V
-				}
-        
-        ///////////////////////////////////////
-        //SRM_Write_ADC_Byte(1,0x1a);WriteADC24(1,0x00800000);
-        ////////////////////////////////////////
-        
 				#if ADC24bit
         // Mode reg (CH01)
         SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
@@ -921,6 +923,6 @@ void InitADC(void)
 		//Write_ADC_GAIN(1, 0, 0);
 		//Write_ADC_GAIN(1, 0, 1);
 
-		delay_us(50000);
+		delay_us(1000);
 }
 

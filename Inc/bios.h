@@ -1122,6 +1122,7 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define ADC_MODE_CHANNEL1_REG   		0x38
 #define ADC_MODE_CHANNEL2_REG   		0x3A
 #define ADC_SINGLE_CONVERSION_MODE 	0x40
+
 //I2C Battery Control
 //Ovo takodjer promijeniti u funkcijama koje ih pozivaju, a onda obrisati.
 #define GPIO_EXPANSION_U2			0x40
