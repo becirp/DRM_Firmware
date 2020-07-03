@@ -84,11 +84,14 @@ extern void DRM1_ADC_Read_All(void);
 extern void VBAT_ADC_Read(void);
 
 //SRM functions
-extern void SRM_Write_ADC_Byte(unsigned int channel, unsigned char data);
+extern void Write_ADC_Byte(unsigned int channel, unsigned int commandWord);
+extern void SRM_Write_ADC_Byte(unsigned int channel, unsigned int commandWord);
 extern void SRM_Write_ADC_24Bits(unsigned int channel, unsigned long data);
 extern unsigned char SRM_Read_ADC_Byte(unsigned int channel);
-extern unsigned char SRM_Read_ADC_16Bits(unsigned int channel);
+extern unsigned int SRM_Read_ADC_16Bits(unsigned int channel);
 extern void SRM_ADC_Set_Gain(unsigned int srm_adc_channel, unsigned int gain);
 extern void SRM_Get_Samples(void);
 extern unsigned int Check_ADC_Ready(unsigned int channel);
 
+//SRM vars
+extern volatile unsigned int AD[4];

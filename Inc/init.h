@@ -23,4 +23,5 @@ extern I2C_HandleTypeDef hi2c1;
 //DRM functions
 extern void init_bat_control(void);
 
-
+//SRM functions
+extern void InitADC(void);

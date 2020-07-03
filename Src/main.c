@@ -114,7 +114,6 @@ int main(void)
 
 //    data = 0x00;     // 0x0C in your example
 
-		
 		myVariable='A';
 	
   /* USER CODE BEGIN 1 */
@@ -132,7 +131,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
+	SystemCoreClockUpdate();
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -145,11 +144,11 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM2_Init();
 	MX_TIM3_Init();
-	MX_I2C1_Init();
-	init_variables();
-	init_coil_control();
-	init_bat_control();
-	MAIN_CONTACTS_INIT_SEQ;
+	//MX_I2C1_Init();
+	//init_variables();
+	//init_coil_control();
+	//init_bat_control();
+	//MAIN_CONTACTS_INIT_SEQ;
 	
 	//Ugasiti kanal na pocetku
 	PWR1_DISABLE;
@@ -164,7 +163,14 @@ int main(void)
 	DRM_CLK_LOW;
 	DRM_DIN_LOW;
 	
+	//Vbat init
 	VBAT_ADC_CLK_HIGH;
+	
+	//SRM init
+	SRM1_CS1_SET;
+	SRM1_CS2_SET;
+	SRM2_CS1_SET;
+	SRM2_CS2_SET;
 	
 	//PRIVREMENO SE UPISUJU JEDINICNI KOEFICIJENTI:
 	Reset_Calibration_COMM();

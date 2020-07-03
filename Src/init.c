@@ -248,6 +248,7 @@ void MX_I2C1_Init(void)
   * @param None
   * @retval None
   */
+#if 0
 extern void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -260,35 +261,35 @@ extern void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_8, GPIO_PIN_SET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_RESET);
 	
 	//PORTA
-	/*Configure GPIO pins : PA0 PA1 PA2 PA3 PA5 PA8 PA12 PA15 OUTPUT*/
-	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3  | GPIO_PIN_5 | GPIO_PIN_8 | GPIO_PIN_12 | GPIO_PIN_15;
+	/*Configure GPIO pin Output Level */	
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_1 | GPIO_PIN_3 | GPIO_PIN_8), GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_5 | GPIO_PIN_7 | GPIO_PIN_12 | GPIO_PIN_15), GPIO_PIN_RESET);	
+	/*Configure GPIO pins : PA1 PA2 PA3 PA5 PA7 PA8 PA12 PA15 OUTPUT*/
+	GPIO_InitStruct.Pin =  GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3  | GPIO_PIN_5 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_12 | GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-	/*Configure GPIO pins : PA4 PA6 PA8 INPUT*/
-	GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_6;
+	/*Configure GPIO pins : PA0 PA4 PA6 INPUT*/
+	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_4 | GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 	
 	//PORTB
+	/*Configure GPIO pin Output Level */	
+	HAL_GPIO_WritePin(GPIOB, (GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_12 | GPIO_PIN_14), GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB, (GPIO_PIN_0 | GPIO_PIN_1), GPIO_PIN_RESET);
 	/*Configure GPIO pins : PB0 PB1 PB4 PB5 PB9 PB10 PB12 PB14 OUTPUT*/
 	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_12 | GPIO_PIN_14;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-	/*Configure GPIO pins : PB3 PB8 PB11 PB13 PB14 PB15 INPUT*/
+	/*Configure GPIO pins : PB3 PB8 PB11 PB13 PB15 INPUT*/
 	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_8 | GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -296,7 +297,9 @@ extern void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	
 	//PORTC
-	/*Configure GPIO pins : PC0-PC6 OUTPUT */		
+	/*Configure GPIO pin Output Level */	
+	
+	/*Configure GPIO pins : PC0-PC6 OUTPUT */	
 	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -310,6 +313,8 @@ extern void MX_GPIO_Init(void)
 //  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 	
 	//PORTD
+	/*Configure GPIO pin Output Level */
+	HAL_GPIO_WritePin(GPIOD, (GPIO_PIN_3 | GPIO_PIN_6), GPIO_PIN_RESET);
 	/*Configure GPIO pins : PD3 PD6 OUTPUT */	
 	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_6;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -333,6 +338,8 @@ extern void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 	
 	//PORTF:
+	/*Configure GPIO pin Output Level */
+	HAL_GPIO_WritePin(GPIOD, (GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_10 | GPIO_PIN_11), GPIO_PIN_RESET);
 	/*Configure GPIO pins : PF6 PF7 PF8 PF10 PF11 OUTPUT*/
 	GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_10 | GPIO_PIN_11;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -346,15 +353,10 @@ extern void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 	
-	//USB Comm config
-	
-	/*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_8, GPIO_PIN_SET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9, GPIO_PIN_RESET);
-	
 	//PORTG
+	/*Configure GPIO pin Output Level */
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_8, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOG, (GPIO_PIN_9 | GPIO_PIN_12 | GPIO_PIN_13), GPIO_PIN_RESET);
 	/*Configure GPIO pins : PG8 PG9 PG12 PG13 OUTPUT*/
   GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12 | GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -375,7 +377,6 @@ extern void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 	
-
 	#if 0
   //PORTA0  = AN_CH_ENABLE/AN_MC_ENABLE, INIT STATE: OUTPUT, 0 OK
 	//PORTA1  = #MCU1_ADC1_#ADC_CS       , INIT STATE: OUTPUT, 1 OK (linear transducer ch)
@@ -513,9 +514,141 @@ extern void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+}
+#endif
+
+//Ubacena alternativna inicijalizacija, jer je bilo problema na nekim portovima
+#if 1
+extern void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10 
+                          |GPIO_PIN_11, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_3|GPIO_PIN_8, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5|GPIO_PIN_7|GPIO_PIN_12|GPIO_PIN_15, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10|GPIO_PIN_12|GPIO_PIN_14|GPIO_PIN_4 
+                          |GPIO_PIN_5|GPIO_PIN_9, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_8, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3|GPIO_PIN_6, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_9|GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PE2 PE6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PF6 PF7 PF8 PF10 
+                           PF11 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_10 
+                          |GPIO_PIN_11;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PF9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PC0 PC1 PC2 PC3 
+                           PC4 PC5 PC6 PC7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA1 PA3 PA5 PA7 
+                           PA8 PA12 PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_3|GPIO_PIN_5|GPIO_PIN_7 
+                          |GPIO_PIN_8|GPIO_PIN_12|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA4 PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB1 PB10 PB12 
+                           PB14 PB4 PB5 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_10|GPIO_PIN_12 
+                          |GPIO_PIN_14|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB11 PB13 PB15 PB3 
+                           PB8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_13|GPIO_PIN_15|GPIO_PIN_3 
+                          |GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG6 PG7 PG10 PG11 
+                           PG14 PG15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_10|GPIO_PIN_11 
+                          |GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG8 PG9 PG12 PG13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_12|GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PD3 PD6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
 }
-
+#endif
 /* FSMC initialization function */
 void MX_FSMC_Init(void)
 {
@@ -716,5 +849,78 @@ void init_bat_control(void)
 //	HAL_I2C_Master_Transmit(&hi2c1, GPIO_EXPANSION_U4, (uint8_t*)&DRM1_Bat_Chg_Info2, 1, 1000);
 }
 
+void InitADC(void)
+{
+    unsigned char i,d;
+    //me=0;
+    for(i=1;i<3;i++)
+    {    
+        SRM_Write_ADC_Byte(i,0xff);        //Reset
+        SRM_Write_ADC_Byte(i,0xff);
+        SRM_Write_ADC_Byte(i,0xff);
+        SRM_Write_ADC_Byte(i,0xff);
+    
+        // IO reg
+        SRM_Write_ADC_Byte(i,0x01);      //Write the next comm to reg. 0x01 - I/O Port
+        SRM_Write_ADC_Byte(i,0x31);      //P0/P1 = input, SYNC = 1
+        
+        //clock
+        SRM_Write_ADC_Byte(i,0x30);    //Write the next comm to reg. 0x30 - Channel Converion Time
+        SRM_Write_ADC_Byte(i,0x9e);		//SRM_Write_ADC_Byte(i,0xbc);   //c5  //Chop = 1, FW = 14 -> Conv. Time = 1 ms 
 
+        // Channel setup (CH00) //naponski kanali opseg 0-10 V, strujni kanali opseg 0-5 V
+				if(i==0){
+					SRM_Write_ADC_Byte(i,0x28);      //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x0b);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0 do +5V
+				}
+				else if(i==1){
+					SRM_Write_ADC_Byte(i,0x28);      //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x09);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0 do +10V
+				}
+        
+        #if ADC24bit
+				// Mode reg  (CH00)
+        SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
+        SRM_Write_ADC_Byte(i,0x23);      //Mode: Continous Conversion Mode, CLAMP = 1, 24-bit resolution
+				#else
+				SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
+        SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
+				#endif
+        
+        //clock-channel convertion time register
+        SRM_Write_ADC_Byte(i,0x32);    //Write the next comm to reg. 0x30 - Channel Converion Time
+        SRM_Write_ADC_Byte(i,0x9e);		//SRM_Write_ADC_Byte(i,0xbc);   //c5  //Chop = 1, FW = 29 -> Conv. Time = 1 ms
+        
+        // Channel setup (CH01) //naponski kanali opseg 0-10 V, strujni kanali opseg 0-5 V
+				if (i==0){
+					SRM_Write_ADC_Byte(i,0x2A);      //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x0b);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0V do +5V
+				}
+				else if (i==1){
+					SRM_Write_ADC_Byte(i,0x2A);      //Write the next comm to reg. 0x28 - Channel Setup
+					SRM_Write_ADC_Byte(i,0x09);      //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Opseg: 0V do +10V
+				}
+        
+        ///////////////////////////////////////
+        //SRM_Write_ADC_Byte(1,0x1a);WriteADC24(1,0x00800000);
+        ////////////////////////////////////////
+        
+				#if ADC24bit
+        // Mode reg (CH01)
+        SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
+        SRM_Write_ADC_Byte(i,0x23);      //Mode: Continous Conversion Mode, CLAMP = 1, 24-bit resolution
+				#else
+				// Mode reg (CH01)
+        SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
+        SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
+				#endif
+    }
+		
+		//SRM_Write_ADC_Byte(1,0x1A);//SRM_Write_ADC_Byte(adc,0x18);
+    //WriteADC24(1,0x00200000);
+		//Write_ADC_GAIN(1, 0, 0);
+		//Write_ADC_GAIN(1, 0, 1);
+
+		delay_us(50000);
+}
 

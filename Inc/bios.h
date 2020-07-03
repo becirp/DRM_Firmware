@@ -1,3 +1,4 @@
+extern void delay_us(unsigned int us);
 extern void BSGRelayControl(unsigned char BSG_RELAY, unsigned char On_Off);
 extern void BSGBuckControl(unsigned char On_Off);
 extern void BSGChargeDischargeRELControl(unsigned int CHARGE_DISCHARGE_REL, unsigned char On_Off);
@@ -1039,8 +1040,8 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define VBAT_ADC_CS_SET					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET)
 #define VBAT_ADC_CS_RESET				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET)
 //VBAT_CLK linija nije povezana na procesor; privremeno stavljeno na PH1 dok se ne proradi plocica
-#define VBAT_ADC_CLK_HIGH				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET)
-#define VBAT_ADC_CLK_LOW				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET)
+#define VBAT_ADC_CLK_HIGH				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET)
+#define VBAT_ADC_CLK_LOW				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET)
 #define	VBAT_ADC_DATA1					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_10)
 #define	VBAT_ADC_DATA2					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11)
 
@@ -1065,11 +1066,12 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define	SRM_DIN_LOW							HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET)
 #define SRM_CLK_HIGH						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET)
 #define SRM_CLK_LOW							HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET)
-#define SRM_DOUT								HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3)
+#define SRM1_DOUT								HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3)
+#define SRM2_DOUT								HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)
 #define SRM1_CS1_SET						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET)
 #define SRM1_CS1_RESET					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET)
-#define SRM1_RST_HIGH						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET)
-#define SRM1_RST_LOW						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET)
+#define SRM_RST_HIGH						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET)
+#define SRM_RST_LOW						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET)
 #define SRM1_RDY1								HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8)
 #define SRM1_CS2_SET						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET)
 #define SRM1_CS2_RESET					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET)
@@ -1111,6 +1113,15 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define DT_PAUSE2_PHASE         (unsigned char) 10
 #define END_PHASE         			(unsigned char) 11
 
+//SRM AD7732 Register Macros
+#define READ_ADC_STATUS_REG					0x44
+#define SRM_ADC_RDY1								0x01
+#define SRM_ADC_RDY2								0x04
+#define READ_ADC_CHANNEL1_DATA  		0x48
+#define READ_ADC_CHANNEL2_DATA  		0x4A
+#define ADC_MODE_CHANNEL1_REG   		0x38
+#define ADC_MODE_CHANNEL2_REG   		0x3A
+#define ADC_SINGLE_CONVERSION_MODE 	0x40
 //I2C Battery Control
 //Ovo takodjer promijeniti u funkcijama koje ih pozivaju, a onda obrisati.
 #define GPIO_EXPANSION_U2			0x40

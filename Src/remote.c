@@ -29,6 +29,11 @@ if (InputBuffer[0]=='m')
 									sprintf(OutputBuffer, "DSRM Control Board V1.1");
 									return (MAIN_OK);
           }
+					//SRM ADC test
+					if((InputBuffer[1]=='S')&&(InputBuffer[2]=='A')&&(InputBuffer[3]=='D'))
+					{
+									return (SRM_ADC_GetData());
+					}
 					//CHG on/off
 					if((InputBuffer[1]=='C')&&(InputBuffer[2]=='H')&&(InputBuffer[3]=='G'))
           {									

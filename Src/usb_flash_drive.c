@@ -18,14 +18,6 @@ void delay_ms(unsigned int ms)
 	HAL_Delay(ms);
 }
 
-void delay_us(unsigned int us)
-{
-	for(unsigned int i=0; i<100; i++)
-	{
-		__nop();
-	}
-}
-
 unsigned char outbv[64];
 
 void reset_flash_drive_MCU(void)

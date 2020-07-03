@@ -40,6 +40,53 @@ LINEAR_RESULTS_STRUCT  LTransd_Results;
 DIGITAL_RESULTS_STRUCT DTransd_Results;
 RMO_RESULTS_STRUCT     RMO_Results;
 
+#if 1
+void delay_us(unsigned int us)
+{
+	for(unsigned int i=0; i<200*us; i++)
+	{
+		__nop();
+	}
+}
+#endif
+
+#if 0
+uint32_t DWT_Get(void)
+{
+  return DWT->CYCCNT;
+}
+
+void delay_us(uint32_t us) // microseconds
+{
+  uint32_t dp = us * (SystemCoreClock/1000000);
+  uint32_t d,n,sp=DWT_Get();
+  do
+  {
+	  //ALTrst;
+	  n=DWT_Get();
+	  if(n>=sp)
+	  {
+		  d=n-sp;
+		  if(d>=dp)
+		  {
+			  return;
+		  }
+		  
+	  }
+	  else
+	  {
+		  d=sp-n;
+		  d=~d;
+		  d++;
+		  if(d>=dp)
+		  {
+			  return;
+		  }
+	  }
+  }while(1);
+}
+#endif
+
 void BSGRelayControl(unsigned char BSG_RELAY, unsigned char On_Off)
 {
     if(On_Off==ON)
