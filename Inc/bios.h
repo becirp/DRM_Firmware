@@ -1114,14 +1114,10 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define END_PHASE         			(unsigned char) 11
 
 //SRM AD7732 Register Macros
-#define READ_ADC_STATUS_REG					0x44
-#define SRM_ADC_RDY1								0x01
-#define SRM_ADC_RDY2								0x04
-#define READ_ADC_CHANNEL1_DATA  		0x48
-#define READ_ADC_CHANNEL2_DATA  		0x4A
-#define ADC_MODE_CHANNEL1_REG   		0x38
-#define ADC_MODE_CHANNEL2_REG   		0x3A
-#define ADC_SINGLE_CONVERSION_MODE 	0x40
+
+
+//Bit check
+#define CHECK_BIT(var,pos) ((var >> pos) & 1)
 
 //I2C Battery Control
 //Ovo takodjer promijeniti u funkcijama koje ih pozivaju, a onda obrisati.

@@ -5760,16 +5760,16 @@ unsigned int DRM_Start_Test(void)
 
 void dummy_function(int dummyVal)
 {
-	sprintf(OutputBuffer,"%d", dummyVal);
+
 }
 
 unsigned int foo_function(void)
 {
-		unsigned int retVal = MAIN_OK;
-		
-		dummy_function(0x41);
-		
-		return retVal;
+	unsigned int retVal = MAIN_OK;
+	
+	dummy_function(0x41);
+	
+	return retVal;
 }
 
 
@@ -5967,37 +5967,43 @@ void Read_ADC_Chip_Revision()
 	
 	SRM_Write_ADC_Byte(SRM1_ADC1, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM1_ADC1);
-	sprintf(OutputBuffer, "SRM1 ADC1 Chip Revision: %d", d);
+	sprintf(OutputBuffer, "SRM1 ADC1 Chip Revision: %x", d);
 	SendOutputBuffer(COMM.port);
 	
 	SRM_Write_ADC_Byte(SRM1_ADC2, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM1_ADC2);
-	sprintf(OutputBuffer, "SRM1 ADC2 Chip Revision: %d", d);
+	sprintf(OutputBuffer, "SRM1 ADC2 Chip Revision: %x", d);
 	SendOutputBuffer(COMM.port);
 	
 	SRM_Write_ADC_Byte(SRM2_ADC1, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM2_ADC1);
-	sprintf(OutputBuffer, "SRM2 ADC1 Chip Revision: %d", d);
+	sprintf(OutputBuffer, "SRM2 ADC1 Chip Revision: %x", d);
 	SendOutputBuffer(COMM.port);
 
 	SRM_Write_ADC_Byte(SRM2_ADC2, 0x42);     
 	d = SRM_Read_ADC_Byte(SRM2_ADC2);
-	sprintf(OutputBuffer, "SRM2 ADC2 Chip Revision: %d", d);
-	SendOutputBuffer(COMM.port);
+	sprintf(OutputBuffer, "SRM2 ADC2 Chip Revision: %x", d);
 	
 }
 
 unsigned int SRM_ADC_GetData(void)
 {
 	unsigned int retVal = MAIN_OK;
-	volatile unsigned char d = 0;
+	unsigned int d = 0;
+	unsigned int data1 = 0;
+	unsigned int data2 = 0;
+	unsigned int channel;
+	unsigned int i;
+	volatile unsigned int ready = 0;
 	/*All communications to the AD7732 start with a write operation to
 		the communications register followed by either reading or
 		writing the addressed register*/
 //	SRM_Write_ADC_Byte(SRM1_ADC1, ADC_MODE_CHANNEL1_REG);
 //	SRM_Write_ADC_Byte(SRM1_ADC1, ADC_SINGLE_CONVERSION_MODE);
 	
-	//Read_ADC_Chip_Revision();
+	#if 0
+	Read_ADC_Chip_Revision();
+	#endif
 	
 	#if 0
 	SRM_Write_ADC_Byte(SRM1_ADC1, 0x70);
@@ -6005,10 +6011,65 @@ unsigned int SRM_ADC_GetData(void)
 	sprintf(OutputBuffer, "SRM1 ADC1 CH0 Conversion Time Register: 0x%X", d);
 	#endif
 	
-	#if 1
+	#if 0
 	SRM_Write_ADC_Byte(SRM1_ADC1, 0x41);
 	d = SRM_Read_ADC_Byte(SRM1_ADC1);    
 	sprintf(OutputBuffer, "SRM1 ADC1 IO Port Register: 0x%X", d);
+	#endif
+	
+	#if 0
+	SRM_Write_ADC_Byte(SRM1_ADC1, 0x44);
+	d = SRM_Read_ADC_Byte(SRM1_ADC2);    
+	sprintf(OutputBuffer, "SRM1 ADC1 ADC Status Register: 0x%X", d);
+	#endif
+	
+	#if 0
+	//AD7732 Continous Conversion Mode
+	channel = SRM1_ADC2;
+	//Setup conti mode in mode register for designated channel
+	SRM_Write_ADC_Byte(channel, AD_MODE1_REG_WRITE);
+	SRM_Write_ADC_Byte(channel, AD_MODE1_CONTI_READ);
+	//Start the continuous read mode
+	SRM_Write_ADC_Byte(channel, AD_START_CONTI_READ);
+	for(i = 0; i < 6; i++)
+	{
+		delay_us(1000);
+		SRM_Write_ADC_Byte(channel, 0x44);
+		ready1 = SRM_Read_ADC_Byte(SRM1_ADC1);
+		if((ready1 == 0x41) || (ready1 == 0x01) || (ready1 == 0x40))
+		{
+			data1 = SRM_Read_ADC_16Bits(channel);
+			delay_us(1000);
+			sprintf(OutputBuffer, "%u", data1);
+			SendOutputBuffer(COMM.port);
+		}	
+	}
+	
+	//Exit conti read mode
+	SRM_Write_ADC_Byte(channel, AD_STOP_CONTI_READ);	
+	//Stop conti mode in mode register for designated channel
+	SRM_Write_ADC_Byte(channel, AD_MODE1_REG_WRITE);
+	SRM_Write_ADC_Byte(channel, 0x31);
+	
+	sprintf(OutputBuffer, "End.");
+	#endif
+	
+	#if 1
+	//Single Conversion ADC, two channels
+	channel = SRM1_ADC2;
+	SRM_Write_ADC_Byte(channel, 0x38);
+	SRM_Write_ADC_Byte(channel, 0x40);
+	while(SRM1_RDY2 != 0);
+	SRM_Write_ADC_Byte(channel, 0x48);
+	data1 = SRM_Read_ADC_16Bits(channel);
+	
+	SRM_Write_ADC_Byte(channel, 0x3A);
+	SRM_Write_ADC_Byte(channel, 0x40);
+	while(SRM1_RDY2 != 0);
+	SRM_Write_ADC_Byte(channel, 0x4A);
+	data2 = SRM_Read_ADC_16Bits(channel);
+	
+	sprintf(OutputBuffer, "%u, %u", data1, data2);
 	#endif
 	
 	return retVal;

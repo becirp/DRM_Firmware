@@ -8,6 +8,7 @@
 #include "init.h"
 #include "comm.h"
 #include "control.h"
+#include "dwt_delay.h"
 
 ADC_STRUCT     ADC_Results;
 ADC8BIT_STRUCT ADC_8bit_results;
@@ -16,7 +17,7 @@ unsigned char ADCdataL[8];
 unsigned char ADCdataH[8];
 
 //SRM ADC settings
-unsigned int SRM_ADC_Delay = 1;
+unsigned int SRM_ADC_Delay = 10;
 unsigned int Test_Phase = 0;
 float SRM1_C_Gain = 1.0;
 float SRM1_V_Gain = 1.0;
@@ -1560,7 +1561,8 @@ void SRM_Write_ADC_Byte(unsigned int channel, unsigned int commandWord)
 	unsigned int i;
 
 	SRM_ADC_Select(channel, SELECT_CHIP);
-	delay_us(SRM_ADC_Delay);
+	//delay_us(SRM_ADC_Delay);
+	DWT_Delay_us(SRM_ADC_Delay);
 	for(i=0; i<8; i++)
 	{
 		if(commandWord & 0x80)
@@ -1572,13 +1574,13 @@ void SRM_Write_ADC_Byte(unsigned int channel, unsigned int commandWord)
 			SRM_DIN_LOW;
 		}
 		commandWord = commandWord << 1;
-		delay_us(SRM_ADC_Delay);
+		DWT_Delay_us(SRM_ADC_Delay);
 		SRM_CLK_LOW;
-		delay_us(SRM_ADC_Delay);
+		DWT_Delay_us(SRM_ADC_Delay);
 		SRM_CLK_HIGH;
 	}
-	delay_us(SRM_ADC_Delay);
-	//SRM_DIN_HIGH;
+	DWT_Delay_us(SRM_ADC_Delay);
+	SRM_DIN_HIGH;
 	SRM_ADC_Select(channel, UNSELECT_CHIP);
 }
 
@@ -1613,28 +1615,24 @@ unsigned char SRM_Read_ADC_Byte(unsigned int channel)
 	unsigned int i;
 	unsigned char data = 0x00;
 	SRM_ADC_Select(channel, SELECT_CHIP);
-	delay_us(SRM_ADC_Delay);
+	DWT_Delay_us(SRM_ADC_Delay);
 	for(i=0; i<8; i++)
 	{
 		data = data << 1;
-		delay_us(SRM_ADC_Delay);
+		DWT_Delay_us(SRM_ADC_Delay);
 		SRM_CLK_LOW;
-		delay_us(SRM_ADC_Delay);
+		DWT_Delay_us(SRM_ADC_Delay);
 		SRM_CLK_HIGH;
-//		if(SRM1_DOUT == GPIO_PIN_SET)
-//		{
-//			data |= 0x01;
-//		}
-		if((channel == SRM1_ADC1) || (channel == SRM1_ADC2)) 
+		if((channel == SRM1_ADC1) || (channel == SRM1_ADC2))
 		{
 			data |= SRM1_DOUT;
 		}
-		if((channel == SRM2_ADC1) || (channel == SRM2_ADC2)) 
+		if((channel == SRM2_ADC1) || (channel == SRM2_ADC2))
 		{
 			data |= SRM2_DOUT;
 		}
 	}
-	delay_us(SRM_ADC_Delay);
+	DWT_Delay_us(SRM_ADC_Delay);
 	SRM_ADC_Select(channel, UNSELECT_CHIP);
 	return data;
 }
@@ -1644,17 +1642,25 @@ unsigned int SRM_Read_ADC_16Bits(unsigned int channel)
 	unsigned int i;
 	unsigned int data = 0x00;
 	SRM_ADC_Select(channel, SELECT_CHIP);
-	DELAY_IN_us(SRM_ADC_Delay);
+	DWT_Delay_us(SRM_ADC_Delay);
 	for(i=0; i<16; i++)
 	{
 		data = data << 1;
-		DELAY_IN_us(SRM_ADC_Delay);
+		DWT_Delay_us(SRM_ADC_Delay);
 		SRM_CLK_LOW;
-		DELAY_IN_us(SRM_ADC_Delay);
+		DWT_Delay_us(SRM_ADC_Delay);
 		SRM_CLK_HIGH;
-		if(SRM1_DOUT == GPIO_PIN_SET) data |= 0x01;
+		//if(SRM1_DOUT == GPIO_PIN_SET) data |= 0x01;
+		if((channel == SRM1_ADC1) || (channel == SRM1_ADC2))
+		{
+			data |= SRM1_DOUT;
+		}
+		if((channel == SRM2_ADC1) || (channel == SRM2_ADC2))
+		{
+			data |= SRM2_DOUT;
+		}
 	}
-	DELAY_IN_us(SRM_ADC_Delay);
+	DWT_Delay_us(SRM_ADC_Delay);
 	SRM_ADC_Select(channel, UNSELECT_CHIP);
 	return data;
 }

@@ -25,9 +25,9 @@
 #ifndef INC_DWT_DELAY_H_
 #define INC_DWT_DELAY_H_
 
-#define DWT_DELAY_NEWBIE 0
-
-void DWT_Init(void);
-void DWT_Delay(uint32_t us);
+uint32_t DWT_Delay_Init(void);
+void DWT_Delay_us(volatile uint32_t microseconds);
+void DWT_Init(void); //disabled
+void DWT_Delay(uint32_t us); //disabled
 
 #endif /* INC_DWT_DELAY_DWT_DELAY_H_ */

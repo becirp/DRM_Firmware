@@ -853,7 +853,7 @@ void InitADC(void)
 {
     unsigned char i,d;
     //me=0;
-    for(i=1;i<3;i++)
+    for(i=1;i<5;i++)
     {    
         SRM_Write_ADC_Byte(i,0xff);       //Software Reset
         SRM_Write_ADC_Byte(i,0xff);
@@ -864,7 +864,7 @@ void InitADC(void)
 				
         //IO Port register
         SRM_Write_ADC_Byte(i,0x01);      //Write the next comm to reg. 0x01 - I/O Port
-        SRM_Write_ADC_Byte(i,0x31);      //P0/P1 = input, SYNC = 1
+        SRM_Write_ADC_Byte(i,0x30);      //P0/P1 = input, RDYFN = 0, SYNC = 0
         
         //Channel Conversion Time register
 				//CH1 0x30
@@ -874,48 +874,33 @@ void InitADC(void)
         SRM_Write_ADC_Byte(i,0x30);      //ADD 0x30 - Channel Conversion Time
         SRM_Write_ADC_Byte(i,0x9D);		   //Chop = 1, FW = 29, MCLK = 4MHz -> Conv. Time = 1 ms 
 				//CH2 0x32
-        SRM_Write_ADC_Byte(i,0x32);    	 //Write the next comm to reg. 0x32 - Channel Converion Time
+        SRM_Write_ADC_Byte(i,0x32);    	 //Write the next comm to reg. 0x32 - Channel Conversion Time
         SRM_Write_ADC_Byte(i,0x9D);			 //Chop = 1, FW = 29, MCLK = 4MHz -> Conv. Time = 1 ms
 			
-        //Channel Setup register
-				if(i==1)
-				{
-					SRM_Write_ADC_Byte(i,0x28);    //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x08);    //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
-				}
-				if(i==2)
-				{
-					SRM_Write_ADC_Byte(i,0x28);    //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x08);    //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
-				}
-				if (i==1)
-				{
-					SRM_Write_ADC_Byte(i,0x2A);     //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x08);     //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
-				}
-				if (i==2)
-				{
-					SRM_Write_ADC_Byte(i,0x2A);     //Write the next comm to reg. 0x28 - Channel Setup
-					SRM_Write_ADC_Byte(i,0x08);     //stat OPT = 0, ENABLE = 1 (Continous conversion mode), Range: -10 to +10V
-				}
+        //Channel Setup register -- za potrebe testiranja svi imaju iste opsege i postavke
+				
+				SRM_Write_ADC_Byte(i,0x28);    //Write the next comm to reg. 0x28 - Channel Setup
+				SRM_Write_ADC_Byte(i,0x00);    //stat OPT = 0, ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
+				SRM_Write_ADC_Byte(i,0x2A);     //Write the next comm to reg. 0x28 - Channel Setup
+				SRM_Write_ADC_Byte(i,0x00);     //stat OPT = 0, ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
 
-        #if ADC24bit
-				// Mode reg  (CH00)
-        SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
-        SRM_Write_ADC_Byte(i,0x23);      //Mode: Continous Conversion Mode, CLAMP = 1, 24-bit resolution
-				#else
-				SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
-        SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
-				#endif
-				#if ADC24bit
-        // Mode reg (CH01)
-        SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
-        SRM_Write_ADC_Byte(i,0x23);      //Mode: Continous Conversion Mode, CLAMP = 1, 24-bit resolution
-				#else
-				// Mode reg (CH01)
-        SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
-        SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
-				#endif
+//        #if ADC24bit
+//				// Mode reg  (CH00)
+//        SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
+//        SRM_Write_ADC_Byte(i,0x23);      //Mode: Continous Conversion Mode, CLAMP = 1, 24-bit resolution
+//				#else
+//				SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
+//        SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
+//				#endif
+//				#if ADC24bit
+//        // Mode reg (CH01)
+//        SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
+//        SRM_Write_ADC_Byte(i,0x23);      //Mode: Continous Conversion Mode, CLAMP = 1, 24-bit resolution
+//				#else
+//				// Mode reg (CH01)
+//        SRM_Write_ADC_Byte(i,0x3A);      //Write the next comm to reg. 0x38 - Mod Reg
+//        SRM_Write_ADC_Byte(i,0x21);      //Mode: Continous Conversion Mode, CLAMP = 1, 16-bit resolution
+//				#endif
     }
 		
 		//SRM_Write_ADC_Byte(1,0x1A);//SRM_Write_ADC_Byte(adc,0x18);

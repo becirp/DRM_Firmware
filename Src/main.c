@@ -144,6 +144,7 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM2_Init();
 	MX_TIM3_Init();
+	DWT_Delay_Init();
 	//MX_I2C1_Init();
 	//init_variables();
 	//init_coil_control();
@@ -151,8 +152,8 @@ int main(void)
 	//MAIN_CONTACTS_INIT_SEQ;
 	
 	//Ugasiti kanal na pocetku
-	PWR1_DISABLE;
-	PWR2_DISABLE;
+	PWR1_ENABLE;
+	PWR2_ENABLE;
 	//Ugasiti punjac na pocetku -- CHG ne radi dok se ne ukljuci TPS kolo, koje pravi +5V koje se referencira za ove upravljacke signale. Ovo treba prepraviti u hardveru.
 	CHG1_DISABLE;
 	CHG2_DISABLE;
@@ -199,6 +200,53 @@ int main(void)
 	//InitStick_Comm(1);
 	
 	#endif
+		
+	/* Remote ENABLE PORTB */
+		COMM.remote_enable=REMOTE_ENABLE;
+		COMM.port = COMM_PORT_B;
+		#if ST_LINK_DEBUG
+			MeasurementStart_Comm();
+		#endif
+	
+	/* WHILE LOOP BEGINS HERE*/
+  while (1)
+  {		
+		
+		//Slanje komandi sa PC na PORTB
+		#if 1
+			COMM.remote_enable=REMOTE_ENABLE;
+			COMM.port = COMM_PORT_B;
+			#if ST_LINK_DEBUG
+				MeasurementStart_Comm();
+			#endif
+			status=GetInputBuffer(COMM.port);
+			if (status==MAIN_OK)
+      {             
+      status=RemoteCommandSwitch();
+                if (status==MAIN_NOK)
+                {                                         
+                     sprintf(OutputBuffer,"ErRCS"); //Error: Remote Comand Switch               
+                }      
+                else if (status==ERROR_SRAM)
+                {
+                    sprintf(OutputBuffer, "ErMEM"); //Error: SRAM Memory!               
+                }
+                else if(status==ERROR_SDC)
+                {
+                    //vec upisana greska, samo je posalji nazad!
+                }       
+                else if (status!=MAIN_OK){                
+                //sprintf(OutputBuffer, "ErS%02u", ErrorSLAVE_nbr); //Error: Slave Device XX
+                }                  
+      } 
+      else 
+      {
+                sprintf(OutputBuffer,"ErGIB"); //Error: Get Input Buffer
+      }       
+			SendOutputBuffer(COMM.port);
+			GetDataFromMemory=NO;
+		#endif
+	
 	
 	#if 0
 	//treba clear-at flag prije pozivanje START funkcije:
@@ -268,51 +316,7 @@ int main(void)
 	}
 	#endif
 	
-	/* Remote ENABLE PORTB */
-		COMM.remote_enable=REMOTE_ENABLE;
-		COMM.port = COMM_PORT_B;
-		#if ST_LINK_DEBUG
-			MeasurementStart_Comm();
-		#endif
 	
-	/* WHILE LOOP BEGINS HERE*/
-  while (1)
-  {		
-		
-		//Slanje komandi sa PC na PORTB
-		#if 1
-			COMM.remote_enable=REMOTE_ENABLE;
-			COMM.port = COMM_PORT_B;
-			#if ST_LINK_DEBUG
-				MeasurementStart_Comm();
-			#endif
-			status=GetInputBuffer(COMM.port);
-			if (status==MAIN_OK)
-      {             
-      status=RemoteCommandSwitch();
-                if (status==MAIN_NOK)
-                {                                         
-                     sprintf(OutputBuffer,"ErRCS"); //Error: Remote Comand Switch               
-                }      
-                else if (status==ERROR_SRAM)
-                {
-                    sprintf(OutputBuffer, "ErMEM"); //Error: SRAM Memory!               
-                }
-                else if(status==ERROR_SDC)
-                {
-                    //vec upisana greska, samo je posalji nazad!
-                }       
-                else if (status!=MAIN_OK){                
-                //sprintf(OutputBuffer, "ErS%02u", ErrorSLAVE_nbr); //Error: Slave Device XX
-                }                  
-      } 
-      else 
-      {
-                sprintf(OutputBuffer,"ErGIB"); //Error: Get Input Buffer
-      }       
-			SendOutputBuffer(COMM.port);
-			GetDataFromMemory=NO;
-		#endif
 		
 		
 		//HAL_UART_Receive(&huart1, &myVar2, 1, HAL_MAX_DELAY);
