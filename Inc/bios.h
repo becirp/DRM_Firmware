@@ -305,6 +305,29 @@ typedef struct _STICK_
 }STICK_STRUCT;
 #endif
 
+//SRM ADC Data Struct
+
+#define SRM_DATA_ARRAY_SIZE (unsigned int)10
+
+#ifndef SRM_ADC_DATA_ARRAY_STRUCTURE
+#define SRM_ADC_DATA_ARRAY_STRUCTURE
+typedef struct _SRM_ADC_DATA_ARRAY_STRUCTURE_
+{
+	unsigned int data1[SRM_DATA_ARRAY_SIZE];
+	unsigned int data2[SRM_DATA_ARRAY_SIZE];
+	unsigned int data3[SRM_DATA_ARRAY_SIZE];
+	unsigned int data4[SRM_DATA_ARRAY_SIZE];
+	unsigned int data5[SRM_DATA_ARRAY_SIZE];
+	unsigned int data6[SRM_DATA_ARRAY_SIZE];
+	unsigned int data7[SRM_DATA_ARRAY_SIZE];
+	unsigned int data8[SRM_DATA_ARRAY_SIZE];
+}SRM_ADC_DATA_ARRAY;
+#endif
+
+
+
+extern SRM_ADC_DATA_ARRAY SRM_ADC_Data_Array;
+extern unsigned int SRM_ADC_Data[8];
 
 extern TESTPAR_STRUCT TESTPAR;
 extern COMM_STRUCT COMM;
@@ -1017,8 +1040,8 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 //DRM Control
 #define CURRENT_CH1_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET)			//izmijenjen
 #define CURRENT_CH1_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET)		//izmijenjen
-#define CURRENT_CH2_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET)			//izmijenjen
-#define CURRENT_CH2_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET)		//izmijenjen
+#define CURRENT_CH2_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET)			//izmijenjen
+#define CURRENT_CH2_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_CLK_HIGH  					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET)			//izmijenjen
 #define DRM_CLK_LOW  						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_DIN_HIGH						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET)  		//izmijenjen
@@ -1071,7 +1094,7 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define SRM1_CS1_SET						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET)
 #define SRM1_CS1_RESET					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET)
 #define SRM_RST_HIGH						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET)
-#define SRM_RST_LOW						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET)
+#define SRM_RST_LOW							HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET)
 #define SRM1_RDY1								HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8)
 #define SRM1_CS2_SET						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET)
 #define SRM1_CS2_RESET					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET)
@@ -1086,10 +1109,10 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define SRM2_RDY2								HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15)
 
 //SRM ADC
-#define SRM1_ADC1								(unsigned int)1
-#define SRM1_ADC2								(unsigned int)2
-#define SRM2_ADC1								(unsigned int)3
-#define SRM2_ADC2								(unsigned int)4
+#define SRM1_ADC1								(unsigned int)0
+#define SRM1_ADC2								(unsigned int)1
+#define SRM2_ADC1								(unsigned int)2
+#define SRM2_ADC2								(unsigned int)3
 #define SRM1_ADC1_CH1						(unsigned int)10
 #define SRM1_ADC1_CH2						(unsigned int)11
 #define SRM1_ADC2_CH1						(unsigned int)12

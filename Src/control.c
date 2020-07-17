@@ -16,6 +16,7 @@
 #include "dwt_delay.h"
 
 volatile unsigned char timer1_interrupt;
+volatile unsigned char timer2_interrupt;
 volatile unsigned char control_after_first_contact_touched;
 
 volatile unsigned char timer1_DRM_ON;
@@ -5687,6 +5688,7 @@ unsigned int DRM_Start_Test(void)
 		}
 	
 	/* Timer setup and start */
+		MX_TIM2_Init();
 		timer1_DRM_ON = 1;
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
 		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
@@ -5731,7 +5733,7 @@ unsigned int DRM_Start_Test(void)
 		//7.1 Iskljuci timer
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);
 		HAL_TIM_Base_Stop_IT(&htim2);
-		timer1_DRM_ON = false;
+		timer1_DRM_ON = 0;
 		//8. Slanje rezultata
 		
 		/* RAM read and send to GUI */
@@ -5758,16 +5760,14 @@ unsigned int DRM_Start_Test(void)
 		return retVal;
 }
 
-void dummy_function(int dummyVal)
-{
-
-}
-
 unsigned int foo_function(void)
 {
 	unsigned int retVal = MAIN_OK;
 	
-	dummy_function(0x41);
+	CURRENT_CH2_ENABLE;
+	HAL_Delay(5000);
+	CURRENT_CH2_DISABLE;
+	sprintf(OutputBuffer, "Toggle pin PA12");
 	
 	return retVal;
 }
@@ -5871,8 +5871,6 @@ unsigned int Channel_Power_Control(void)
 		}	
 	}
 	
-	InitADC();
-	
 	return retVal;
 }
 
@@ -5952,57 +5950,185 @@ unsigned int DRM_DAC_Test(void)
 		if(InputBuffer[4]=='1')
 		{	
 			DRM_DAC_Write(dacValue, CHANNEL1);
+			CURRENT_CH1_ENABLE;
 		}
 		if(InputBuffer[4]=='2')
 		{
 			DRM_DAC_Write(dacValue, CHANNEL2);
+			CURRENT_CH2_ENABLE;
 		}
-		
+		HAL_Delay(1000);
+		DRM_DAC_Write(0, CHANNEL1);
+		DRM_DAC_Write(0, CHANNEL2);
+		CURRENT_CH1_DISABLE;
+		CURRENT_CH2_DISABLE;
 		return retVal;
 }
 
-void Read_ADC_Chip_Revision()
+void Read_ADC_Chip_Revision(unsigned int channel)
 {
-	unsigned int d;
-	
-	SRM_Write_ADC_Byte(SRM1_ADC1, 0x42);     
-	d = SRM_Read_ADC_Byte(SRM1_ADC1);
-	sprintf(OutputBuffer, "SRM1 ADC1 Chip Revision: %x", d);
-	SendOutputBuffer(COMM.port);
-	
-	SRM_Write_ADC_Byte(SRM1_ADC2, 0x42);     
-	d = SRM_Read_ADC_Byte(SRM1_ADC2);
-	sprintf(OutputBuffer, "SRM1 ADC2 Chip Revision: %x", d);
-	SendOutputBuffer(COMM.port);
-	
-	SRM_Write_ADC_Byte(SRM2_ADC1, 0x42);     
-	d = SRM_Read_ADC_Byte(SRM2_ADC1);
-	sprintf(OutputBuffer, "SRM2 ADC1 Chip Revision: %x", d);
-	SendOutputBuffer(COMM.port);
+	unsigned int registerData;	
+	SRM_Write_ADC_Byte(channel, 0x42);     
+	registerData = SRM_Read_ADC_Byte(SRM1_ADC1);
+	sprintf(OutputBuffer, "Chip %u Revision: 0x%x", channel, registerData);
+}
 
-	SRM_Write_ADC_Byte(SRM2_ADC2, 0x42);     
-	d = SRM_Read_ADC_Byte(SRM2_ADC2);
-	sprintf(OutputBuffer, "SRM2 ADC2 Chip Revision: %x", d);
-	
+void Read_ADC_IOPort_Config(unsigned int channel)
+{
+	unsigned int registerData;	
+	SRM_Write_ADC_Byte(channel, 0x41);
+	registerData = SRM_Read_ADC_Byte(SRM1_ADC1);
+	sprintf(OutputBuffer, "Chip %u IO Port register: 0x%x", channel, registerData);
+}
+
+void Wait_ADC_RDY(unsigned int channel)
+{
+	unsigned int timeout = 1000;
+	switch (channel)
+	{
+		case SRM1_ADC1:
+			while(SRM1_RDY1 != 0)
+			{
+				if(--timeout == 0) break;
+				DWT_Delay_us(1);
+			};
+		break;
+		case SRM1_ADC2:
+			while(SRM1_RDY2 != 0)
+			{
+				if(--timeout == 0) break;
+				DWT_Delay_us(1);
+			};
+		break; 
+		case SRM2_ADC1:
+			while(SRM2_RDY1 != 0)
+			{
+				if(--timeout == 0) break;
+				DWT_Delay_us(1);
+			};
+		break; 
+		case SRM2_ADC2:
+			while(SRM2_RDY2 != 0)
+			{
+				if(--timeout == 0) break;
+				DWT_Delay_us(1);
+			};
+		break;
+	}
+}
+
+//Setup mode za AD konverziju na jednom kolu AD7732, na oba njegova kanala. Trazi SYNC u funkciji koja je poziva.
+void SRM_Single_Conversion(unsigned int channel)
+{
+	unsigned int data1 = 0, data2 = 0;
+	SRM_Write_ADC_Byte(channel, 0x38);
+	SRM_Write_ADC_Byte(channel, 0x40);
+	Wait_ADC_RDY(channel);
+	SRM_Write_ADC_Byte(channel, 0x48);	
+	data1 = SRM_Read_ADC_16Bits(channel);
+	SRM_Write_ADC_Byte(channel, 0x3A);
+	SRM_Write_ADC_Byte(channel, 0x40);
+	Wait_ADC_RDY(channel);
+	SRM_Write_ADC_Byte(channel, 0x4A);
+	data2 = SRM_Read_ADC_16Bits(channel);
+	SRM_ADC_Data[2*channel] = data1;
+	SRM_ADC_Data[2*channel + 1] = data2;
+}
+
+
+//Setup sync
+void Setup_Sync_Mode(unsigned int set)
+{
+	if(set == SET)
+	{
+		for(int i = 1; i < 5; i++)
+		{
+			SRM_Write_ADC_Byte(i,0x01);
+			SRM_Write_ADC_Byte(i,0x31);
+		}
+	}
+	if(set == RESET)
+	{
+		for(int i = 1; i < 5; i++)
+		{
+			SRM_Write_ADC_Byte(i,0x01);
+			SRM_Write_ADC_Byte(i,0x30);
+		}
+	}
+}
+
+//Multiple single conversions all channels
+void SRM_Multiple_Conversions(void)
+{
+	SRM_Single_Conversion(SRM1_ADC1);
+	SRM_Single_Conversion(SRM1_ADC2);
+	SRM_Single_Conversion(SRM2_ADC1);
+	SRM_Single_Conversion(SRM2_ADC2);
+}
+
+void SRM_Write_Data_ToArray(int i)
+{
+	SRM_ADC_Data_Array.data1[i] = SRM_ADC_Data[0];
+	SRM_ADC_Data_Array.data2[i] = SRM_ADC_Data[1];
+	SRM_ADC_Data_Array.data3[i] = SRM_ADC_Data[2];
+	SRM_ADC_Data_Array.data4[i] = SRM_ADC_Data[3];
+	SRM_ADC_Data_Array.data5[i] = SRM_ADC_Data[4];
+	SRM_ADC_Data_Array.data6[i] = SRM_ADC_Data[5];
+	SRM_ADC_Data_Array.data7[i] = SRM_ADC_Data[6];
+	SRM_ADC_Data_Array.data8[i] = SRM_ADC_Data[7];
+}
+
+void SRM_Send_Data(void)
+{	
+	for(int i = 0; i < SRM_DATA_ARRAY_SIZE; i++)
+	{
+		sprintf(OutputBuffer, "%05u,%05u,%05u,%05u,%05u,%05u,%05u,%05u;", SRM_ADC_Data_Array.data1[i], SRM_ADC_Data_Array.data2[i], SRM_ADC_Data_Array.data3[i], 
+							SRM_ADC_Data_Array.data4[i], SRM_ADC_Data_Array.data5[i], SRM_ADC_Data_Array.data6[i], SRM_ADC_Data_Array.data7[i], SRM_ADC_Data_Array.data8[i]);
+		SendOutputBuffer(COMM.port);
+	}
+}
+
+void SRM_AllChannels_Conversion(void)
+{
+	InitADC();
+	//Turn on sync mode
+	//Setup_Sync_Mode(SET);
+	//SRM_SYNC_LOW;
+	//Timer 2 init for SRM: 1ms timer
+	MX_TIM2_Init_SRM();
+	/* Timer setup and start */
+	timer2_SRM_ON = 1;
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+	HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
+	timer2_interrupt=1;
+	for(int i = 0; i < SRM_DATA_ARRAY_SIZE; i++)
+	{
+		while(timer2_interrupt==0);
+		timer2_interrupt=0;
+		SRM_Multiple_Conversions();
+		//SRM_SYNC_HIGH;
+		//SRM_Multiple_Reads();
+		SRM_Write_Data_ToArray(i);
+		//SRM_SYNC_LOW;
+	}
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);
+	HAL_TIM_Base_Stop_IT(&htim2);
+	timer2_SRM_ON = 0;
+	Setup_Sync_Mode(RESET);
+	SRM_Send_Data();
 }
 
 unsigned int SRM_ADC_GetData(void)
 {
 	unsigned int retVal = MAIN_OK;
 	unsigned int d = 0;
-	unsigned int data1 = 0;
-	unsigned int data2 = 0;
+	unsigned int data1 = 0, data2 = 0, data = 0, registerContent;
 	unsigned int channel;
 	unsigned int i;
-	volatile unsigned int ready = 0;
-	/*All communications to the AD7732 start with a write operation to
-		the communications register followed by either reading or
-		writing the addressed register*/
-//	SRM_Write_ADC_Byte(SRM1_ADC1, ADC_MODE_CHANNEL1_REG);
-//	SRM_Write_ADC_Byte(SRM1_ADC1, ADC_SINGLE_CONVERSION_MODE);
 	
 	#if 0
-	Read_ADC_Chip_Revision();
+	channel = SRM1_ADC1;
+	Read_ADC_Chip_Revision(channel);
 	#endif
 	
 	#if 0
@@ -6012,9 +6138,8 @@ unsigned int SRM_ADC_GetData(void)
 	#endif
 	
 	#if 0
-	SRM_Write_ADC_Byte(SRM1_ADC1, 0x41);
-	d = SRM_Read_ADC_Byte(SRM1_ADC1);    
-	sprintf(OutputBuffer, "SRM1 ADC1 IO Port Register: 0x%X", d);
+	channel = SRM1_ADC1;
+	Read_ADC_IOPort_Config(channel);
 	#endif
 	
 	#if 0
@@ -6022,56 +6147,18 @@ unsigned int SRM_ADC_GetData(void)
 	d = SRM_Read_ADC_Byte(SRM1_ADC2);    
 	sprintf(OutputBuffer, "SRM1 ADC1 ADC Status Register: 0x%X", d);
 	#endif
-	
-	#if 0
-	//AD7732 Continous Conversion Mode
-	channel = SRM1_ADC2;
-	//Setup conti mode in mode register for designated channel
-	SRM_Write_ADC_Byte(channel, AD_MODE1_REG_WRITE);
-	SRM_Write_ADC_Byte(channel, AD_MODE1_CONTI_READ);
-	//Start the continuous read mode
-	SRM_Write_ADC_Byte(channel, AD_START_CONTI_READ);
-	for(i = 0; i < 6; i++)
+		
+	//Single conversion AD7732 test
+	if(InputBuffer[4] == 'S')
 	{
-		delay_us(1000);
-		SRM_Write_ADC_Byte(channel, 0x44);
-		ready1 = SRM_Read_ADC_Byte(SRM1_ADC1);
-		if((ready1 == 0x41) || (ready1 == 0x01) || (ready1 == 0x40))
-		{
-			data1 = SRM_Read_ADC_16Bits(channel);
-			delay_us(1000);
-			sprintf(OutputBuffer, "%u", data1);
-			SendOutputBuffer(COMM.port);
-		}	
+
+	}		
+	
+	//Continuous conversion AD7732
+	if(InputBuffer[4] == 'C')
+	{	
+		SRM_AllChannels_Conversion();	
 	}
-	
-	//Exit conti read mode
-	SRM_Write_ADC_Byte(channel, AD_STOP_CONTI_READ);	
-	//Stop conti mode in mode register for designated channel
-	SRM_Write_ADC_Byte(channel, AD_MODE1_REG_WRITE);
-	SRM_Write_ADC_Byte(channel, 0x31);
-	
-	sprintf(OutputBuffer, "End.");
-	#endif
-	
-	#if 1
-	//Single Conversion ADC, two channels
-	channel = SRM1_ADC2;
-	SRM_Write_ADC_Byte(channel, 0x38);
-	SRM_Write_ADC_Byte(channel, 0x40);
-	while(SRM1_RDY2 != 0);
-	SRM_Write_ADC_Byte(channel, 0x48);
-	data1 = SRM_Read_ADC_16Bits(channel);
-	
-	SRM_Write_ADC_Byte(channel, 0x3A);
-	SRM_Write_ADC_Byte(channel, 0x40);
-	while(SRM1_RDY2 != 0);
-	SRM_Write_ADC_Byte(channel, 0x4A);
-	data2 = SRM_Read_ADC_16Bits(channel);
-	
-	sprintf(OutputBuffer, "%u, %u", data1, data2);
-	#endif
-	
 	return retVal;
 }
 

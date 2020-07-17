@@ -66,6 +66,7 @@
 unsigned char varijabla=0;
 unsigned char nova_varijabla=0; 
 extern volatile unsigned char timer1_interrupt;
+extern volatile unsigned char timer2_interrupt;
 unsigned int Test_Counter;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -73,16 +74,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* Prevent unused argument(s) compilation warning */
 	//HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
 	//varijabla=1; 
-
+	
 	if(timer1_DRM_ON)
 	{
 		timer1_interrupt=1;
 		varijabla=1;
 	}
-	else if(timer2_SRM_ON)
+	if(timer2_SRM_ON)
 	{
-		SRM_Get_Samples();
-		Test_Counter++;
+		timer2_interrupt=1;
+		//SRM_Get_Samples();
+		//Test_Counter++;
 	}
 		
 	//__HAL_TIM_CLEAR_IT(&htim2, TIM_IT_UPDATE);	
@@ -143,7 +145,7 @@ int main(void)
   MX_FSMC_Init();
   MX_FATFS_Init();
   MX_TIM2_Init();
-	MX_TIM3_Init();
+	//MX_TIM3_Init();
 	DWT_Delay_Init();
 	//MX_I2C1_Init();
 	//init_variables();
@@ -151,9 +153,15 @@ int main(void)
 	//init_bat_control();
 	//MAIN_CONTACTS_INIT_SEQ;
 	
-	//Ugasiti kanal na pocetku
+	//Upaljen kanal na pocetku
 	PWR1_ENABLE;
 	PWR2_ENABLE;
+	
+	CURRENT_CH2_DISABLE;
+	CURRENT_CH1_DISABLE;
+	
+	InitADC();
+	
 	//Ugasiti punjac na pocetku -- CHG ne radi dok se ne ukljuci TPS kolo, koje pravi +5V koje se referencira za ove upravljacke signale. Ovo treba prepraviti u hardveru.
 	CHG1_DISABLE;
 	CHG2_DISABLE;
@@ -172,6 +180,7 @@ int main(void)
 	SRM1_CS2_SET;
 	SRM2_CS1_SET;
 	SRM2_CS2_SET;
+	SRM_SYNC_LOW;
 	
 	//PRIVREMENO SE UPISUJU JEDINICNI KOEFICIJENTI:
 	Reset_Calibration_COMM();

@@ -29,5 +29,6 @@ uint32_t DWT_Delay_Init(void);
 void DWT_Delay_us(volatile uint32_t microseconds);
 void DWT_Init(void); //disabled
 void DWT_Delay(uint32_t us); //disabled
+void DWT_Delay_ns(volatile uint32_t nanoseconds);
 
 #endif /* INC_DWT_DELAY_DWT_DELAY_H_ */

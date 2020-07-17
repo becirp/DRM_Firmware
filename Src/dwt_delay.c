@@ -112,6 +112,17 @@ void DWT_Delay_us(volatile uint32_t microseconds)
   while ((DWT->CYCCNT - clk_cycle_start) < microseconds);
 }
 
+void DWT_Delay_ns(volatile uint32_t nanoseconds)
+{
+  uint32_t clk_cycle_start = DWT->CYCCNT;
+ 
+  /* Go to number of cycles for system */
+  nanoseconds *= (HAL_RCC_GetHCLKFreq() / 1000000000);
+ 
+  /* Delay till end */
+  while ((DWT->CYCCNT - clk_cycle_start) < nanoseconds);
+}
+
 
 #endif 
 

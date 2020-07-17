@@ -17,7 +17,7 @@ unsigned char ADCdataL[8];
 unsigned char ADCdataH[8];
 
 //SRM ADC settings
-unsigned int SRM_ADC_Delay = 10;
+unsigned int SRM_ADC_Delay = 1;
 unsigned int Test_Phase = 0;
 float SRM1_C_Gain = 1.0;
 float SRM1_V_Gain = 1.0;

@@ -40,6 +40,10 @@ LINEAR_RESULTS_STRUCT  LTransd_Results;
 DIGITAL_RESULTS_STRUCT DTransd_Results;
 RMO_RESULTS_STRUCT     RMO_Results;
 
+//SRM ADC Data struct
+SRM_ADC_DATA_ARRAY SRM_ADC_Data_Array;
+unsigned int SRM_ADC_Data[8];
+
 #if 1
 void delay_us(unsigned int us)
 {

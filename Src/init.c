@@ -167,6 +167,52 @@ void MX_TIM2_Init(void)
   /* USER CODE END TIM2_Init 2 */
 }
 
+void MX_TIM2_Init_SRM(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+	
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+	
+	//Hocemo da dobijemo frekvenciju fs = 20kHz ili Ts = 0.05ms za semplovanje. 
+	//Vremenski period za preskaler biramo uzimajuci u obzir da je on 16bit.
+	//Uzmemo manji period za preskaler nego za Ts, npr Tp = 0.01ms.
+	//Odrediti za koji je clock vezan timer: Tc = APB1 Clock
+	//Prescaler = Tc(Hz) * Tp(s) - 1 = 84MHz * 0.01ms - 1 = 840 - 1
+	//Period za brojac uzimamo, koliko zelimo puta da izbroji do prescaler vrijednosti da bi dobili zeljeni period. Za timer3 period je 16bit vrijednost.
+	//PeriodCounter = (Ts / Tp) - 1 = (0.05 / 0.01) - 1 = 10 - 1 
+  htim2.Init.Prescaler = 8400-1; 	
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 10-1;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+}
+
 void MX_TIM3_Init(void)
 {
 
@@ -545,7 +591,7 @@ extern void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_3|GPIO_PIN_8, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5|GPIO_PIN_7|GPIO_PIN_12|GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5|GPIO_PIN_7|GPIO_PIN_12, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
@@ -594,16 +640,16 @@ extern void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA1 PA3 PA5 PA7 
-                           PA8 PA12 PA15 */
+                           PA8 PA12 */
   GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_3|GPIO_PIN_5|GPIO_PIN_7 
-                          |GPIO_PIN_8|GPIO_PIN_12|GPIO_PIN_15;
+                          |GPIO_PIN_8|GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA4 PA6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_6;
+  /*Configure GPIO pins : PA4 PA6 PA15*/
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_6|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -864,7 +910,7 @@ void InitADC(void)
 				
         //IO Port register
         SRM_Write_ADC_Byte(i,0x01);      //Write the next comm to reg. 0x01 - I/O Port
-        SRM_Write_ADC_Byte(i,0x30);      //P0/P1 = input, RDYFN = 0, SYNC = 0
+        SRM_Write_ADC_Byte(i,0x31);      //P0/P1 = input, RDYFN = 1, SYNC = 0
         
         //Channel Conversion Time register
 				//CH1 0x30
@@ -877,13 +923,18 @@ void InitADC(void)
         SRM_Write_ADC_Byte(i,0x32);    	 //Write the next comm to reg. 0x32 - Channel Conversion Time
         SRM_Write_ADC_Byte(i,0x9D);			 //Chop = 1, FW = 29, MCLK = 4MHz -> Conv. Time = 1 ms
 			
-        //Channel Setup register -- za potrebe testiranja svi imaju iste opsege i postavke
+        //Channel Mode register -- za potrebe testiranja svi imaju iste opsege i postavke
+				SRM_Write_ADC_Byte(i,0x38);    //Write the next comm to reg. 0x28 - Channel Setup
+				SRM_Write_ADC_Byte(i,0x00);    //ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
+				SRM_Write_ADC_Byte(i,0x3A);    //Write the next comm to reg. 0x28 - Channel Setup
+				SRM_Write_ADC_Byte(i,0x00);    //ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
 				
-				SRM_Write_ADC_Byte(i,0x28);    //Write the next comm to reg. 0x28 - Channel Setup
-				SRM_Write_ADC_Byte(i,0x00);    //stat OPT = 0, ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
-				SRM_Write_ADC_Byte(i,0x2A);     //Write the next comm to reg. 0x28 - Channel Setup
-				SRM_Write_ADC_Byte(i,0x00);     //stat OPT = 0, ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
-
+				//Channel Setup register -- ENABLE = 1 (Set this bit to 1 to enable the channel in the continuous conversion mode.)
+				SRM_Write_ADC_Byte(i,0x28);
+				SRM_Write_ADC_Byte(i,0x04);
+				SRM_Write_ADC_Byte(i,0x2A);
+				SRM_Write_ADC_Byte(i,0x04);				
+							
 //        #if ADC24bit
 //				// Mode reg  (CH00)
 //        SRM_Write_ADC_Byte(i,0x38);      //Write the next comm to reg. 0x38 - Mod Reg
