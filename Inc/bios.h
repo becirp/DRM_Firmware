@@ -1040,8 +1040,8 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 //DRM Control
 #define CURRENT_CH1_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET)			//izmijenjen
 #define CURRENT_CH1_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET)		//izmijenjen
-#define CURRENT_CH2_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET)			//izmijenjen
-#define CURRENT_CH2_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET)		//izmijenjen
+#define CURRENT_CH2_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET)			//izmijenjen
+#define CURRENT_CH2_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_CLK_HIGH  					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET)			//izmijenjen
 #define DRM_CLK_LOW  						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_DIN_HIGH						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET)  		//izmijenjen

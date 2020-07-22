@@ -511,17 +511,16 @@ void DRM_DAC_Write(unsigned int data, unsigned int channel)
 	unsigned char i;
 	unsigned long full_data = 0;
 	unsigned long bit_operator = 0x800000;
-	uint32_t spi_delay = 10;
 	
 	data |= 0x01;
 	full_data = (unsigned long)0x180000;
 	full_data |= ((unsigned long)data);	
 	
 	DRM_CLK_HIGH;
-	delay_us(spi_delay);
+	DWT_Delay_ns(50);
 	if(channel == CHANNEL1) DRM_SYNC1_LOW;
 	if(channel == CHANNEL2) DRM_SYNC2_LOW;
-	delay_us(spi_delay);
+	DWT_Delay_ns(50);
 	
 	for(i=0; i<24; i++)
 	{
@@ -533,14 +532,14 @@ void DRM_DAC_Write(unsigned int data, unsigned int channel)
 		{
 			DRM_DIN_LOW;
 		}
-		delay_us(spi_delay);
+		DWT_Delay_ns(50);
     DRM_CLK_LOW;
-    delay_us(spi_delay);
+    DWT_Delay_ns(50);
 		full_data = (full_data << 1); 
     DRM_CLK_HIGH;		
-    delay_us(spi_delay);
+    DWT_Delay_ns(50);
 	}
-	delay_us(spi_delay);
+	DWT_Delay_ns(50);
 	if(channel == CHANNEL1) DRM_SYNC1_HIGH;
 	if(channel == CHANNEL2) DRM_SYNC2_HIGH;
 }

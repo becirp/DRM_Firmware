@@ -1431,27 +1431,27 @@ void DRM1_ADC_Read_All(void)
 	ADC_Results.ANCH[3]=0;
 	
 	DRM_ADC_CLK_LOW;
-	DELAY_IN_us;
+	DWT_Delay_ns(50);
 	DRM_ADC_CS_RESET;
 	for(i=0; i<6; i++)
 	{
-		DELAY_IN_us;
+		DWT_Delay_ns(50);
 		DRM_ADC_CLK_HIGH;
-		DELAY_IN_us;
+		DWT_Delay_ns(50);
 		DRM_ADC_CLK_LOW;
 	}
 	for(i=0; i<16; i++)
 	{
-		DELAY_IN_us;
+		DWT_Delay_ns(50);
 		DRM_ADC_CLK_HIGH;
-		DELAY_IN_us;
+		DWT_Delay_ns(50);
 		current_data1[i] = DRM_ADC_CURR1;
 		voltage_data1[i] = DRM_ADC_VOUT1;
 		current_data2[i] = DRM_ADC_CURR2;
 		voltage_data2[i] = DRM_ADC_VOUT2;
 		DRM_ADC_CLK_LOW;
 	}
-	DELAY_IN_us;
+	DWT_Delay_ns(50);
 	DRM_ADC_CS_SET;
 	
 	for(i=0; i<16; i++)

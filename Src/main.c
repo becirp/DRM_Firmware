@@ -220,7 +220,6 @@ int main(void)
 	/* WHILE LOOP BEGINS HERE*/
   while (1)
   {		
-		
 		//Slanje komandi sa PC na PORTB
 		#if 1
 			COMM.remote_enable=REMOTE_ENABLE;

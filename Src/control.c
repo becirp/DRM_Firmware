@@ -5763,11 +5763,14 @@ unsigned int DRM_Start_Test(void)
 unsigned int foo_function(void)
 {
 	unsigned int retVal = MAIN_OK;
-	
-	CURRENT_CH2_ENABLE;
-	HAL_Delay(5000);
-	CURRENT_CH2_DISABLE;
-	sprintf(OutputBuffer, "Toggle pin PA12");
+	for(int i = 0; i < 5; i++)
+	{
+		CURRENT_CH2_ENABLE;
+		HAL_Delay(3000);
+		CURRENT_CH2_DISABLE;
+		HAL_Delay(3000);
+	}
+	sprintf(OutputBuffer, "Toggle pin PA15");
 	
 	return retVal;
 }
@@ -5938,31 +5941,101 @@ unsigned int DRM_Current_Control(void)
 
 unsigned int DRM_DAC_Test(void)
 {
-		unsigned int retVal = MAIN_OK;
-		unsigned int dacValue = 0;
-		
-		sprintf(OutputBuffer, "DRM DAC test");
-			
-		if(check_if_digit(5, 9) == MAIN_OK)
-		{
-			dacValue = string_to_int(5, 9);
-		}	
-		if(InputBuffer[4]=='1')
-		{	
-			DRM_DAC_Write(dacValue, CHANNEL1);
-			CURRENT_CH1_ENABLE;
-		}
-		if(InputBuffer[4]=='2')
-		{
-			DRM_DAC_Write(dacValue, CHANNEL2);
-			CURRENT_CH2_ENABLE;
-		}
-		HAL_Delay(1000);
-		DRM_DAC_Write(0, CHANNEL1);
-		DRM_DAC_Write(0, CHANNEL2);
-		CURRENT_CH1_DISABLE;
-		CURRENT_CH2_DISABLE;
-		return retVal;
+	unsigned int array_size = 10;
+	unsigned int retVal = MAIN_OK;
+	unsigned int dacValue = 0;
+	unsigned int dacValueArray[array_size];
+	unsigned int data_current1[array_size], data_current2[array_size];
+	float current1, current2;
+	unsigned int i;	
+	
+	#if 1
+	//PI regulator
+	//Dummy values
+	int integral = 0;						//Integral component initial condition
+	float error = 0, error_old = 0;							//Error value [A]
+	float setpoint = 0.0; 					//Isp[A]
+	float measured_value = 0.0; 		//ADC Value
+	float output = 0, output_old = 0; 						//DAC Value
+	int Kp = 600, Ki = 0.1;			//PI parameters: unknown, need tuning
+	if(check_if_digit(5, 7) == MAIN_OK)
+	{
+		dacValue = string_to_int(5, 7);
+	}
+	if(dacValue>40) dacValue = 40;
+	setpoint = (float)dacValue;
+	//Regulator code
+	//10 iterations, no integral components	
+	CURRENT_CH1_ENABLE;
+	for(i = 0; i < array_size; i++)
+	{
+		DRM1_ADC_Read_All();
+		data_current1[i] = ADC_Results.ANCH[0];
+		//measured_value =  data_current1[i] * 0.003391;	
+		measured_value =  data_current1[i] * 10.0 / 65535 / 90 / 0.0005;			
+		error = setpoint - measured_value;
+		output = output_old - 100 * error_old + 600 * error;
+		if(output >= 20000) output = 20000;
+		DRM_DAC_Write((int)output, CHANNEL1);
+		dacValueArray[i] = output;
+		error_old = error;
+		output_old = output;
+		DWT_Delay_us(1000);
+	}		
+	#endif
+	
+	#if 0
+	//PID regulator
+	//u[k] = u[k-1] + a*e[k] + b*e[k-1] + c*e[k-2]
+	//a = Kp + Ki*Ts/2 + Kd/Ts
+	//b = -Kp + Ki*Ts/2 - 2*Kd/Ts
+	//c = Kd/Ts
+	float u = 0, u1 = 0; //output1 = output[k-1] ili u[k-1]
+	float e = 0, e1 = 0, e2 = 0;
+	int Kp = 100, Ki = 0, Kd = 0, Ts = 1; //Ts 1ms
+	float setpoint = 0.0;
+	float a = Kp + Ki*Ts/2 - 2*Kd/Ts;
+	float b = -Kp + Ki*Ts/2 - 2*Kd/Ts;
+	float c = Kd/Ts;
+	if(check_if_digit(5, 7) == MAIN_OK)
+	{
+		dacValue = string_to_int(5, 7);
+	}
+	if(dacValue>20) dacValue = 20;
+	setpoint = (float)dacValue;
+	DRM1_ADC_Read_All();
+	data_current1[i] = ADC_Results.ANCH[0];
+	measured_value =  data_current1[i] * 10.0 / 65535 / 90 / 0.0005;
+	e = setpoint - measured_value;
+	#endif
+//	if(InputBuffer[4]=='1')
+//	{	
+//		DRM_DAC_Write(dacValue, CHANNEL1);
+//		CURRENT_CH1_ENABLE;
+//	}
+//	if(InputBuffer[4]=='2')
+//	{
+//		DRM_DAC_Write(dacValue, CHANNEL2);
+//		CURRENT_CH2_ENABLE;
+//	}
+//	for(i = 0; i < 10; i++)
+//	{
+//		DRM1_ADC_Read_All();
+//		data_current1[i] = ADC_Results.ANCH[0];
+//		data_current2[i] = ADC_Results.ANCH[2];
+//		HAL_Delay(10);
+//	}
+	DRM_DAC_Write(0, CHANNEL1);
+	DRM_DAC_Write(0, CHANNEL2);
+	CURRENT_CH1_DISABLE;
+	CURRENT_CH2_DISABLE;
+//	for(i = 0; i < array_size; i++)
+//	{
+//		sprintf(OutputBuffer, "%u:%u,%u", i, data_current1[i], dacValueArray[i]);
+//		SendOutputBuffer(COMM.port);
+//	}
+	sprintf(OutputBuffer, "PI test");
+	return retVal;
 }
 
 void Read_ADC_Chip_Revision(unsigned int channel)
