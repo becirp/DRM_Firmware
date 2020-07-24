@@ -121,7 +121,7 @@ void MX_SDIO_SD_Init(void)
 
 //NAPOMENA:  TIM2 is connected to APB1 (72 Mhz ili 84 MHz - vidi kako generise cube!)
 
-void MX_TIM2_Init(void)
+void MX_TIM2_Init_DRM(void)
 {
 
   /* USER CODE BEGIN TIM2_Init 0 */

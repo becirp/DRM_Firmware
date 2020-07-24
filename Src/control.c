@@ -5688,7 +5688,7 @@ unsigned int DRM_Start_Test(void)
 		}
 	
 	/* Timer setup and start */
-		MX_TIM2_Init();
+		MX_TIM2_Init_DRM();
 		timer1_DRM_ON = 1;
 		__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
 		HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
@@ -5763,15 +5763,21 @@ unsigned int DRM_Start_Test(void)
 unsigned int foo_function(void)
 {
 	unsigned int retVal = MAIN_OK;
-	for(int i = 0; i < 5; i++)
+	MX_TIM2_Init_DRM();
+	timer1_DRM_ON = 1;
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+	HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
+	timer1_interrupt=1;
+	for(int i = 0; i < 20; i++)
 	{
-		CURRENT_CH2_ENABLE;
-		HAL_Delay(3000);
-		CURRENT_CH2_DISABLE;
-		HAL_Delay(3000);
+		while(timer1_interrupt==0);
+		timer1_interrupt=0;
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_6);		
 	}
-	sprintf(OutputBuffer, "Toggle pin PA15");
-	
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);
+	HAL_TIM_Base_Stop_IT(&htim2);
+	timer1_DRM_ON = 0;
+	sprintf(OutputBuffer, "Toggle pin");
 	return retVal;
 }
 
@@ -5941,18 +5947,19 @@ unsigned int DRM_Current_Control(void)
 
 unsigned int DRM_DAC_Test(void)
 {
-	unsigned int array_size = 10;
+	unsigned int array_size = 20;
 	unsigned int retVal = MAIN_OK;
 	unsigned int dacValue = 0;
 	unsigned int dacValueArray[array_size];
 	unsigned int data_current1[array_size], data_current2[array_size];
+	float current_amp1[array_size];
 	float current1, current2;
 	unsigned int i;	
 	
 	#if 1
 	//PI regulator
 	//Dummy values
-	int integral = 0;						//Integral component initial condition
+	float adc_conversion_factor = 10.04 / 65535 / 89.3 / 0.0005;
 	float error = 0, error_old = 0;							//Error value [A]
 	float setpoint = 0.0; 					//Isp[A]
 	float measured_value = 0.0; 		//ADC Value
@@ -5962,25 +5969,33 @@ unsigned int DRM_DAC_Test(void)
 	{
 		dacValue = string_to_int(5, 7);
 	}
-	if(dacValue>40) dacValue = 40;
+	if(dacValue>100) dacValue = 100;
 	setpoint = (float)dacValue;
 	//Regulator code
 	//10 iterations, no integral components	
 	CURRENT_CH1_ENABLE;
+	MX_TIM2_Init_SRM();
+	/* Timer setup and start */
+	timer2_SRM_ON = 1;
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+	HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
+	timer2_interrupt=1;
 	for(i = 0; i < array_size; i++)
 	{
+		while(timer2_interrupt==0);
+		timer2_interrupt=0;
 		DRM1_ADC_Read_All();
-		data_current1[i] = ADC_Results.ANCH[0];
-		//measured_value =  data_current1[i] * 0.003391;	
-		measured_value =  data_current1[i] * 10.0 / 65535 / 90 / 0.0005;			
+		data_current1[i] = ADC_Results.ANCH[0];	
+		measured_value =  data_current1[i] * adc_conversion_factor;	
+		current_amp1[i] = measured_value;		
 		error = setpoint - measured_value;
-		output = output_old - 100 * error_old + 600 * error;
-		if(output >= 20000) output = 20000;
+		output = output_old - 150 * error_old + 650 * error;
+		if(output >= 65000) output = 65000;
 		DRM_DAC_Write((int)output, CHANNEL1);
 		dacValueArray[i] = output;
 		error_old = error;
 		output_old = output;
-		DWT_Delay_us(1000);
+		//DWT_Delay_us(1000);
 	}		
 	#endif
 	
@@ -5990,51 +6005,66 @@ unsigned int DRM_DAC_Test(void)
 	//a = Kp + Ki*Ts/2 + Kd/Ts
 	//b = -Kp + Ki*Ts/2 - 2*Kd/Ts
 	//c = Kd/Ts
+	float measured_value = 0.0;
+	float adc_current_conversion = 10.0 / 65535 / 90 / 0.0005;
 	float u = 0, u1 = 0; //output1 = output[k-1] ili u[k-1]
 	float e = 0, e1 = 0, e2 = 0;
-	int Kp = 100, Ki = 0, Kd = 0, Ts = 1; //Ts 1ms
+	float Kp = 600, Ki = 60, Kd = 20, Ts = 1;
 	float setpoint = 0.0;
-	float a = Kp + Ki*Ts/2 - 2*Kd/Ts;
+	float a = Kp + Ki*Ts/2 + Kd/Ts;
 	float b = -Kp + Ki*Ts/2 - 2*Kd/Ts;
 	float c = Kd/Ts;
 	if(check_if_digit(5, 7) == MAIN_OK)
 	{
 		dacValue = string_to_int(5, 7);
 	}
-	if(dacValue>20) dacValue = 20;
 	setpoint = (float)dacValue;
-	DRM1_ADC_Read_All();
-	data_current1[i] = ADC_Results.ANCH[0];
-	measured_value =  data_current1[i] * 10.0 / 65535 / 90 / 0.0005;
-	e = setpoint - measured_value;
+	CURRENT_CH1_ENABLE;
+	//Timer 2 init for SRM: 1ms timer
+	MX_TIM2_Init_SRM();
+	/* Timer setup and start */
+	timer2_SRM_ON = 1;
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);	//clear flag odmah kako ne bi usao u interrupt
+	HAL_TIM_Base_Start_IT(&htim2); //pokreni tajmer
+	timer2_interrupt=1;
+	for(i = 0; i < array_size; i++)
+	{
+		while(timer2_interrupt==0);
+		timer2_interrupt=0;
+		DRM1_ADC_Read_All();
+		data_current1[i] = ADC_Results.ANCH[0];
+		measured_value =  data_current1[i] * adc_current_conversion;
+		current_amp1[i] = measured_value;	
+		e = setpoint - measured_value;
+		u = u1 + a*e + b*e1 + c*e2;
+		if(u >= 35000) u = 35000;
+		DRM_DAC_Write((int)u, CHANNEL1);
+		dacValueArray[i] = u;
+		u1 = u;
+		e2 = e1;
+		e1 = e;
+		DWT_Delay_us(1000);
+	}
 	#endif
-//	if(InputBuffer[4]=='1')
-//	{	
-//		DRM_DAC_Write(dacValue, CHANNEL1);
-//		CURRENT_CH1_ENABLE;
-//	}
-//	if(InputBuffer[4]=='2')
-//	{
-//		DRM_DAC_Write(dacValue, CHANNEL2);
-//		CURRENT_CH2_ENABLE;
-//	}
-//	for(i = 0; i < 10; i++)
-//	{
-//		DRM1_ADC_Read_All();
-//		data_current1[i] = ADC_Results.ANCH[0];
-//		data_current2[i] = ADC_Results.ANCH[2];
-//		HAL_Delay(10);
-//	}
+	
+	//Current shut down
 	DRM_DAC_Write(0, CHANNEL1);
 	DRM_DAC_Write(0, CHANNEL2);
 	CURRENT_CH1_DISABLE;
 	CURRENT_CH2_DISABLE;
-//	for(i = 0; i < array_size; i++)
-//	{
-//		sprintf(OutputBuffer, "%u:%u,%u", i, data_current1[i], dacValueArray[i]);
-//		SendOutputBuffer(COMM.port);
-//	}
-	sprintf(OutputBuffer, "PI test");
+	
+	//Timer disable
+	__HAL_TIM_CLEAR_FLAG(&htim2, TIM_IT_UPDATE);
+	HAL_TIM_Base_Stop_IT(&htim2);
+	timer2_SRM_ON = 0;
+	
+	//DAC and ADC value display
+	for(i = 0; i < array_size; i++)
+	{
+		sprintf(OutputBuffer, "%u:%.2f,%u", i, current_amp1[i], dacValueArray[i]);
+		SendOutputBuffer(COMM.port);
+	}
+	sprintf(OutputBuffer, "PID test");
 	return retVal;
 }
 

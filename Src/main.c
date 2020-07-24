@@ -144,7 +144,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_FSMC_Init();
   MX_FATFS_Init();
-  MX_TIM2_Init();
+  MX_TIM2_Init_DRM();
 	//MX_TIM3_Init();
 	DWT_Delay_Init();
 	//MX_I2C1_Init();

@@ -1,7 +1,7 @@
 extern void MX_USART1_UART_Init(void);
 extern void USART1_UART_Init_printer_comm(void);
 extern void MX_SDIO_SD_Init(void);
-extern void MX_TIM2_Init(void);
+extern void MX_TIM2_Init_DRM(void);
 extern void MX_TIM2_Init_SRM(void);
 extern void MX_TIM3_Init(void);
 extern void MX_GPIO_Init(void);
