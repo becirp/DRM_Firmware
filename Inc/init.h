@@ -11,9 +11,7 @@ extern void init_variables(void);
 
 extern void init_coil_control(void);
 
-
 extern void SystemClock_Config(void);
-
 
 extern SD_HandleTypeDef hsd;
 extern TIM_HandleTypeDef htim2;

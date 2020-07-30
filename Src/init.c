@@ -961,3 +961,4 @@ void InitADC(void)
 
 		delay_us(1000);
 }
+

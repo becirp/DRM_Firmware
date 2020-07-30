@@ -32,6 +32,7 @@ stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fsmc.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
+stm32f407zet6\ff.o: ../Inc/stm32f4xx_hal_iwdg.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sd.h
@@ -39,6 +40,7 @@ stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_sdmmc.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+stm32f407zet6\ff.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_wwdg.h
 stm32f407zet6\ff.o: ../Inc/bsp_driver_sd.h
 stm32f407zet6\ff.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32f407zet6\ff.o: ../Middlewares/Third_Party/FatFs/src/diskio.h

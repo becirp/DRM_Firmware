@@ -5,7 +5,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2019 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2020 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -66,7 +66,7 @@
 /* #define HAL_HASH_MODULE_ENABLED   */
 #define HAL_I2C_MODULE_ENABLED
 /* #define HAL_I2S_MODULE_ENABLED   */
-/* #define HAL_IWDG_MODULE_ENABLED   */
+#define HAL_IWDG_MODULE_ENABLED
 /* #define HAL_LTDC_MODULE_ENABLED   */
 /* #define HAL_RNG_MODULE_ENABLED   */
 /* #define HAL_RTC_MODULE_ENABLED   */
@@ -79,7 +79,7 @@
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
 /* #define HAL_SMARTCARD_MODULE_ENABLED   */
-/* #define HAL_WWDG_MODULE_ENABLED   */
+#define HAL_WWDG_MODULE_ENABLED
 /* #define HAL_PCD_MODULE_ENABLED   */
 /* #define HAL_HCD_MODULE_ENABLED   */
 /* #define HAL_DSI_MODULE_ENABLED   */
@@ -105,7 +105,7 @@
   *        (when HSE is used as system clock source, directly or through the PLL).  
   */
 #if !defined  (HSE_VALUE) 
-  #define HSE_VALUE    ((uint32_t)8000000U) /*!< Value of the External oscillator in Hz */
+  #define HSE_VALUE    ((uint32_t)16000000U) /*!< Value of the External oscillator in Hz */
 #endif /* HSE_VALUE */
 
 #if !defined  (HSE_STARTUP_TIMEOUT)

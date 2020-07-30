@@ -30,6 +30,7 @@ stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fsmc.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
+stm32f407zet6\usb_flash_drive.o: ../Inc/stm32f4xx_hal_iwdg.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sd.h
@@ -37,6 +38,7 @@ stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_l
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+stm32f407zet6\usb_flash_drive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_wwdg.h
 stm32f407zet6\usb_flash_drive.o: ../Inc/bios.h
 stm32f407zet6\usb_flash_drive.o: ../Inc/comm.h
 stm32f407zet6\usb_flash_drive.o: ../Inc/usb_flash_drive.h

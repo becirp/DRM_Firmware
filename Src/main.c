@@ -69,6 +69,9 @@ extern volatile unsigned char timer1_interrupt;
 extern volatile unsigned char timer2_interrupt;
 unsigned int Test_Counter;
 
+static void MX_IWDG_Init(void);
+IWDG_HandleTypeDef hiwdg;
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* Prevent unused argument(s) compilation warning */
@@ -146,7 +149,8 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM2_Init_DRM();
 	//MX_TIM3_Init();
-	DWT_Delay_Init();
+	DWT_Delay_Init();	
+	MX_IWDG_Init;
 	//MX_I2C1_Init();
 	//init_variables();
 	//init_coil_control();
@@ -658,3 +662,26 @@ void assert_failed(uint8_t *file, uint32_t line)
 #endif /* USE_FULL_ASSERT */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+static void MX_IWDG_Init(void)
+{
+
+  /* USER CODE BEGIN IWDG_Init 0 */
+
+  /* USER CODE END IWDG_Init 0 */
+
+  /* USER CODE BEGIN IWDG_Init 1 */
+
+  /* USER CODE END IWDG_Init 1 */
+  hiwdg.Instance = IWDG;
+  hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+  hiwdg.Init.Reload = 512;
+  if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN IWDG_Init 2 */
+
+  /* USER CODE END IWDG_Init 2 */
+
+}
