@@ -80,7 +80,7 @@ if (InputBuffer[0]=='m')
 									return (DRM_Get_Results());			
 					}
 					//DRM Read all function
-										if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]!='C'))
+					if((InputBuffer[1]=='A')&&(InputBuffer[2]=='D')&&(InputBuffer[3]!='C'))
 					{
 									return (DRM_Get_Results());
 					}

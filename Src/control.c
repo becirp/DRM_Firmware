@@ -6229,7 +6229,7 @@ unsigned int SRM_ADC_GetData(void)
 	unsigned int channel;
 	unsigned int i;
 	
-	#if 0
+	#if 1
 	channel = SRM1_ADC1;
 	Read_ADC_Chip_Revision(channel);
 	#endif
