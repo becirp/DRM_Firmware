@@ -50,6 +50,9 @@ extern unsigned int DRM_DAC_Test(void);
 extern unsigned int SRM_Start_Test(void);
 extern unsigned int SRM_ADC_GetData(void);
 extern void SRM_AllChannels_Conversion(void);
+extern void SRM_Multiple_Conversions(void);
+extern void SRM_Write_Data_ToArray(int i);
+	
 //BAT Functions
 extern unsigned int Get_BAT_Voltage(void);
 extern unsigned int Battery_Charger_Control(void);

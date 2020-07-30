@@ -1416,7 +1416,7 @@ void DRM1_ADC1_Read(void)
 
 /* READ All DRM Channels */
 //Sada su samo dva kanala umjesto tri. Ako bude kakvih gresaka oko spremanja i citanja rezultata
-void DRM1_ADC_Read_All(void)
+void DRM_ADC_Read_All(void)
 {
 	unsigned int i;
 	uint8_t current_data1[16];

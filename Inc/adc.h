@@ -78,7 +78,7 @@ extern signed long convert_to_slong_DT_res(unsigned char channel);
 //DRM Functions
 
 extern void DRM1_ADC1_Read(void);
-extern void DRM1_ADC_Read_All(void);
+extern void DRM_ADC_Read_All(void);
 
 //VBAT Monitor function
 extern void VBAT_ADC_Read(void);

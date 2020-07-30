@@ -307,7 +307,7 @@ typedef struct _STICK_
 
 //SRM ADC Data Struct
 
-#define SRM_DATA_ARRAY_SIZE (unsigned int)10
+#define SRM_DATA_ARRAY_SIZE (unsigned int)20
 
 #ifndef SRM_ADC_DATA_ARRAY_STRUCTURE
 #define SRM_ADC_DATA_ARRAY_STRUCTURE
@@ -1042,8 +1042,8 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 #define CURRENT_CH1_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET)		//izmijenjen
 #define CURRENT_CH2_ENABLE 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET)			//izmijenjen
 #define CURRENT_CH2_DISABLE 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET)		//izmijenjen
-#define DRM_CLK_HIGH  					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET)			//izmijenjen
-#define DRM_CLK_LOW  						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET)		//izmijenjen
+#define DRM_CLK_HIGH  					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET)			//izmijenjen
+#define DRM_CLK_LOW  						HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_DIN_HIGH						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET)  		//izmijenjen
 #define DRM_DIN_LOW				  		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_RESET)		//izmijenjen
 #define DRM_SYNC1_HIGH					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET)			//izmijenjen
@@ -1062,11 +1062,16 @@ extern unsigned int Battery_Charging_Status(unsigned int channel);
 //VBAT Monitor
 #define VBAT_ADC_CS_SET					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET)
 #define VBAT_ADC_CS_RESET				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET)
-//VBAT_CLK linija nije povezana na procesor; privremeno stavljeno na PH1 dok se ne proradi plocica
 #define VBAT_ADC_CLK_HIGH				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET)
 #define VBAT_ADC_CLK_LOW				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET)
 #define	VBAT_ADC_DATA1					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_10)
 #define	VBAT_ADC_DATA2					HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11)
+
+//Coil Control
+#define COIL_IGBT1_ON						HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET)
+#define COIL_IGBT1_OFF					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET)
+#define COIL_IGBT2_ON						HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET)
+#define COIL_IGBT2_OFF					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET)
 
 //BAT CHARGER Control
 #define BAL1_ENABLE							HAL_GPIO_WritePin(GPIOF, GPIO_PIN_6, GPIO_PIN_SET)
