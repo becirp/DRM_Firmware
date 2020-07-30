@@ -126,7 +126,7 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
+	
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
@@ -216,6 +216,9 @@ int main(void)
 		#if ST_LINK_DEBUG
 			MeasurementStart_Comm();
 		#endif
+	
+	//Watchdog setup
+	
 	
 	/* WHILE LOOP BEGINS HERE*/
   while (1)

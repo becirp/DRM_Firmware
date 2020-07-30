@@ -910,7 +910,7 @@ void InitADC(void)
 				
         //IO Port register
         SRM_Write_ADC_Byte(i,0x01);      //Write the next comm to reg. 0x01 - I/O Port
-        SRM_Write_ADC_Byte(i,0x31);      //P0/P1 = input, RDYFN = 1, SYNC = 0
+        SRM_Write_ADC_Byte(i,0x30);      //P0/P1 = input, RDYFN = 1, SYNC = 0
         
         //Channel Conversion Time register
 				//CH1 0x30
@@ -961,4 +961,3 @@ void InitADC(void)
 
 		delay_us(1000);
 }
-

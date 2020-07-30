@@ -6042,34 +6042,34 @@ void Read_ADC_IOPort_Config(unsigned int channel)
 
 void Wait_ADC_RDY(unsigned int channel)
 {
-	unsigned int timeout = 100;
+	unsigned int timeout = 1000;
 	switch (channel)
 	{
 		case SRM1_ADC1:
 			while(SRM1_RDY1 != 0)
 			{
-				if(--timeout == 0) break;
+				//if(--timeout == 0) break;
 				DWT_Delay_us(1);
 			};
 		break;
 		case SRM1_ADC2:
 			while(SRM1_RDY2 != 0)
 			{
-				if(--timeout == 0) break;
+				//if(--timeout == 0) break;
 				DWT_Delay_us(1);
 			};
 		break; 
 		case SRM2_ADC1:
 			while(SRM2_RDY1 != 0)
 			{
-				if(--timeout == 0) break;
+				//if(--timeout == 0) break;
 				DWT_Delay_us(1);
 			};
 		break; 
 		case SRM2_ADC2:
 			while(SRM2_RDY2 != 0)
 			{
-				if(--timeout == 0) break;
+				//if(--timeout == 0) break;
 				DWT_Delay_us(1);
 			};
 		break;
@@ -6301,16 +6301,29 @@ unsigned int SRM_ADC_GetData(void)
 unsigned int foo_function(void)
 {
 	unsigned int retVal = MAIN_OK;
-	unsigned int data;
-	
-	#if 1
-	InitADC();
-	SRM_Write_ADC_Byte(SRM1_ADC1, 0x32);
-	data = SRM_Read_ADC_Byte(SRM1_ADC1);
-	sprintf(OutputBuffer, "%u", data);
-	#endif
+	unsigned int data1,data2,channel;
 	
 	#if 0
+	//Single Conversion ADC, two channels
+	SRM_Write_ADC_Byte(SRM1_ADC2,0x01);      //Write the next comm to reg. 0x01 - I/O Port
+  SRM_Write_ADC_Byte(SRM1_ADC2,0x30);      //P0/P1 = input, RDYFN = 1, SYNC = 0
+	channel = SRM1_ADC2;
+	SRM_Write_ADC_Byte(SRM1_ADC2, 0x38);
+	SRM_Write_ADC_Byte(SRM1_ADC2, 0x40);
+	while(SRM1_RDY2 != 0);
+	SRM_Write_ADC_Byte(SRM1_ADC2, 0x48);
+	data1 = SRM_Read_ADC_16Bits(SRM1_ADC2);
+	
+	SRM_Write_ADC_Byte(SRM1_ADC2, 0x3A);
+	SRM_Write_ADC_Byte(SRM1_ADC2, 0x40);
+	while(SRM1_RDY2 != 0);
+	SRM_Write_ADC_Byte(SRM1_ADC2, 0x4A);
+	data2 = SRM_Read_ADC_16Bits(SRM1_ADC2);
+	
+	sprintf(OutputBuffer, "%u, %u", data1, data2);
+	#endif
+	
+	#if 1
 	InitADC();
 	for(int i = 0; i < SRM_DATA_ARRAY_SIZE; i++)
 	{
