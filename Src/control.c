@@ -5923,6 +5923,14 @@ unsigned int DRM_Current_Control(void)
 	return retVal;
 }
 
+#if 0
+unsigned int DRM_DAC_Test(void)
+{
+	
+}
+#endif
+
+#if 1
 unsigned int DRM_DAC_Test(void)
 {
 	unsigned int channel;
@@ -5939,8 +5947,8 @@ unsigned int DRM_DAC_Test(void)
 	
 	//PI regulator
 	//Dummy values
-	float adc1_conversion_factor = 10.0 / 65535 / 89.3 / 0.0005;
-	float adc2_conversion_factor = 10.0 / 65535 / 96 / 0.0005;
+	float adc1_conversion_factor = 10.0 / 65535 / 100 / 0.0005;
+	float adc2_conversion_factor = 10.0 / 65535 / 90 / 0.0005;
 	float error = 0, error_old = 0;						
 	float setpoint = 0.0; 					
 	float measured_value = 0.0; 		
@@ -5992,12 +6000,13 @@ unsigned int DRM_DAC_Test(void)
 		}			
 		current_amp1[i] = measured_value;		
 		error = setpoint - measured_value;
-		output = output_old - 150 * error_old + 650 * error;
+		output = output_old - 100 * error_old + 650 * error;
 		if(output >= dac_limit) output = dac_limit;
 		DRM_DAC_Write((int)output, channel);
 		dacValueArray[i] = output;
 		error_old = error;
 		output_old = output;
+		DWT_Delay_us(1000);
 	}		
 	
 	//Current shut down
@@ -6011,7 +6020,7 @@ unsigned int DRM_DAC_Test(void)
 	HAL_TIM_Base_Stop_IT(&htim2);
 	timer2_SRM_ON = 0;
 	
-	#if 0
+	#if 1
 	//DAC and ADC value display for debugging
 	for(i = 0; i < array_size; i++)
 	{
@@ -6023,6 +6032,8 @@ unsigned int DRM_DAC_Test(void)
 	sprintf(OutputBuffer, "PI regulator test.");
 	return retVal;
 }
+#endif
+
 
 void Read_ADC_Chip_Revision(unsigned int channel)
 {
@@ -6302,7 +6313,8 @@ unsigned int foo_function(void)
 {
 	unsigned int retVal = MAIN_OK;
 	unsigned int data1,data2,channel;
-	
+	float adc_conversion_factor = 10.0 / 65535 / 89.3 / 0.0005;
+	float voltage_factor = 10.0 / 65535;
 	#if 0
 	//Single Conversion ADC, two channels
 	SRM_Write_ADC_Byte(SRM1_ADC2,0x01);      //Write the next comm to reg. 0x01 - I/O Port
@@ -6323,7 +6335,7 @@ unsigned int foo_function(void)
 	sprintf(OutputBuffer, "%u, %u", data1, data2);
 	#endif
 	
-	#if 1
+	#if 0
 	InitADC();
 	for(int i = 0; i < SRM_DATA_ARRAY_SIZE; i++)
 	{
@@ -6345,6 +6357,17 @@ unsigned int foo_function(void)
 	sprintf(OutputBuffer, "DRM adc");
 	#endif
 	
+	#if 1
+	CURRENT_CH1_ENABLE;
+	DRM_DAC_Write(10000,CHANNEL1);
+	DRM_ADC_Read_All();
+	data1 = ADC_Results.ANCH[0];
+	data2 = ADC_Results.ANCH[1];
+	HAL_Delay(10);
+	DRM_DAC_Write(0,CHANNEL1);
+	CURRENT_CH1_DISABLE;
+	#endif
+	sprintf(OutputBuffer, "DRM: %.2f A (%u), %.2f V", data1*adc_conversion_factor, data1, data2*voltage_factor);
 	return retVal;
 }
 

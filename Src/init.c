@@ -923,17 +923,17 @@ void InitADC(void)
         SRM_Write_ADC_Byte(i,0x32);    	 //Write the next comm to reg. 0x32 - Channel Conversion Time
         SRM_Write_ADC_Byte(i,0x9D);			 //Chop = 1, FW = 29, MCLK = 4MHz -> Conv. Time = 1 ms
 			
-        //Channel Mode register -- za potrebe testiranja svi imaju iste opsege i postavke
-				SRM_Write_ADC_Byte(i,0x38);    //Write the next comm to reg. 0x28 - Channel Setup
-				SRM_Write_ADC_Byte(i,0x00);    //ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
-				SRM_Write_ADC_Byte(i,0x3A);    //Write the next comm to reg. 0x28 - Channel Setup
-				SRM_Write_ADC_Byte(i,0x00);    //ENABLE = 0 (Continous conversion mode), Range: -10 to +10V
+        //Channel Mode register -- defaults
+				SRM_Write_ADC_Byte(i,0x38);    
+				SRM_Write_ADC_Byte(i,0x00);    
+				SRM_Write_ADC_Byte(i,0x3A);    
+				SRM_Write_ADC_Byte(i,0x00);    
 				
 				//Channel Setup register -- ENABLE = 1 (Set this bit to 1 to enable the channel in the continuous conversion mode.)
-				SRM_Write_ADC_Byte(i,0x28);
-				SRM_Write_ADC_Byte(i,0x04);
-				SRM_Write_ADC_Byte(i,0x2A);
-				SRM_Write_ADC_Byte(i,0x04);				
+				SRM_Write_ADC_Byte(i,0x28);   //Write the next comm to reg. 0x28 - Channel Setup
+				SRM_Write_ADC_Byte(i,0x02);			
+				SRM_Write_ADC_Byte(i,0x2A);		//Write the next comm to reg. 0x28 - Channel Setup
+				SRM_Write_ADC_Byte(i,0x02);		
 							
 //        #if ADC24bit
 //				// Mode reg  (CH00)
